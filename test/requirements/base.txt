@@ -1,0 +1,6 @@
+psycopg2
+markdown
+flask
+
+-e git+https://github.com/Riffstation/sqlalchemypostgresutils.git#egg=sqlalchemypostgresutils
+
