@@ -33,3 +33,5 @@ In order to run test a vagrant instance is required, below steps required to exe
 * [Flask Book](http://flaskbook.com/)
 
 * [Flasky](https://github.com/miguelgrinberg/flasky)
+
+* [Flask Restful](http://flask-restful-cn.readthedocs.io/en/0.3.4/)
