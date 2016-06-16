@@ -1,16 +1,17 @@
-from flaskutils import get_app
-import os
+from flaskutils import app
+
+from flask import Flask
+
 
 class TestApp(object):
     def setup(self):
-       os.environ.setdefault("FLASK_SETTINGS_MODULE", "project.settings")
+        pass
 
     def test_app_instanciate(self):
         """
         Test if the flask app was correctly instanciated
         """
-        app = get_app()
-        import ipdb; ipdb.set_trace()
+        assert isinstance(app, Flask)
 
     def test_render_hmtl(self):
         """

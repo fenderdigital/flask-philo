@@ -1,5 +1,10 @@
 from flask import Flask
 
+from .exceptions import  ConfigurationError
+
+import importlib
+import os
+
 
 # Alex Martelli's 'Borg'
 class Borg:
@@ -17,13 +22,18 @@ class App(Borg):
     def __init__(self, module, **config):
         Borg.__init__(self)
         self.flask_app = Flask(module)
+        self.init_config()
 
     def init_config(self, **config):
+
         for k, v in config.items():
             self.app.config[k] = v
-        # secret encryption key
+
         if 'SECRET_KEY' in config:
             app.secret_key = config['SECRET_KEY']
+
+
+
 
     def init_urls(self):
         # Reads urls definition from URLs file and bind routes and views
@@ -36,18 +46,21 @@ class App(Borg):
 app = None
 
 
-def init_app(module, **config):
+def init_app(module):
     """
     Initalize an app, call this method once from start_app
     """
     global app
-    app = App(module, **config)
-    app.init_urls()
-    return app.flask_app
 
+    def init_config():
+        if 'FLASKUTILS_SETTINGS_MODULE' not in os.environ:
+            raise ConfigurationError('No settings has been defined')
 
-def get_app():
-    """
-    Get current app, call this method  from anywhere inside the application
-    """
-    return app.flask_app
+        settings = importlib.import_module(os.environ['FLASKUTILS_SETTINGS_MODULE'])
+        for v in dir(settings):
+            if not v.startswith('_'):
+                app.config[v] = getattr(settings, v)
+        import ipdb; ipdb.set_trace()
+
+    app = Flask(module)
+    init_config()

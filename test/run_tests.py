@@ -1,5 +1,4 @@
 import argparse
-import json
 import os
 import pytest
 import sys
@@ -13,13 +12,12 @@ def run_tests():
     description = 'Creates play admin user'
     parser = argparse.ArgumentParser(description=description)
     parser.add_argument(
-        '--config', help='config file path', default='./config/dev.json')
+        '--settings', help='config file path', default='config.development')
     args = parser.parse_args()
 
-    with open(args.config, 'r') as f:
-        config = json.loads(f.read())
+    os.environ.setdefault('FLASKUTILS_SETTINGS_MODULE', args.settings)
 
-    init_app(__name__, **config)
+    init_app(__name__)
 
     pytest.main(['-s'])
 

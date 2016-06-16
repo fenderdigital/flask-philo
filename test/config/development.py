@@ -1,3 +1,1 @@
-{
-    "urls_module": "webtests.url"
-}
+URLS =  'webtests.url'
