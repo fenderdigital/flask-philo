@@ -1,1 +1,1 @@
-URLS =  'webtests.url'
+URLS =  'webtests.urls'

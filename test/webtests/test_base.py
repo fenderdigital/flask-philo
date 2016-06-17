@@ -1,31 +1,52 @@
 from flaskutils import app
-
 from flask import Flask
+
+import json
 
 
 class TestApp(object):
     def setup(self):
-        pass
+        self.client = app.test_client()
 
     def test_app_instanciate(self):
         """
         Test if the flask app was correctly instanciated
         """
         assert isinstance(app, Flask)
+        assert 'run_tests' == app.name
 
-    def test_render_hmtl(self):
+    def test_render_html(self):
         """
         Makes a HTTP GET REQUEST AND GETS html
         """
+        result = self.client.get('/')
+        assert 200 == result.status_code
+        assert b'<h1>hello world!!!</h1>' == result.get_data()
 
     def test_get_resource(self):
         """
         Get a Rest resource in json format
         """
+        result = self.client.get('/users/1')
+        assert 200 == result.status_code
+        data = json.loads(result.get_data().decode('utf-8'))
+        assert 'username' in data
+        assert 'id' in data
 
     def test_get_resource_list(self):
         """
         Get a list of rest resources
+        """
+        result = self.client.get('/users')
+        assert 200 == result.status_code
+        data = json.loads(result.get_data().decode('utf-8'))
+        assert len(data) == 2
+        assert 'username' in data[0]
+        assert 'id' in data[0]
+
+
+    def test_post_resource(self):
+        """
         """
 
     def test_password_authentication(self):

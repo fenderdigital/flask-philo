@@ -1,14 +1,10 @@
 from flask import abort, json, render_template, Response
 from flask.views import MethodView
 
-from rfapp import get_app
-
 
 class BaseView(MethodView):
-    def __init__(self, *args, **kwargs):
-        self.app = get_app()
 
-    def json_response(self, status, **data):
+    def json_response(self, status=200, data={}):
         mimetype = 'application/json'
         return Response(json.dumps(data), status=status, mimetype=mimetype)
 
@@ -26,3 +22,24 @@ class BaseView(MethodView):
 
     def patch(self):
         abort(400)
+
+    def delete(self):
+        abort(400)
+
+
+class BaseResourceView(BaseView):
+
+    def get(self):
+        return self.json_response(400)
+
+    def post(self):
+        return self.json_response(400)
+
+    def put(self):
+        return self.json_response(400)
+
+    def patch(self):
+        return self.json_response(400)
+
+    def delete(self):
+        return self.json_response(400)
