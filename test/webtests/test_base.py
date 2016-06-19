@@ -7,6 +7,10 @@ import json
 class TestApp(object):
     def setup(self):
         self.client = app.test_client()
+        self.json_request_headers = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
 
     def test_app_instanciate(self):
         """
@@ -35,7 +39,7 @@ class TestApp(object):
 
     def test_get_resource_list(self):
         """
-        Get a list of rest resources
+        Get a list ogf rest resources
         """
         result = self.client.get('/users')
         assert 200 == result.status_code
@@ -49,6 +53,18 @@ class TestApp(object):
         """
         Test A valid
         """
+
+    def test_put_resource(self):
+        """
+        Test A valid put request
+        """
+        user = {'id': 1, 'username': 'userupdated', 'email': 'email@test.com'}
+        response = self.client.put(
+            '/users/1',
+            data=json.dumps(user),
+            headers=self.json_request_headers
+        )
+        
 
     def test_password_authentication(self):
         """

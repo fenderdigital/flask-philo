@@ -1,6 +1,8 @@
+from flask import request
 from flaskutils.views import BaseView, BaseResourceView
 from flaskutils import app
 
+from .serializers import UserSerializer
 
 class BasicHTMLView(BaseView):
     def get(self):
@@ -20,5 +22,10 @@ class UserResourceView(BaseResourceView):
 
         return self.json_response(data=data)
 
+    def post(self, id):
+        user = UserSerializer(request)
+        return self.json_response()
+
     def put(self, id):
-        pass
+        user = UserSerializer(request)
+        return self.json_response()

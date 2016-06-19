@@ -19,7 +19,7 @@ def run_tests():
 
     init_app(__name__)
 
-    pytest.main(['-s'])
+    pytest.main(['-s', './webtests'])
 
 
 def main():
