@@ -1,5 +1,5 @@
 psycopg2
 markdown
 flask
-flask-inputs
+jsonschema
 -e git+https://github.com/Riffstation/sqlalchemypostgresutils.git#egg=sqlalchemypostgresutils
