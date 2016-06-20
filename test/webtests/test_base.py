@@ -5,7 +5,7 @@ from flaskutils.test import TestApiCase
 from flask import Flask
 
 from jsonschema import ValidationError
-from .serializers import UserSerializer
+from .serializers import PostUserSerializer, PutUserSerializer
 
 import json
 import pytest
@@ -44,7 +44,7 @@ class TestValidators(object):
     def test_validate_simple_json(self):
         user_dict = {'id': 1, 'username': 'userupdated', 'email': 'email@test.com'}
         self.request.json = user_dict
-        user_obj = UserSerializer(self.request)
+        user_obj = PutUserSerializer(request=self.request)
         assert user_obj.id == user_dict['id']
         assert user_obj.username == user_dict['username']
         assert user_obj.email == user_dict['email']
@@ -53,7 +53,7 @@ class TestValidators(object):
         user_dict = {'id': 1, 'username': 'userupdated', 'email': 'email'}
         self.request.json = user_dict
         with pytest.raises(ValidationError) as excinfo:
-            UserSerializer(self.request)
+            PutUserSerializer(request=self.request)
         assert "'email' is not a 'email'" in str(excinfo.value)
 
     def test_validate_invalid_extra_field(self):
@@ -63,7 +63,7 @@ class TestValidators(object):
         }
         self.request.json = user_dict
         with pytest.raises(ValidationError) as excinfo:
-            UserSerializer(self.request)
+            PutUserSerializer(request=self.request)
         assert "Additional properties are not allowed ('extra' was unexpected)" in str(excinfo.value)
 
 
@@ -81,7 +81,7 @@ class TestApiRequest(TestApiCase):
 
     def test_get_resource_list(self):
         """
-        Get a list ogf rest resources
+        Get a list of rest resources
         """
         result = self.client.get('/users')
         assert 200 == result.status_code
@@ -106,7 +106,6 @@ class TestApiRequest(TestApiCase):
             data=json.dumps(user),
             headers=self.json_request_headers
         )
-        
 
     def test_password_authentication(self):
         """
