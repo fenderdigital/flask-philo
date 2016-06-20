@@ -1,10 +1,18 @@
+from unittest.mock import Mock
+
 from flaskutils import app
+from flaskutils.test import TestApiCase
 from flask import Flask
 
+from jsonschema import ValidationError
+from .serializers import UserSerializer
+
 import json
+import pytest
 
 
-class TestApp(object):
+
+class TestAppCase(object):
     def setup(self):
         self.client = app.test_client()
         self.json_request_headers = {
@@ -26,6 +34,40 @@ class TestApp(object):
         result = self.client.get('/')
         assert 200 == result.status_code
         assert b'<h1>hello world!!!</h1>' == result.get_data()
+
+
+
+class TestValidators(object):
+    def setup(self):
+        self.request = Mock()
+
+    def test_validate_simple_json(self):
+        user_dict = {'id': 1, 'username': 'userupdated', 'email': 'email@test.com'}
+        self.request.json = user_dict
+        user_obj = UserSerializer(self.request)
+        assert user_obj.id == user_dict['id']
+        assert user_obj.username == user_dict['username']
+        assert user_obj.email == user_dict['email']
+
+    def test_validate_invalid_email(self):
+        user_dict = {'id': 1, 'username': 'userupdated', 'email': 'email'}
+        self.request.json = user_dict
+        with pytest.raises(ValidationError) as excinfo:
+            UserSerializer(self.request)
+        assert "'email' is not a 'email'" in str(excinfo.value)
+
+    def test_validate_invalid_extra_field(self):
+        user_dict = {
+            'id': 1, 'username': 'userupdated',
+            'email': 'email@email.com', 'extra': 'danger'
+        }
+        self.request.json = user_dict
+        with pytest.raises(ValidationError) as excinfo:
+            UserSerializer(self.request)
+        assert "Additional properties are not allowed ('extra' was unexpected)" in str(excinfo.value)
+
+
+class TestApiRequest(TestApiCase):
 
     def test_get_resource(self):
         """

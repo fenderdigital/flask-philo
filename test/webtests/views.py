@@ -24,7 +24,7 @@ class UserResourceView(BaseResourceView):
 
     def post(self, id):
         user = UserSerializer(request)
-        return self.json_response()
+        return self.json_response(data=user.to_json)
 
     def put(self, id):
         user = UserSerializer(request)

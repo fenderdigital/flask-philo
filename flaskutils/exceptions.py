@@ -1,2 +1,4 @@
 class ConfigurationError(Exception):
-    pass
+    """
+    This exception should be thrown if configuration errors happen
+    """
