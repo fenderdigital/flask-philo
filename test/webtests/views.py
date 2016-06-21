@@ -1,12 +1,20 @@
 from flask import request
 from flaskutils.views import BaseView, BaseResourceView
-from flaskutils import app
 
-from .serializers import PostUserSerializer, PutUserSerializer
+from .serializers import (
+    GetUserSerializer, PostUserSerializer, PutUserSerializer
+)
+
 
 class BasicHTMLView(BaseView):
     def get(self):
         return self.render_template('home.html')
+
+
+class User(object):
+    def __init__(self, *args, **kwargs):
+        for k, v in kwargs.items():
+            setattr(self, k, v)
 
 
 class UserResourceView(BaseResourceView):
@@ -14,11 +22,14 @@ class UserResourceView(BaseResourceView):
     def get(self, id=None):
         if not id:
             data = [
-                {'id': 1, 'username': 'user1'},
-                {'id': 2, 'username': 'user2'}
+                GetUserSerializer(
+                    model=User(id=1, username='user1')).to_json(),
+                GetUserSerializer(
+                    model=User(id=1, username='user1')).to_json()
             ]
         else:
-            data = {'id': 1, 'username': 'user1'}
+            data = GetUserSerializer(
+                model=User(id=1, username='user1')).to_json()
 
         return self.json_response(data=data)
 

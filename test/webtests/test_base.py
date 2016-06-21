@@ -1,6 +1,8 @@
+from datetime import date, datetime
 from unittest.mock import Mock
 
 from flaskutils import app
+from flaskutils import utils
 from flaskutils.test import TestApiCase
 from flask import Flask
 
@@ -9,7 +11,6 @@ from .serializers import PostUserSerializer, PutUserSerializer
 
 import json
 import pytest
-
 
 
 class TestAppCase(object):
@@ -36,13 +37,14 @@ class TestAppCase(object):
         assert b'<h1>hello world!!!</h1>' == result.get_data()
 
 
-
 class TestValidators(object):
     def setup(self):
         self.request = Mock()
 
     def test_validate_simple_json(self):
-        user_dict = {'id': 1, 'username': 'userupdated', 'email': 'email@test.com'}
+        user_dict = {
+            'id': 1, 'username': 'userupdated',
+            'email': 'email@test.com', 'last_login': '2016-06-21 08:00:00'}
         self.request.json = user_dict
         user_obj = PutUserSerializer(request=self.request)
         assert user_obj.id == user_dict['id']
@@ -64,7 +66,18 @@ class TestValidators(object):
         self.request.json = user_dict
         with pytest.raises(ValidationError) as excinfo:
             PutUserSerializer(request=self.request)
-        assert "Additional properties are not allowed ('extra' was unexpected)" in str(excinfo.value)
+        assert "'extra' was unexpected)" in str(excinfo.value)
+
+    def test_serialize_from_model(self):
+        user_model = Mock()
+        user_model.email = 'email@email.com'
+        user_model.username = 'username'
+        user_model.last_login = datetime(2016, 6, 21, 8, 15)
+        user_model.birthday = date(2016, 6, 21)
+        user_serializer = PostUserSerializer(model=user_model)
+        json_obj = user_serializer.to_json()
+        assert json_obj['birthday'] == '2016-06-21'
+        assert json_obj['last_login'] == '2016-06-21 08:15:00'
 
 
 class TestApiRequest(TestApiCase):
@@ -89,7 +102,6 @@ class TestApiRequest(TestApiCase):
         assert len(data) == 2
         assert 'username' in data[0]
         assert 'id' in data[0]
-
 
     def test_post_resource(self):
         """

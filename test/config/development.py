@@ -1,2 +1,2 @@
 TESTING = True
-URLS =  'webtests.urls'
+URLS = 'webtests.urls'

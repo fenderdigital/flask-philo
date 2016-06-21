@@ -1,6 +1,7 @@
 from flask import Flask
 
-from .exceptions import  ConfigurationError
+from . import default_settings
+from .exceptions import ConfigurationError
 
 import importlib
 import os
@@ -30,7 +31,14 @@ def init_app(module):
         if 'FLASKUTILS_SETTINGS_MODULE' not in os.environ:
             raise ConfigurationError('No settings has been defined')
 
-        settings = importlib.import_module(os.environ['FLASKUTILS_SETTINGS_MODULE'])
+        # default settings
+        for v in dir(default_settings):
+            if not v.startswith('_'):
+                app.config[v] = getattr(default_settings, v)
+
+        # app settings
+        settings = importlib.import_module(
+            os.environ['FLASKUTILS_SETTINGS_MODULE'])
         for v in dir(settings):
             if not v.startswith('_'):
                 app.config[v] = getattr(settings, v)
