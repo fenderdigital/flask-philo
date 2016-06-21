@@ -49,7 +49,27 @@ def init_app(module):
             for route in urls_module.URLS:
                 app.add_url_rule(
                         route[0], view_func=route[1].as_view(route[2]))
+
+        def init_postgres():
+            """
+            If postgresql url is defined in configuration params a scoped session
+            will be created and will be used by pgsqlutils
+            https://github.com/Riffstation/sqlalchemypostgresutils
+            """
+            if 'POSTGRESQL_DATABASE_URI' in app.config:
+                from flask import _app_ctx_stack
+                from pgsqlutils.base import get_db_conf, init_db_conn
+                from sqlalchemy.orm import sessionmaker, scoped_session
+
+                dbconf = get_db_conf()
+                dbconf.DATABASE_URI = app.config['POSTGRESQL_DATABASE_URI']
+                dbconf.Session = scoped_session(
+                    sessionmaker(), scopefunc=_app_ctx_stack.__ident_func__)
+                init_db_conn()
+
+
         init_urls()
+        init_postgres()
 
     app = Flask(module)
     init_config()

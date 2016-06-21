@@ -2,4 +2,4 @@ psycopg2
 markdown
 flask
 jsonschema
--e git+https://github.com/Riffstation/sqlalchemypostgresutils.git#egg=sqlalchemypostgresutils
+-e git+https://github.com/maigfrga/sqlalchemypostgresutils.git@dev#egg=sqlalchemypostgresutils
