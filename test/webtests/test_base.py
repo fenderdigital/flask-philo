@@ -2,8 +2,7 @@ from datetime import date, datetime
 from unittest.mock import Mock
 
 from flaskutils import app
-from flaskutils import utils
-from flaskutils.test import TestApiCase
+from flaskutils.test import TestApiCase, TestTransactionApiCase
 from flask import Flask
 
 from jsonschema import ValidationError
@@ -80,7 +79,7 @@ class TestValidators(object):
         assert json_obj['last_login'] == '2016-06-21 08:15:00'
 
 
-class TestApiRequest(TestApiCase):
+class TestApiRequest(TestTransactionApiCase):
 
     def test_get_resource(self):
         """

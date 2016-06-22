@@ -24,3 +24,17 @@ class TestApiCase(object):
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         }
+
+
+class TestTransactionApiCase(TransactionalTestCase):
+    """
+    Instanciates an http client ready to make json requests and get
+    json responses, it instanciates a database connection
+    """
+    def setup(self):
+        self.client = app.test_client()
+        self.json_request_headers = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+        super(TestTransactionApiCase, self).setup()

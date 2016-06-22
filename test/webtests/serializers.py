@@ -29,8 +29,9 @@ class PostUserSerializer(BaseSerializer):
             'username': {'type': 'string'},
             'last_login': {'type': 'string', 'format': 'date-time'},
             'birthday': {'type': 'string', 'format': 'date'},
+            'password': {'type': 'string'},
         },
-        'required': ['email', 'username']
+        'required': ['email', 'username', 'password']
     }
 
 
