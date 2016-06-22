@@ -58,12 +58,13 @@ def init_app(module):
             """
             if 'POSTGRESQL_DATABASE_URI' in app.config:
                 from flask import _app_ctx_stack
+                import pgsqlutils.base as pgbase
                 from pgsqlutils.base import get_db_conf, init_db_conn
                 from sqlalchemy.orm import sessionmaker, scoped_session
-
                 dbconf = get_db_conf()
                 dbconf.DATABASE_URI = app.config['POSTGRESQL_DATABASE_URI']
-                dbconf.Session = scoped_session(
+                # monkey patching to replace default session by a sessing handled by flask
+                pgbase.Session = scoped_session(
                     sessionmaker(), scopefunc=_app_ctx_stack.__ident_func__)
                 init_db_conn()
 

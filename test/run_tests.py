@@ -12,7 +12,7 @@ def run_tests():
     description = 'Creates play admin user'
     parser = argparse.ArgumentParser(description=description)
     parser.add_argument(
-        '--settings', help='config file path', default='config.development')
+        '--settings', help='config file path', default='config.test')
     args = parser.parse_args()
 
     os.environ.setdefault('FLASKUTILS_SETTINGS_MODULE', args.settings)
