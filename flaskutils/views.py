@@ -11,35 +11,35 @@ class BaseView(MethodView):
     def render_template(self, template_name):
         return render_template(template_name)
 
-    def get(self):
+    def get(self, *args, **kwargs):
         abort(400)
 
-    def post(self):
+    def post(self, *args, **kwargs):
         abort(400)
 
-    def put(self):
+    def put(self, *args, **kwargs):
         abort(400)
 
-    def patch(self):
+    def patch(self, *args, **kwargs):
         abort(400)
 
-    def delete(self):
+    def delete(self, *args, **kwargs):
         abort(400)
 
 
 class BaseResourceView(BaseView):
 
-    def get(self):
+    def get(self, *args, **kwargs):
         return self.json_response(400)
 
-    def post(self):
+    def post(self, *args, **kwargs):
         return self.json_response(400)
 
-    def put(self):
+    def put(self, *args, **kwargs):
         return self.json_response(400)
 
-    def patch(self):
+    def patch(self, *args, **kwargs):
         return self.json_response(400)
 
-    def delete(self):
+    def delete(self, *args, **kwargs):
         return self.json_response(400)

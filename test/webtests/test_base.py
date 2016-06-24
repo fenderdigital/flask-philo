@@ -2,10 +2,12 @@ from datetime import date, datetime
 from unittest.mock import Mock
 
 from flaskutils import app
-from flaskutils.test import TestApiCase, TestTransactionApiCase
+from flaskutils.test import TransactionalTestCase
 from flask import Flask
-
 from jsonschema import ValidationError
+from pgsqlutils.base import Session
+
+from .models import User
 from .serializers import PostUserSerializer, PutUserSerializer
 
 import json
@@ -79,76 +81,101 @@ class TestValidators(object):
         assert json_obj['last_login'] == '2016-06-21 08:15:00'
 
 
-class TestApiRequest(TestTransactionApiCase):
+class TestApiRequest(TransactionalTestCase):
 
     def test_get_resource(self):
         """
         Get a Rest resource in json format
         """
-        result = self.client.get('/users/1')
+        user = User(
+            username='username1', email='email1@email.com', password='123')
+        user.add()
+
+        user2 = User(
+            username='username2', email='email2@email.com', password='123')
+        user2.add()
+
+        result = self.client.get('/users/{}'.format(user.id))
         assert 200 == result.status_code
         data = json.loads(result.get_data().decode('utf-8'))
         assert 'username' in data
         assert 'id' in data
+        assert user.id == data['id']
 
     def test_get_resource_list(self):
         """
         Get a list of rest resources
         """
+        user = User(
+            username='username1', email='email1@email.com', password='123')
+        user.add()
+
+        user2 = User(
+            username='username2', email='email2@email.com', password='123')
+        user2.add()
         result = self.client.get('/users')
         assert 200 == result.status_code
         data = json.loads(result.get_data().decode('utf-8'))
         assert len(data) == 2
         assert 'username' in data[0]
         assert 'id' in data[0]
+        assert user.id == data[0]['id']
+        assert user2.id == data[1]['id']
+
 
     def test_post_resource(self):
         """
         Test A valid
         """
+        assert 0 == User.objects.count()
+        user = {'username': 'user', 'email': 'email@test.com', 'password': '123'}
+        response = self.client.post(
+            '/users',
+            data=json.dumps(user),
+            headers=self.json_request_headers
+        )
+        assert 1 == User.objects.count()
+        assert 201 == response.status_code
+        data = json.loads(response.get_data().decode('utf-8'))
+        user2 = User.objects.filter_by()[0]
+        assert data['id'] == user2.id
 
     def test_put_resource(self):
         """
         Test A valid put request
         """
-        user = {'id': 1, 'username': 'userupdated', 'email': 'email@test.com'}
-        response = self.client.put(
-            '/users/1',
-            data=json.dumps(user),
+        user = User(
+            username='username1', email='email1@email.com', password='123')
+        user.add()
+        Session.commit()
+        data = {
+            'id': user.id, 'username': 'updatedusername',
+            'email': user.email, 'password': '123' }
+
+        result = self.client.put(
+            '/users/{}'.format(user.id),
+            data=json.dumps(data),
             headers=self.json_request_headers
         )
+        data = json.loads(result.get_data().decode('utf-8'))
+        user2 = User.objects.get(user.id)
 
-    def test_password_authentication(self):
-        """
-        valid  username and password  authentication backend
-        """
+        assert 200 == result.status_code
+        assert 1 == User.objects.count()
+        assert user.id == user2.id and user2.id == data['id']
 
-    def test_token_authentication(self):
+    def test_delete_resource(self):
         """
-        test api token authentication backend
+        deleting a resource using delete
         """
-
-    def test_unautorized_request(self):
-        """
-        invalid request, user unauthorized
-        """
-
-    def test_post_rest_request(self):
-        """
-        create a new resource with a json request
-        """
-
-    def test_put_rest_request(self):
-        """
-        updating a resource using put
-        """
-
-    def test_patch_rest_request(self):
-        """
-        updating a resource using put
-        """
-
-    def test_delete_rest_request(self):
-        """
-        deleting a resource using put
-        """
+        user = User(
+            username='username1', email='email1@email.com', password='123')
+        user.add()
+        Session.commit()
+        assert 1 == User.objects.count()
+        result = self.client.delete(
+            '/users/{}'.format(user.id),
+            headers=self.json_request_headers
+        )
+        assert 200 == result.status_code
+        assert 0 == User.objects.count()

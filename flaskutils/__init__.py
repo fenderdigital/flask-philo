@@ -17,7 +17,7 @@ class Borg:
 app = None
 
 
-def init_app(module):
+def init_app(module, testing=True):
     """
     Initalize an app, call this method once from start_app
     """
@@ -50,27 +50,32 @@ def init_app(module):
                 app.add_url_rule(
                         route[0], view_func=route[1].as_view(route[2]))
 
-        def init_postgres():
+        def init_postgres(testing):
             """
             If postgresql url is defined in configuration params a scoped session
             will be created and will be used by pgsqlutils
             https://github.com/Riffstation/sqlalchemypostgresutils
             """
             if 'POSTGRESQL_DATABASE_URI' in app.config:
-                from flask import _app_ctx_stack
-                import pgsqlutils.base as pgbase
-                from pgsqlutils.base import get_db_conf, init_db_conn
-                from sqlalchemy.orm import sessionmaker, scoped_session
-                dbconf = get_db_conf()
-                dbconf.DATABASE_URI = app.config['POSTGRESQL_DATABASE_URI']
-                # monkey patching to replace default session by a sessing handled by flask
-                pgbase.Session = scoped_session(
-                    sessionmaker(), scopefunc=_app_ctx_stack.__ident_func__)
-                init_db_conn()
-
+                if not testing:
+                    from flask import _app_ctx_stack
+                    import pgsqlutils.base as pgbase
+                    from pgsqlutils.base import get_db_conf, init_db_conn
+                    from sqlalchemy.orm import sessionmaker, scoped_session
+                    dbconf = get_db_conf()
+                    dbconf.DATABASE_URI = app.config['POSTGRESQL_DATABASE_URI']
+                    # monkey patching to replace default session by a sessing handled by flask
+                    pgbase.Session = scoped_session(
+                        sessionmaker(), scopefunc=_app_ctx_stack.__ident_func__)
+                    init_db_conn()
+                else:
+                    from pgsqlutils.base import get_db_conf, init_db_conn
+                    dbconf = get_db_conf()
+                    dbconf.DATABASE_URI = app.config['POSTGRESQL_DATABASE_URI']
+                    init_db_conn()
 
         init_urls()
-        init_postgres()
+        init_postgres(testing)
 
     app = Flask(module)
     init_config()

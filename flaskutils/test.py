@@ -1,19 +1,29 @@
 from flaskutils import app
-from pgsqlutils.base import syncdb, Session
+from .models import FlaskModel
+from pgsqlutils.base import syncdb, dropall, Session
+
 
 class TransactionalTestCase(object):
     """
     Establish a database connection and create models
     """
     def setup(self):
+        self.client = app.test_client()
+        self.json_request_headers = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
         syncdb()
 
     def teardown(self):
-        Session.rollback()
+        for t in  FlaskModel.metadata.sorted_tables:
+            sql = 'delete from {};'.format(t.name)
+            Session.execute(sql)
+            Session.commit()
         Session.close()
 
 
-class TestApiCase(object):
+class ApiTestCase(object):
     """
     Instanciates an http client ready to make json requests and get
     json responses, it doesn't instanciate a database connection
@@ -24,17 +34,3 @@ class TestApiCase(object):
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         }
-
-
-class TestTransactionApiCase(TransactionalTestCase):
-    """
-    Instanciates an http client ready to make json requests and get
-    json responses, it instanciates a database connection
-    """
-    def setup(self):
-        self.client = app.test_client()
-        self.json_request_headers = {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        }
-        super(TestTransactionApiCase, self).setup()

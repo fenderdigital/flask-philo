@@ -1,8 +1,10 @@
 from flaskutils.test import TransactionalTestCase
 from pgsqlutils.base import Session
 
+from unittest.mock import Mock
+
 from .models import User
-from .serializers import GetUserSerializer
+from .serializers import GetUserSerializer, PostUserSerializer
 
 
 class TestDBAccess(TransactionalTestCase):
@@ -33,3 +35,15 @@ class TestDBAccess(TransactionalTestCase):
         assert user2.username == json_model['username']
         assert user2.email == json_model['email']
         assert 'password' not in json_model
+
+    def test_serializer_to_model(self):
+
+        request = Mock()
+        user_dict = {
+            'username': 'userupdated', 'password': '123',
+            'email': 'email@test.com'}
+        request.json = user_dict
+        user_serializer = PostUserSerializer(request=request)
+        user_model = User(serializer=user_serializer)
+        assert user_dict['username'] == user_model.username
+        assert user_model.email == user_dict['email']

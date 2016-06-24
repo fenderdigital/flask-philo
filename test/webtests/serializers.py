@@ -42,7 +42,8 @@ class PutUserSerializer(BaseSerializer):
             'email': {'type': 'string', 'format': 'email'},
             'username': {'type': 'string'},
             'id': {'type': 'number'},
-            'last_login': {'type': 'string', 'format': 'date-time'}
+            'last_login': {'type': 'string', 'format': 'date-time'},
+            'password': {'type': 'string'},
         },
         'required': ['id', 'email', 'username']
     }
