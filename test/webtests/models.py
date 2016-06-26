@@ -1,7 +1,7 @@
 from flaskutils.models import FlaskModel
 from pgsqlutils.types import BcryptType
 
-from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy import Column, String
 
 
 class User(FlaskModel):

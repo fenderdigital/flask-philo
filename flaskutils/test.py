@@ -1,6 +1,6 @@
 from flaskutils import app
 from .models import FlaskModel
-from pgsqlutils.base import syncdb, dropall, Session
+from pgsqlutils.base import syncdb, Session
 
 
 class TransactionalTestCase(object):
@@ -16,7 +16,7 @@ class TransactionalTestCase(object):
         syncdb()
 
     def teardown(self):
-        for t in  FlaskModel.metadata.sorted_tables:
+        for t in FlaskModel.metadata.sorted_tables:
             sql = 'delete from {};'.format(t.name)
             Session.execute(sql)
             Session.commit()

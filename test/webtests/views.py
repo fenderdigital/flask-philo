@@ -1,4 +1,5 @@
 from flask import request
+from flaskutils import app
 from flaskutils.views import BaseView, BaseResourceView
 from pgsqlutils.base import Session
 from pgsqlutils.exceptions import NotFoundError
@@ -13,7 +14,6 @@ from .serializers import (
 class BasicHTMLView(BaseView):
     def get(self):
         return self.render_template('home.html')
-
 
 
 class UserResourceView(BaseResourceView):
@@ -40,9 +40,11 @@ class UserResourceView(BaseResourceView):
             user.add()
             Session.commit()
             user = User.objects.get(user.id)
+            app.logger.info('user with id {} has been created'.format(user.id))
             return self.json_response(status=201, data={'id': user.id})
 
         except Exception as e:
+            app.logger.error(e)
             Session.rollback()
             return self.json_response(status=500)
 
@@ -55,6 +57,7 @@ class UserResourceView(BaseResourceView):
             return self.json_response(
                 status=200, data=PutUserSerializer(model=user).to_json())
         except Exception as e:
+            app.logger.error(e)
             Session.rollback()
             return self.json_response(status=500)
 
@@ -65,5 +68,6 @@ class UserResourceView(BaseResourceView):
             Session.commit()
             return self.json_response()
         except Exception as e:
+            app.logger.error(e)
             Session.rollback()
             return self.json_response(status=500)

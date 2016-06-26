@@ -122,13 +122,13 @@ class TestApiRequest(TransactionalTestCase):
         assert user.id == data[0]['id']
         assert user2.id == data[1]['id']
 
-
     def test_post_resource(self):
         """
         Test A valid
         """
         assert 0 == User.objects.count()
-        user = {'username': 'user', 'email': 'email@test.com', 'password': '123'}
+        user = {
+            'username': 'user', 'email': 'email@test.com', 'password': '123'}
         response = self.client.post(
             '/users',
             data=json.dumps(user),
@@ -150,7 +150,7 @@ class TestApiRequest(TransactionalTestCase):
         Session.commit()
         data = {
             'id': user.id, 'username': 'updatedusername',
-            'email': user.email, 'password': '123' }
+            'email': user.email, 'password': '123'}
 
         result = self.client.put(
             '/users/{}'.format(user.id),
