@@ -21,7 +21,7 @@ In order to run test a vagrant instance is required, below steps required to exe
    vagrant up
    vagrant ssh
    cd /src/test
-   python3 run_test.py
+   python3 manage.py test
 ```
 
 

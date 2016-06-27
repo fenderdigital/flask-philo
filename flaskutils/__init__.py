@@ -1,6 +1,7 @@
 from flask import Flask
 
 from . import default_settings
+from .commands import *  # noqa
 from .exceptions import ConfigurationError
 
 import logging
@@ -18,7 +19,7 @@ class Borg:
 app = None
 
 
-def init_app(module, testing=True):
+def init_app(module, BASE_DIR, testing=True):
     """
     Initalize an app, call this method once from start_app
     """
@@ -32,10 +33,14 @@ def init_app(module, testing=True):
         if 'FLASKUTILS_SETTINGS_MODULE' not in os.environ:
             raise ConfigurationError('No settings has been defined')
 
+        app.config['BASE_DIR'] = BASE_DIR
+
         # default settings
         for v in dir(default_settings):
             if not v.startswith('_'):
                 app.config[v] = getattr(default_settings, v)
+
+        app.debug = app.config['DEBUG']
 
         # app settings
         settings = importlib.import_module(
@@ -95,3 +100,17 @@ def init_app(module, testing=True):
 
     app = Flask(module)
     init_config()
+
+
+def execute_command(cmd, **kwargs):
+    """
+    execute a console command
+    """
+    cmd_list = [
+        c for c in dir(commands) if not c.startswith('_') and c != 'os'
+    ]
+
+    if cmd not in cmd_list:
+        raise ConfigurationError('command {} does not exists'.format(cmd))
+    cmd_module = importlib.import_module('flaskutils.commands.' + cmd)
+    cmd_module.run(app, **kwargs)

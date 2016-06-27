@@ -27,7 +27,7 @@ class TestAppCase(object):
         Test if the flask app was correctly instanciated
         """
         assert isinstance(app, Flask)
-        assert 'run_tests' == app.name
+        assert 'manage' == app.name
 
     def test_render_html(self):
         """

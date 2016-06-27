@@ -4,3 +4,9 @@ DATETIME_FORMAT = '%Y-%m-%d %H:%M:%S'
 DATE_FORMAT = '%Y-%m-%d'
 
 LOG_LEVEL = 'INFO'
+
+HOST = '127.0.0.1'
+
+PORT = 8080
+
+DEBUG = False
