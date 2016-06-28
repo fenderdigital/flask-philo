@@ -9,6 +9,7 @@ setup(
     author_email='maigfrga@gmail.com',
     dependency_links=['https://github.com/maigfrga/sqlalchemypostgresutils.git@dev#egg=sqlalchemypostgresutils'],  # noqa
     install_requires=[
+        'jsonschema',
         'pytest',
         'flask',
     ],
