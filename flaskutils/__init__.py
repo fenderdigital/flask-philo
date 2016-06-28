@@ -107,7 +107,7 @@ def execute_command(cmd, **kwargs):
     execute a console command
     """
     cmd_list = [
-        c for c in dir(commands) if not c.startswith('_') and c != 'os'
+        c for c in dir(commands) if not c.startswith('_') and c != 'os'  # noqa
     ]
 
     if cmd not in cmd_list:

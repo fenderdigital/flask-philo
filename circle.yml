@@ -8,5 +8,5 @@ dependencies:
         - pip3 install flake8
 test:
     override:
-        -  flake8 ./
-        -  python3 test/run_tests.py --config test_config
+        -  flake8 --exclude build ./
+        -  cd test; python3 manage.py test --settings config.ci
