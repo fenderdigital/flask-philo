@@ -94,9 +94,9 @@ def init_app(module, BASE_DIR, testing=True):
             log_level = app.config['LOG_LEVEL']
             app.logger.setLevel(getattr(logging, log_level))
 
+        init_logging()
         init_urls()
         init_postgres(testing)
-        init_logging()
 
     app = Flask(module)
     init_config()
