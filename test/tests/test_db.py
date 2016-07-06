@@ -28,7 +28,7 @@ class TestDBAccess(TransactionalTestCase):
             username='username1', email='email1@email.com', password='123')
         user.add()
 
-        user2 = User.objects.get(user.id)
+        user2 = User.objects.get(id=user.id)
         serializer = GetUserSerializer(model=user2)
         json_model = serializer.to_json()
         assert user2.id == json_model['id']

@@ -4,6 +4,7 @@ from . import default_settings
 from .commands import *  # noqa
 from .exceptions import ConfigurationError
 
+import flask_login
 import logging
 import importlib
 import os
@@ -94,9 +95,20 @@ def init_app(module, BASE_DIR, testing=True):
             log_level = app.config['LOG_LEVEL']
             app.logger.setLevel(getattr(logging, log_level))
 
+
+        def init_flask_login():
+            """
+            Initialize flask login
+            https://flask-login.readthedocs.io
+            """
+            login_manager = flask_login.LoginManager()
+            login_manager.session_protection = 'strong'
+            login_manager.init_app(app)
+
         init_logging()
         init_urls()
         init_postgres(testing)
+        init_flask_login()
 
     app = Flask(module)
     init_config()

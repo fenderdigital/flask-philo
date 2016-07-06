@@ -27,7 +27,7 @@ class UserResourceView(BaseResourceView):
                 ]
             else:
                 data = GetUserSerializer(
-                    model=User.objects.get(id)).to_json()
+                    model=User.objects.get(id=id)).to_json()
 
             return self.json_response(data=data)
         except NotFoundError:
@@ -39,7 +39,7 @@ class UserResourceView(BaseResourceView):
             user = User(serializer=serializer)
             user.add()
             Session.commit()
-            user = User.objects.get(user.id)
+            user = User.objects.get(id=user.id)
             app.logger.info('user with id {} has been created'.format(user.id))
             return self.json_response(status=201, data={'id': user.id})
 
@@ -63,7 +63,7 @@ class UserResourceView(BaseResourceView):
 
     def delete(self, id):
         try:
-            user = User.objects.get(id)
+            user = User.objects.get(id=id)
             user.delete()
             Session.commit()
             return self.json_response()

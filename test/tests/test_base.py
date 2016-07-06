@@ -158,7 +158,7 @@ class TestApiRequest(TransactionalTestCase):
             headers=self.json_request_headers
         )
         data = json.loads(result.get_data().decode('utf-8'))
-        user2 = User.objects.get(user.id)
+        user2 = User.objects.get(id=user.id)
 
         assert 200 == result.status_code
         assert 1 == User.objects.count()

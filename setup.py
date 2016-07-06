@@ -12,5 +12,6 @@ setup(
         'jsonschema',
         'pytest',
         'flask',
+        'flask-login'
     ],
 )
