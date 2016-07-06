@@ -47,3 +47,19 @@ class PutUserSerializer(BaseSerializer):
         },
         'required': ['id', 'email', 'username']
     }
+
+
+
+class LoginSerializer(BaseSerializer):
+    """
+    Post requests with login credentials
+    """
+    _schema = {
+        'type': 'object',
+        'properties': {
+            'username': {'type': 'string'},
+            'password': {'type': 'string'},
+            'email': {'type': 'string', 'format': 'email'}
+        },
+        'required': ['email', 'username', 'password']
+    }

@@ -9,4 +9,4 @@ dependencies:
 test:
     override:
         -  flake8 --exclude build ./
-        -  cd test; python3 manage.py test --settings config.ci
+        -  cd test; python3 manage.py test --settings tests.config.ci
