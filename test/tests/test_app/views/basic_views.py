@@ -4,9 +4,9 @@ from flaskutils.views import BaseView, BaseResourceView
 from pgsqlutils.base import Session
 from pgsqlutils.exceptions import NotFoundError
 
-from .models import User
+from tests.test_app.models import User
 
-from .serializers import (
+from tests.test_app.serializers import (
     GetUserSerializer, PostUserSerializer, PutUserSerializer
 )
 

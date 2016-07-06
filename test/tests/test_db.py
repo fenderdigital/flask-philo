@@ -3,8 +3,8 @@ from pgsqlutils.base import Session
 
 from unittest.mock import Mock
 
-from .models import User
-from .serializers import GetUserSerializer, PostUserSerializer
+from tests.test_app.models import User
+from tests.test_app.serializers import GetUserSerializer, PostUserSerializer
 
 
 class TestDBAccess(TransactionalTestCase):

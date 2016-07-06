@@ -7,8 +7,8 @@ from flask import Flask
 from jsonschema import ValidationError
 from pgsqlutils.base import Session
 
-from .models import User
-from .serializers import PostUserSerializer, PutUserSerializer
+from tests.test_app.models import User
+from tests.test_app.serializers import PostUserSerializer, PutUserSerializer
 
 import json
 import pytest
