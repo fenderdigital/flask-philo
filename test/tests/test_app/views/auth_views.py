@@ -1,7 +1,6 @@
 from flask import request
 from flaskutils import app
-from flaskutils.views import BaseView, BaseResourceView
-from pgsqlutils.base import Session
+from flaskutils.views import BaseView
 from flaskutils.exceptions import AuthenticationError
 from jsonschema.exceptions import ValidationError
 

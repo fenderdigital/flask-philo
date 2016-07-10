@@ -1,7 +1,8 @@
 from flaskutils.exceptions import ConfigurationError
 
 
-def run(app, **kwargs):
+def run(**kwargs):
+    app = kwargs['app']
     if app.config['DEBUG']:
         app.run(
             host=app.config['HOST'], port=app.config['PORT'])

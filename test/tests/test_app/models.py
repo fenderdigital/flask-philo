@@ -1,6 +1,6 @@
 from flaskutils.models import FlaskModel
 from flaskutils.exceptions import AuthenticationError
-from pgsqlutils.types import Password, BcryptType
+from flaskutils.sql import BcryptType, Password
 from pgsqlutils.exceptions import NotFoundError
 
 from sqlalchemy import Boolean, Column, String
@@ -13,16 +13,18 @@ class User(FlaskModel):
     email = Column(String(64))
     is_active =  Column(Boolean(), nullable=False, default=False)
 
+    def get_id(self):
+        return self.id
+
     @classmethod
     def authenticate(cls, username=None, email=None, password=None):
-
         # checking if all fiels are not null
         if not(username and email and password):
             raise AuthenticationError('invalid credentials')
 
         try:
             user = User.objects.get(username=username, email=email)
-            assert Password(user.password, password.encode('utf-8'))
+            assert Password(user.password) == Password(password)
             return user
-        except NotFoundError:
+        except (AssertionError, NotFoundError,):
             raise AuthenticationError('invalid credentials')

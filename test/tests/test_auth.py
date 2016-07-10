@@ -1,9 +1,37 @@
 from flaskutils import app
-from flaskutils.test import TransactionalTestCase
+from flaskutils.exceptions import AuthenticationError
+from flaskutils.test import ModelTestCase, TransactionalTestCase
 
 from tests.test_app.models import User
 
 import json
+import pytest
+
+
+class TestAuthUser(ModelTestCase):
+    def test_invalid_password(self):
+        user = User(
+            username='user', email='user@user.com', password='123')
+        user.add()
+
+        with pytest.raises(AuthenticationError) as excinfo:
+            User.authenticate(username='user', email='user@user.com', password='12345')
+        assert 'invalid credentials' in str(excinfo.value)
+
+    def test_invalid_username(self):
+        with pytest.raises(AuthenticationError) as excinfo:
+            User.authenticate(username='not exists', email='user@user.com', password='12345')
+        assert 'invalid credentials' in str(excinfo.value)
+
+    def test_valid_password(self):
+        user = User(
+            username='user', email='user@user.com', password='123')
+        user.add()
+
+        user2 = User.authenticate(username='user', email='user@user.com', password='123')
+
+        assert user.password == user2.password
+        assert user.id == user2.id
 
 
 class TestAuth(TransactionalTestCase):
@@ -65,9 +93,12 @@ class TestAuth(TransactionalTestCase):
         assert 'msg' in data
         assert "invalid credentials" == data['msg']
 
-    def test_successfull_login(self):
+    def test_successful_login(self):
+        assert (
+            'localhost.local' not in
+            self.client.cookie_jar._cookies)
         user = User(
-            username='user', email='user@user.com', password='123')
+            username='user', email='user@user.com', password='123', is_active=True)
         user.add()
         credentials = {
             'username': 'user', 'email': 'user@user.com', 'password': '123'}
@@ -76,12 +107,19 @@ class TestAuth(TransactionalTestCase):
             data=json.dumps(credentials),
             headers=self.json_request_headers
         )
+        # import ipdb; ipdb.set_trace()
         assert 200 == result.status_code
         data = json.loads(result.get_data().decode('utf-8'))
         assert 'username' in data
         assert 'user' == data['username']
+        assert (
+            'session' in
+            self.client.cookie_jar._cookies['localhost.local']['/'])
 
     def test_invalid_password(self):
+        assert (
+            'localhost.local' not in
+            self.client.cookie_jar._cookies)
         user = User(
             username='user', email='user@user.com', password='123')
         user.add()

@@ -3,9 +3,21 @@ from .models import FlaskModel
 from pgsqlutils.base import syncdb, Session
 
 
+class ModelTestCase(object):
+    def setup(self):
+        """
+        Use this test case when no interaction in a view is required
+        """
+        syncdb()
+
+    def teardown(self):
+        Session.rollback()
+        Session.close()
+
+
 class TransactionalTestCase(object):
     """
-    Establish a database connection and create models
+    This tests should be used when testing views
     """
     def setup(self):
         self.client = app.test_client()

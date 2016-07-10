@@ -1,3 +1,5 @@
+from flaskutils.commands import gen_salt
+
 # ISO 8601  https://en.wikipedia.org/wiki/ISO_8601
 DATETIME_FORMAT = '%Y-%m-%d %H:%M:%S'
 
@@ -10,3 +12,5 @@ HOST = '127.0.0.1'
 PORT = 8080
 
 DEBUG = False
+
+CRYP_SALT =  gen_salt.run(print_salt=False)

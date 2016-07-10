@@ -125,4 +125,5 @@ def execute_command(cmd, **kwargs):
     if cmd not in cmd_list:
         raise ConfigurationError('command {} does not exists'.format(cmd))
     cmd_module = importlib.import_module('flaskutils.commands.' + cmd)
-    cmd_module.run(app, **kwargs)
+    kwargs['app'] = app
+    cmd_module.run(**kwargs)
