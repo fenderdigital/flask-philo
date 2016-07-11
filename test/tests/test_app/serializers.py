@@ -49,7 +49,6 @@ class PutUserSerializer(BaseSerializer):
     }
 
 
-
 class LoginSerializer(BaseSerializer):
     """
     Post requests with login credentials

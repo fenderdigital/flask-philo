@@ -1,2 +1,2 @@
-from .basic_views import BasicHTMLView, UserResourceView
-from .auth_views import LoginView, ProtectectView
+from .basic_views import BasicHTMLView, UserResourceView  # noqa
+from .auth_views import LoginView, ProtectectView, LogoutView  # noqa

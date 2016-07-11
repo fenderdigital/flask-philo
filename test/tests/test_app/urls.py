@@ -1,5 +1,5 @@
 from .views import (
-    BasicHTMLView, UserResourceView, LoginView, ProtectectView)
+    BasicHTMLView, UserResourceView, LoginView, ProtectectView, LogoutView)
 
 URLS = (
     ('/', BasicHTMLView, 'home'),
@@ -7,4 +7,5 @@ URLS = (
     ('/users/<int:id>', UserResourceView, 'user_list'),
     ('/login', LoginView, 'login'),
     ('/protected', ProtectectView, 'protected'),
+    ('/logout', LogoutView, 'logout'),
 )

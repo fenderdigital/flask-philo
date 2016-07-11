@@ -1,5 +1,5 @@
 from flask import request
-from flaskutils import app, get_login_manager
+from flaskutils import login_manager
 from flaskutils.views import BaseView
 from flaskutils.exceptions import AuthenticationError
 from jsonschema.exceptions import ValidationError
@@ -8,11 +8,10 @@ from tests.test_app.models import User
 from tests.test_app.serializers import (
     LoginSerializer
 )
-from flask_login import login_user, login_required
+from flask_login import login_user, logout_user, login_required
 
-lm = get_login_manager()
 
-@lm.user_loader
+@login_manager.user_loader
 def load_user(id):
     """
     If user does not exist should return None
@@ -45,6 +44,13 @@ class LoginView(BaseView):
             data = {'msg': str(e)}
 
         return self.json_response(status=401, data=data)
+
+
+class LogoutView(BaseView):
+    @login_required
+    def post(self):
+        logout_user()
+        return self.json_response(200)
 
 
 class ProtectectView(BaseView):

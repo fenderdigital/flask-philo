@@ -15,12 +15,14 @@ class TestAuthUser(ModelTestCase):
         user.add()
 
         with pytest.raises(AuthenticationError) as excinfo:
-            User.authenticate(username='user', email='user@user.com', password='12345')
+            User.authenticate(
+                username='user', email='user@user.com', password='12345')
         assert 'invalid credentials' in str(excinfo.value)
 
     def test_invalid_username(self):
         with pytest.raises(AuthenticationError) as excinfo:
-            User.authenticate(username='not exists', email='user@user.com', password='12345')
+            User.authenticate(
+                username='not exists', email='user@user.com', password='12345')
         assert 'invalid credentials' in str(excinfo.value)
 
     def test_valid_password(self):
@@ -28,7 +30,8 @@ class TestAuthUser(ModelTestCase):
             username='user', email='user@user.com', password='123')
         user.add()
 
-        user2 = User.authenticate(username='user', email='user@user.com', password='123')
+        user2 = User.authenticate(
+            username='user', email='user@user.com', password='123')
 
         assert user.password == user2.password
         assert user.id == user2.id
@@ -48,7 +51,6 @@ class TestAuth(TransactionalTestCase):
         """
         result = self.client.post('/login')
         assert 401 == result.status_code
-
 
     def test_401_password_username_missing(self):
         """
@@ -98,7 +100,8 @@ class TestAuth(TransactionalTestCase):
             'localhost.local' not in
             self.client.cookie_jar._cookies)
         user = User(
-            username='user', email='user@user.com', password='123', is_active=True)
+            username='user', email='user@user.com',
+            password='123', is_active=True)
         user.add()
         credentials = {
             'username': 'user', 'email': 'user@user.com', 'password': '123'}
@@ -134,7 +137,6 @@ class TestAuth(TransactionalTestCase):
         assert 'msg' in data
         assert "invalid credentials" == data['msg']
 
-
     def test_login_required(self):
         result = self.client.get(
             '/protected',
@@ -143,7 +145,8 @@ class TestAuth(TransactionalTestCase):
 
         assert 401 == result.status_code
         user = User(
-            username='user', email='user@user.com', password='123', is_active=True)
+            username='user', email='user@user.com',
+            password='123', is_active=True)
         user.add()
         credentials = {
             'username': 'user', 'email': 'user@user.com', 'password': '123'}
@@ -157,3 +160,39 @@ class TestAuth(TransactionalTestCase):
             headers=self.json_request_headers
         )
         assert 200 == result.status_code
+
+    def test_logout(self):
+        assert (
+            'localhost.local' not in
+            self.client.cookie_jar._cookies)
+        user = User(
+            username='user', email='user@user.com',
+            password='123', is_active=True)
+        user.add()
+        credentials = {
+            'username': 'user', 'email': 'user@user.com', 'password': '123'}
+        result = self.client.post(
+            '/login',
+            data=json.dumps(credentials),
+            headers=self.json_request_headers
+        )
+        assert (
+            'session' in
+            self.client.cookie_jar._cookies['localhost.local']['/'])
+
+        result = self.client.get(
+            '/protected',
+            headers=self.json_request_headers
+        )
+        assert 200 == result.status_code
+        result = self.client.post(
+            '/logout',
+            data=json.dumps(credentials),
+            headers=self.json_request_headers
+        )
+
+        result = self.client.get(
+            '/protected',
+            headers=self.json_request_headers
+        )
+        assert 401 == result.status_code

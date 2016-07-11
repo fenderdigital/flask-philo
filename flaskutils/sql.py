@@ -1,15 +1,13 @@
 from flaskutils import app
 
-from sqlalchemy import String
 from pgsqlutils.types import Password as ParentPassword
 from pgsqlutils.types import BcryptType as ParentBcryptType
 
 
 class Password(ParentPassword):
     def __new__(cls, value, salt=app.config['CRYP_SALT'], crypt=True):
-        return ParentPassword.__new__(ParentPassword,
-            value, salt=salt, crypt=crypt)
-
+        return ParentPassword.__new__(
+            ParentPassword, value, salt=salt, crypt=crypt)
 
 
 class BcryptType(ParentBcryptType):

@@ -13,4 +13,4 @@ PORT = 8080
 
 DEBUG = False
 
-CRYP_SALT =  gen_salt.run(print_salt=False)
+CRYP_SALT = gen_salt.run(print_salt=False)
