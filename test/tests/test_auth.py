@@ -107,7 +107,6 @@ class TestAuth(TransactionalTestCase):
             data=json.dumps(credentials),
             headers=self.json_request_headers
         )
-        # import ipdb; ipdb.set_trace()
         assert 200 == result.status_code
         data = json.loads(result.get_data().decode('utf-8'))
         assert 'username' in data
@@ -134,3 +133,27 @@ class TestAuth(TransactionalTestCase):
         data = json.loads(result.get_data().decode('utf-8'))
         assert 'msg' in data
         assert "invalid credentials" == data['msg']
+
+
+    def test_login_required(self):
+        result = self.client.get(
+            '/protected',
+            headers=self.json_request_headers
+        )
+
+        assert 401 == result.status_code
+        user = User(
+            username='user', email='user@user.com', password='123', is_active=True)
+        user.add()
+        credentials = {
+            'username': 'user', 'email': 'user@user.com', 'password': '123'}
+        result = self.client.post(
+            '/login',
+            data=json.dumps(credentials),
+            headers=self.json_request_headers
+        )
+        result = self.client.get(
+            '/protected',
+            headers=self.json_request_headers
+        )
+        assert 200 == result.status_code

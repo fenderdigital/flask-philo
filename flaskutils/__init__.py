@@ -18,13 +18,17 @@ class Borg:
         self.__dict__ = self._shared_state
 
 app = None
+login_manager = None
 
+def get_login_manager():
+    return app.login_manager
 
 def init_app(module, BASE_DIR, testing=True):
     """
     Initalize an app, call this method once from start_app
     """
     global app
+    
 
     def init_config():
         """
@@ -104,6 +108,7 @@ def init_app(module, BASE_DIR, testing=True):
             login_manager = flask_login.LoginManager()
             login_manager.session_protection = 'strong'
             login_manager.init_app(app)
+            app.login_manager = login_manager
 
         init_logging()
         init_urls()
