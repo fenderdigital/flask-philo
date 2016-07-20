@@ -8,10 +8,12 @@ from jsonschema import ValidationError
 from pgsqlutils.base import Session
 
 from tests.test_app.models import User
-from tests.test_app.serializers import PostUserSerializer, PutUserSerializer
+from tests.test_app.serializers import (
+    PostUserSerializer, PutUserSerializer, UUIDSerializer)
 
 import json
 import pytest
+import uuid
 
 
 class TestAppCase(object):
@@ -79,6 +81,12 @@ class TestValidators(object):
         json_obj = user_serializer.to_json()
         assert json_obj['birthday'] == '2016-06-21'
         assert json_obj['last_login'] == '2016-06-21 08:15:00'
+
+    def test_serialize_uuid(self):
+        data = {'key': str(uuid.uuid4())}
+        serializer = UUIDSerializer(data=data)
+        jdata = serializer.to_json()
+        assert str(data['key']) == jdata['key']
 
 
 class TestApiRequest(TransactionalTestCase):

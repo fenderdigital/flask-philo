@@ -1,4 +1,4 @@
-from flaskutils.serializers import BaseSerializer
+from flaskutils.serializers import BaseSerializer, uuid_schema
 
 
 class GetUserSerializer(BaseSerializer):
@@ -61,4 +61,17 @@ class LoginSerializer(BaseSerializer):
             'email': {'type': 'string', 'format': 'email'}
         },
         'required': ['email', 'username', 'password']
+    }
+
+
+class UUIDSerializer(BaseSerializer):
+    _schema = {
+        'definitions': {
+            'key': uuid_schema
+        },
+        'type': 'object',
+        'properties': {
+            'key': {'$ref': '#/definitions/key'},
+        },
+        'required': ['key']
     }

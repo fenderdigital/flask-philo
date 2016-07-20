@@ -3,6 +3,13 @@ from jsonschema import validate, FormatChecker
 
 from flaskutils import utils
 from .exceptions import SerializerError
+import uuid
+
+# uuid
+uuid_schema = {
+    "type": "string",
+    "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"  # noqa
+}
 
 
 class BaseSerializer(object):
@@ -13,7 +20,7 @@ class BaseSerializer(object):
 
     _json = {}
 
-    def __init__(self, request=None, model=None):
+    def __init__(self, request=None, model=None, data=None):
         """
         A serializer object can be built from a request object or
         a model object
@@ -26,9 +33,11 @@ class BaseSerializer(object):
             self._properties = self._schema['properties']
 
         if request:
-            self._initialize_from_request(request)
+            self._initialize_from_dict(request.json)
         elif model:
             self._initialize_from_model(model)
+        elif data:
+            self._initialize_from_dict(data)
         else:
             raise SerializerError(
                 'Can not build a serializer without an'
@@ -41,13 +50,13 @@ class BaseSerializer(object):
         validate(
             self._json, self._schema, format_checker=FormatChecker())
 
-    def _initialize_from_request(self, request):
+    def _initialize_from_dict(self, data):
         """
         Loads serializer from a request object
         """
-        self._json = request.json
+        self._json = data
         self._validate()
-        for name, value in request.json.items():
+        for name, value in self._json.items():
             if name in self._properties:
                 # applying proper formatting when required
                 if 'format' in self._properties[name]:
@@ -79,10 +88,12 @@ class BaseSerializer(object):
         data = {}
         for k, v in self.__dict__.items():
             if not k.startswith('_'):
-                # dates are not serializable, should be converted to strings
+                # values not serializable, should be converted to strings
                 if isinstance(v, datetime):
                     v = utils.datetime_to_string(v)
                 elif isinstance(v, date):
                     v = utils.date_to_string(v)
+                elif isinstance(v, uuid.UUID):
+                    v = str(v)
                 data[k] = v
         return data
