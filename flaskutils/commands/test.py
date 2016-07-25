@@ -1,8 +1,13 @@
+import argparse
 import os
 import pytest
 
 
 def run(**kwargs):
     app = kwargs['app']
-    testdir = os.path.join(app.config['BASE_DIR'], 'tests')
-    pytest.main(['-s', testdir])
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '--q', help='config file path', required=False,
+        default=os.path.join(app.config['BASE_DIR'], 'tests'))
+    args, extra_params = parser.parse_known_args()
+    pytest.main(['-s', args.q])
