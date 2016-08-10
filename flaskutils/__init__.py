@@ -1,7 +1,7 @@
 from flask import Flask
 
 from . import default_settings
-from .commands import *  # noqa
+from .commands_flaskutils import *  # noqa
 from .exceptions import ConfigurationError
 
 import flask_login
@@ -118,16 +118,27 @@ def init_app(module, BASE_DIR, testing=True):
     init_config()
 
 
-def execute_command(cmd, **kwargs):
+def execute_command(cmd, real_path, **kwargs):
     """
     execute a console command
     """
-    cmd_list = [
-        c for c in dir(commands) if not c.startswith('_') and c != 'os'  # noqa
-    ]
+    cmd_dict = {
+        c: 'flaskutils.commands_flaskutils.' + c for c
+            in dir(commands_flaskutils) if not c.startswith('_') and c != 'os'  # noqa
+    }
 
-    if cmd not in cmd_list:
+    # loading specific app commands
+    try:
+        import console_commands
+        for cm in console_commands.__all__:
+            if not cm.startswith('_'):
+                cmd_dict[cm] = 'console_commands.' + cm
+    except Exception as e:
+        print(e)
+        pass
+
+    if cmd not in cmd_dict:
         raise ConfigurationError('command {} does not exists'.format(cmd))
-    cmd_module = importlib.import_module('flaskutils.commands.' + cmd)
+    cmd_module = importlib.import_module(cmd_dict[cmd])
     kwargs['app'] = app
     cmd_module.run(**kwargs)
