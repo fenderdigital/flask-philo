@@ -118,7 +118,7 @@ def init_app(module, BASE_DIR, testing=True):
     init_config()
 
 
-def execute_command(cmd, real_path, **kwargs):
+def execute_command(cmd, **kwargs):
     """
     execute a console command
     """

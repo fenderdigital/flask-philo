@@ -18,7 +18,7 @@ def main():
     os.environ.setdefault('FLASKUTILS_SETTINGS_MODULE', args.settings)
 
     init_app(__name__, BASE_DIR)
-    execute_command(args.command, os.path.dirname(os.path.realpath(__file__)))
+    execute_command(args.command)
 
 if __name__ == '__main__':
     main()
