@@ -4,7 +4,7 @@ setup(
     name='flaskutils',
     version='1.0.0',
     description='Flask Utilities',
-    packages=['flaskutils', 'flaskutils.commands'],
+    packages=['flaskutils', 'flaskutils.commands_flaskutils'],
     author='Manuel Ignacio Franco Galeano',
     author_email='maigfrga@gmail.com',
     dependency_links=['https://github.com/maigfrga/sqlalchemypostgresutils.git@dev#egg=sqlalchemypostgresutils'],  # noqa
