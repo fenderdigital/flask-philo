@@ -12,6 +12,7 @@ setup(
         'jsonschema',
         'pytest',
         'flask',
-        'flask-login'
+        'flask-login',
+        'flask_oauthlib'
     ],
 )

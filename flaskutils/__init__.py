@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_oauthlib.provider import OAuth2Provider
 
 from . import default_settings
 from .commands_flaskutils import *  # noqa
@@ -109,10 +110,18 @@ def init_app(module, BASE_DIR, testing=True):
             login_manager.session_protection = 'strong'
             login_manager.init_app(app)
 
+        def init_flask_oauthlib():
+            """
+            http://flask-oauthlib.readthedocs.io/en/latest/oauth2.html
+            """
+            oauth = OAuth2Provider()
+            oauth.init_app(app)
+
         init_logging()
         init_urls()
         init_postgres(testing)
         init_flask_login()
+        init_flask_oauthlib()
 
     app = Flask(module)
     init_config()
