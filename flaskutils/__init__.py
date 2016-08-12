@@ -20,6 +20,7 @@ class Borg:
 
 app = None
 login_manager = flask_login.LoginManager()
+oauth = OAuth2Provider()
 
 
 def get_login_manager():
@@ -114,9 +115,7 @@ def init_app(module, BASE_DIR, testing=True):
             """
             http://flask-oauthlib.readthedocs.io/en/latest/oauth2.html
             """
-            oauth = OAuth2Provider()
             oauth.init_app(app)
-            app.oauth = oauth
 
         init_logging()
         init_urls()
