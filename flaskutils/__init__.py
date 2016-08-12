@@ -116,6 +116,7 @@ def init_app(module, BASE_DIR, testing=True):
             """
             oauth = OAuth2Provider()
             oauth.init_app(app)
+            app.oauth = oauth
 
         init_logging()
         init_urls()
