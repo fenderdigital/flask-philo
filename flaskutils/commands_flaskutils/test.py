@@ -10,4 +10,4 @@ def run(**kwargs):
         '--q', help='config file path', required=False,
         default=os.path.join(app.config['BASE_DIR'], 'tests'))
     args, extra_params = parser.parse_known_args()
-    pytest.main(['-s', args.q])
+    exit(pytest.main(['-s', args.q]))
