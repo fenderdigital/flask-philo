@@ -6,6 +6,6 @@ def run(**kwargs):
     app.run(
         host=app.config['HOST'],
         port=app.config['PORT'],
-        use_reloader=app.config['USE_RELOADER'],
+        use_reloader=False,
         debug=app.config["DEBUG"]
     )
