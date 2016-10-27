@@ -7,7 +7,7 @@ setup(
     packages=['flaskutils', 'flaskutils.commands_flaskutils'],
     author='Manuel Ignacio Franco Galeano',
     author_email='maigfrga@gmail.com',
-    dependency_links=['https://github.com/maigfrga/sqlalchemypostgresutils.git@dev#egg=sqlalchemypostgresutils'],  # noqa
+    dependency_links=['https://github.com/Riffstation/sqlalchemypostgresutils.git@dev#egg=sqlalchemypostgresutils'],  # noqa
     install_requires=[
         'jsonschema',
         'pytest',
