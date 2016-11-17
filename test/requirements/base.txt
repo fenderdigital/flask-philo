@@ -4,3 +4,4 @@ flask
 jsonschema
 -e git+https://github.com/maigfrga/sqlalchemypostgresutils.git@dev#egg=sqlalchemypostgresutils
 flask-login
+flask_oauthlib
