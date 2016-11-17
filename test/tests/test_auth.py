@@ -190,9 +190,23 @@ class TestAuth(TransactionalTestCase):
             data=json.dumps(credentials),
             headers=self.json_request_headers
         )
+        assert 200 == result.status_code
 
         result = self.client.get(
             '/protected',
             headers=self.json_request_headers
         )
         assert 401 == result.status_code
+
+
+class TestBasicAuth(TransactionalTestCase):
+
+    def test_requires_auth__endpoint_without_valid_credentials(self):
+        result = self.client.get('/basic_auth', headers={
+            'Authorization': 'Basic dXNlcjpwYXNz'})
+        assert 401 == result.status_code
+
+    def test_requires_auth_endpoint_with_valid_credentials(self):
+        result = self.client.get('/basic_auth', headers={
+            'Authorization': 'Basic dXNlcm5hbWU6cGFzc3dvcmQ='})
+        assert 200 == result.status_code
