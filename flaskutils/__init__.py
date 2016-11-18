@@ -63,7 +63,7 @@ def init_app(module, BASE_DIR, testing=True):
             urls_module = importlib.import_module(app.config['URLS'])
             for route in urls_module.URLS:
                 app.add_url_rule(
-                        route[0], view_func=route[1].as_view(route[2]))
+                    route[0], view_func=route[1].as_view(route[2]))
 
         def init_postgres(testing):
             """
