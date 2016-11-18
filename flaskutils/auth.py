@@ -6,7 +6,7 @@ import base64
 
 """
 http://flask.pocoo.org/snippets/8/
-This module exposes a decorator that can be used in a 
+This module exposes a decorator that can be used in a
 flaskutils app to enforce basic auth on an endpoint.
 An example of usage can be found in `test/tests/test_app/views/auth_views.py`
 """
@@ -17,7 +17,8 @@ def check_auth(username, password):
     password combination is valid.
     """
     return (
-        username == app.config['USERNAME'] and password == app.config['PASSWORD']
+        username == app.config['USERNAME']
+        and password == app.config['PASSWORD']
     )
 
 

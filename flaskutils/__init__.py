@@ -1,6 +1,5 @@
 from flask import Flask
 from flask_oauthlib.provider import OAuth2Provider
-
 from . import default_settings
 from .commands_flaskutils import *  # noqa
 from .exceptions import ConfigurationError
