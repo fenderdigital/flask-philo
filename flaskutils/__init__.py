@@ -17,6 +17,7 @@ class Borg:
     def __init__(self):
         self.__dict__ = self._shared_state
 
+
 app = None
 login_manager = flask_login.LoginManager()
 oauth = OAuth2Provider()
