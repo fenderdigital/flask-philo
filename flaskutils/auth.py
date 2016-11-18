@@ -6,6 +6,9 @@ import base64
 
 """
 http://flask.pocoo.org/snippets/8/
+This module exposes a decorator that can be used in a 
+flaskutils app to enforce basic auth on an endpoint.
+An example of usage can be found in `test/tests/test_app/views/auth_views.py`
 """
 
 
@@ -13,8 +16,9 @@ def check_auth(username, password):
     """This function is called to check if a username /
     password combination is valid.
     """
-    return (username == app.config['USERNAME']
-            and password == app.config['PASSWORD'])
+    return (
+        username == app.config['USERNAME'] and password == app.config['PASSWORD']
+    )
 
 
 def authenticate():
@@ -22,7 +26,8 @@ def authenticate():
     return Response(
         'Could not verify your access level for that URL.\n'
         'You have to login with proper credentials', 401,
-        {'WWW-Authenticate': 'Basic realm="Login Required"'})
+        {'WWW-Authenticate': 'Basic realm="Login Required"'}
+    )
 
 
 def requires_auth(f):
