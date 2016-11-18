@@ -28,7 +28,7 @@ class TransactionalTestCase(object):
         syncdb()
 
     def teardown(self):
-        for t in FlaskModel.metadata.sorted_tables:
+        for t in reversed(FlaskModel.metadata.sorted_tables):
             sql = 'delete from {} cascade;'.format(t.name)
             Session.execute(sql)
             Session.commit()
