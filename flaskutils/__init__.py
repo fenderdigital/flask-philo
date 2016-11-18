@@ -1,6 +1,5 @@
 from flask import Flask
 from flask_oauthlib.provider import OAuth2Provider
-
 from . import default_settings
 from .commands_flaskutils import *  # noqa
 from .exceptions import ConfigurationError
@@ -17,6 +16,7 @@ class Borg:
 
     def __init__(self):
         self.__dict__ = self._shared_state
+
 
 app = None
 login_manager = flask_login.LoginManager()
@@ -63,7 +63,7 @@ def init_app(module, BASE_DIR, testing=True):
             urls_module = importlib.import_module(app.config['URLS'])
             for route in urls_module.URLS:
                 app.add_url_rule(
-                        route[0], view_func=route[1].as_view(route[2]))
+                    route[0], view_func=route[1].as_view(route[2]))
 
         def init_postgres(testing):
             """

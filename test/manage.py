@@ -20,5 +20,6 @@ def main():
     init_app(__name__, BASE_DIR)
     execute_command(args.command)
 
+
 if __name__ == '__main__':
     main()

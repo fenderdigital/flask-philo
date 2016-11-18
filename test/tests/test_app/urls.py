@@ -1,5 +1,7 @@
 from .views import (
-    BasicHTMLView, UserResourceView, LoginView, ProtectectView, LogoutView)
+    BasicHTMLView, UserResourceView, LoginView,
+    ProtectectView, LogoutView, RequiresBasicAuthView
+)
 
 URLS = (
     ('/', BasicHTMLView, 'home'),
@@ -8,4 +10,5 @@ URLS = (
     ('/login', LoginView, 'login'),
     ('/protected', ProtectectView, 'protected'),
     ('/logout', LogoutView, 'logout'),
+    ('/basic_auth', RequiresBasicAuthView, 'Basic Auth')
 )
