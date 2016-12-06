@@ -1,6 +1,6 @@
 from flaskutils.models import FlaskModel
 from flaskutils.exceptions import AuthenticationError
-from flaskutils.sql import BcryptType, Password
+from pgsqlutils.types import Password
 from pgsqlutils.exceptions import NotFoundError
 from flask_login import UserMixin
 from sqlalchemy import Boolean, Column, String
@@ -9,7 +9,7 @@ from sqlalchemy import Boolean, Column, String
 class User(FlaskModel, UserMixin):
     __tablename__ = 'users'
     username = Column(String(64))
-    password = Column(BcryptType)
+    password = Column(Password)
     email = Column(String(64))
     is_active = Column(Boolean(), nullable=False, default=False)
 
@@ -24,7 +24,7 @@ class User(FlaskModel, UserMixin):
 
         try:
             user = User.objects.get(username=username, email=email)
-            assert Password(user.password) == Password(password)
+            assert user.password == password
             return user
         except (AssertionError, NotFoundError,):
             raise AuthenticationError('invalid credentials')
