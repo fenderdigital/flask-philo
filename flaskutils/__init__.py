@@ -27,7 +27,7 @@ def get_login_manager():
     return app.login_manager
 
 
-def init_app(module, BASE_DIR, testing=True):
+def init_app(module, BASE_DIR, **kwargs):
     """
     Initalize an app, call this method once from start_app
     """
@@ -65,7 +65,7 @@ def init_app(module, BASE_DIR, testing=True):
                 app.add_url_rule(
                     route[0], view_func=route[1].as_view(route[2]))
 
-        def init_postgres(testing):
+        def init_postgres():
             """
             If postgresql url is defined in configuration params a
             scoped session will be created and will be used by
@@ -73,26 +73,42 @@ def init_app(module, BASE_DIR, testing=True):
             https://github.com/Riffstation/sqlalchemypostgresutils
             """
             if 'POSTGRESQL_DATABASE_URI' in app.config:
-                if not testing:
+                from flask import _app_ctx_stack
+                from sqlalchemy import create_engine
+                from pgsqlutils.base import (
+                    get_db_conf, update_session, init_db_conn)
+                from sqlalchemy.orm import sessionmaker, scoped_session
+
+                import pgsqlutils.base as pgbase
+
+                dbconf = get_db_conf()
+                dbconf.DATABASE_URI = app.config['POSTGRESQL_DATABASE_URI']
+
+                if not app.config['TESTING']:
                     # not testing will use request context as scope
-                    # for sqlalchemy Session object
-                    from flask import _app_ctx_stack
-                    import pgsqlutils.base as pgbase
-                    from pgsqlutils.base import get_db_conf, init_db_conn
-                    from sqlalchemy.orm import sessionmaker, scoped_session
-                    dbconf = get_db_conf()
-                    dbconf.DATABASE_URI = app.config['POSTGRESQL_DATABASE_URI']
-                    # monkey patching to replace default session
-                    # by a sessing handled by flask
-                    pgbase.Session = scoped_session(
-                        sessionmaker(),
-                        scopefunc=_app_ctx_stack.__ident_func__)
                     init_db_conn()
+                    Session = scoped_session(sessionmaker())
+                    update_session(Session)
+
+                    @app.before_request
+                    def before_request():
+                        dbconf = get_db_conf()
+                        dbconf.DATABASE_URI =\
+                            app.config['POSTGRESQL_DATABASE_URI']
+                        dbconf.SCOPE_FUNC = _app_ctx_stack
+                        engine = create_engine(dbconf.DATABASE_URI)
+                        Session = scoped_session(
+                            sessionmaker(),
+                            scopefunc=_app_ctx_stack)
+                        Session.configure(bind=engine)
+                        update_session(Session)
+
+                    @app.teardown_request
+                    def teardown_request(exception):
+                        pgbase.Session.close_all()
+
                 else:
                     # Testing will use current thread as scope for Session
-                    from pgsqlutils.base import get_db_conf, init_db_conn
-                    dbconf = get_db_conf()
-                    dbconf.DATABASE_URI = app.config['POSTGRESQL_DATABASE_URI']
                     init_db_conn()
 
         def init_logging():
@@ -117,9 +133,9 @@ def init_app(module, BASE_DIR, testing=True):
             """
             oauth.init_app(app)
 
+        init_postgres()
         init_logging()
         init_urls()
-        init_postgres(testing)
         init_flask_login()
         init_flask_oauthlib()
 
