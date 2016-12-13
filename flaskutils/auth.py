@@ -39,9 +39,9 @@ def requires_auth(f):
             auth_string = auth_string.replace('Basic ', '', 1)
             try:
                 auth_string = base64.b64decode(auth_string).decode("utf-8")
+                username, password = auth_string.split(':')
             except:
-                return("Invalid Credentials")
-        username, password = auth_string.split(':')
+                return authenticate()
         if not auth_string or not check_auth(username, password):
             return authenticate()
         return f(*args, **kwargs)
