@@ -8,8 +8,8 @@ class BaseView(MethodView):
         mimetype = 'application/json'
         return Response(json.dumps(data), status=status, mimetype=mimetype)
 
-    def render_template(self, template_name):
-        return render_template(template_name)
+    def render_template(self, template_name, **values):
+        return render_template(template_name, **values)
 
     def get(self, *args, **kwargs):
         abort(400)
