@@ -1,6 +1,6 @@
 from flask import request
 from flaskutils import login_manager
-from flaskutils.auth import requires_auth
+from flaskutils.auth import requires_basic_auth
 from flaskutils.views import BaseView
 from flaskutils.exceptions import AuthenticationError
 from jsonschema.exceptions import ValidationError
@@ -61,6 +61,6 @@ class ProtectectView(BaseView):
 
 
 class RequiresBasicAuthView(BaseView):
-    @requires_auth
+    @requires_basic_auth
     def get(self):
         return self.json_response(200)

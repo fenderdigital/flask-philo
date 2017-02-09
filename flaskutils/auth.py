@@ -31,7 +31,7 @@ def authenticate():
     )
 
 
-def requires_auth(f):
+def requires_basic_auth(f):
     @wraps(f)
     def decorated(*args, **kwargs):
         auth_string = request.headers.get('Authorization')
