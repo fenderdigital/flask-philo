@@ -1,4 +1,6 @@
-TESTING = True
+TESTING = False
+
+DEBUG = False
 
 URLS = 'tests.test_app.urls'
 
