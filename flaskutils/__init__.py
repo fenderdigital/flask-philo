@@ -74,7 +74,8 @@ def init_postgres(is_command_line=False):
 
             @app.teardown_request
             def teardown_request(exception):
-                pgbase.Session.close_all()
+                pgbase.close_session()
+                pgbase.engine.dispose()
 
 
 def init_app(module, BASE_DIR, **kwargs):
