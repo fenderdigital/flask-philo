@@ -1,4 +1,3 @@
-from flaskutils import app
 from flaskutils.exceptions import AuthenticationError
 from flaskutils.test import ModelTestCase, TransactionalTestCase
 
@@ -38,12 +37,6 @@ class TestAuthUser(ModelTestCase):
 
 
 class TestAuth(TransactionalTestCase):
-    def setup(self):
-        self.client = app.test_client()
-        self.json_request_headers = {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        }
 
     def test_401_unauthorized(self):
         """

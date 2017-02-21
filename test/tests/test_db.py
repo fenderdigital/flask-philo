@@ -1,5 +1,5 @@
 from flaskutils.test import TransactionalTestCase
-from pgsqlutils.base import Session
+from pgsqlutils.orm import Session
 
 from unittest.mock import Mock
 

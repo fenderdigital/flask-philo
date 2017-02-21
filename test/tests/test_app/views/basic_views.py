@@ -1,9 +1,7 @@
 from flask import request
 from flaskutils import app
 from flaskutils.views import BaseView, BaseResourceView
-from pgsqlutils.base import Session
 from pgsqlutils.exceptions import NotFoundError
-
 from tests.test_app.models import User
 
 from tests.test_app.serializers import (
@@ -38,14 +36,14 @@ class UserResourceView(BaseResourceView):
             serializer = PostUserSerializer(request=request)
             user = User(serializer=serializer)
             user.add()
-            Session.commit()
+            self.PGSession.commit()
             user = User.objects.get(id=user.id)
             app.logger.info('user with id {} has been created'.format(user.id))
             return self.json_response(status=201, data={'id': user.id})
 
         except Exception as e:
             app.logger.error(e)
-            Session.rollback()
+            self.PGSession.rollback()
             return self.json_response(status=500)
 
     def put(self, id):
@@ -53,21 +51,21 @@ class UserResourceView(BaseResourceView):
             serializer = PutUserSerializer(request=request)
             user = User(serializer=serializer)
             user.update()
-            Session.commit()
+            self.PGSession.commit()
             return self.json_response(
                 status=200, data=PutUserSerializer(model=user).to_json())
         except Exception as e:
             app.logger.error(e)
-            Session.rollback()
+            self.PGSession.rollback()
             return self.json_response(status=500)
 
     def delete(self, id):
         try:
             user = User.objects.get(id=id)
             user.delete()
-            Session.commit()
+            self.PGSession.commit()
             return self.json_response()
         except Exception as e:
             app.logger.error(e)
-            Session.rollback()
+            self.PGSession.rollback()
             return self.json_response(status=500)

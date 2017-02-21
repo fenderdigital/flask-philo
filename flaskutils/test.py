@@ -1,6 +1,7 @@
 from flaskutils import app
 from .models import FlaskModel
-from pgsqlutils.base import syncdb, Session
+from pgsqlutils.orm import Session
+from pgsqlutils.base import syncdb, init_db_conn
 
 
 class ModelTestCase(object):
@@ -8,11 +9,14 @@ class ModelTestCase(object):
         """
         Use this test case when no interaction in a view is required
         """
-        syncdb()
+        if 'POSTGRESQL_DATABASE_URI' in app.config:
+            init_db_conn()
+            syncdb()
 
     def teardown(self):
-        Session.rollback()
-        Session.close()
+        if 'POSTGRESQL_DATABASE_URI' in app.config:
+            Session.rollback()
+            Session.close()
 
 
 class TransactionalTestCase(object):
@@ -25,14 +29,18 @@ class TransactionalTestCase(object):
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         }
-        syncdb()
+
+        if 'POSTGRESQL_DATABASE_URI' in app.config:
+            init_db_conn()
+            syncdb()
 
     def teardown(self):
-        for t in reversed(FlaskModel.metadata.sorted_tables):
-            sql = 'delete from {} cascade;'.format(t.name)
-            Session.execute(sql)
-            Session.commit()
-        Session.close()
+        if 'POSTGRESQL_DATABASE_URI' in app.config:
+            for t in reversed(FlaskModel.metadata.sorted_tables):
+                sql = 'delete from {} cascade;'.format(t.name)
+                Session.execute(sql)
+                Session.commit()
+            Session.close()
 
 
 class ApiTestCase(object):

@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, g
 from flask_oauthlib.provider import OAuth2Provider
 from . import default_settings
 from .commands_flaskutils import *  # noqa
@@ -28,54 +28,46 @@ def get_login_manager():
     return app.login_manager
 
 
-def init_postgres(is_command_line=False):
+def init_postgres(is_console_command=False):
     """
     If postgresql url is defined in configuration params a
     scoped session will be created and will be used by
     pgsqlutils
     https://github.com/Riffstation/sqlalchemypostgresutils
     """
-
     if 'POSTGRESQL_DATABASE_URI' in app.config:
         from flask import _app_ctx_stack
-        from sqlalchemy import create_engine
-        from pgsqlutils.base import (
-            get_db_conf, update_session, init_db_conn)
-        from sqlalchemy.orm import sessionmaker, scoped_session
-
-        import pgsqlutils.base as pgbase
+        from pgsqlutils.base import init_db_conn, get_db_conf
 
         dbconf = get_db_conf()
         dbconf.DATABASE_URI = app.config['POSTGRESQL_DATABASE_URI']
 
-        init_db_conn()
-
-        if 'test' not in sys.argv and not is_command_line:
+        if 'test' not in sys.argv and not is_console_command:
             """
-            Establish a new connection every request, not required in unit
-            testing
-            or when a command line establish a new connection
+            Establish a new connection every request
             """
-            Session = scoped_session(sessionmaker())
-            update_session(Session)
 
             @app.before_request
             def before_request():
-                dbconf = get_db_conf()
-                dbconf.DATABASE_URI =\
-                    app.config['POSTGRESQL_DATABASE_URI']
-                dbconf.SCOPE_FUNC = _app_ctx_stack
-                engine = create_engine(dbconf.DATABASE_URI)
-                Session = scoped_session(
-                    sessionmaker(),
-                    scopefunc=_app_ctx_stack)
-                Session.configure(bind=engine)
-                update_session(Session)
+
+                g.pgbase_session = init_db_conn(scopefunc=_app_ctx_stack)
 
             @app.teardown_request
             def teardown_request(exception):
-                pgbase.close_session()
-                pgbase.engine.dispose()
+                """
+                Releasing connection after finish request, not required in unit
+                testing
+                """
+                pgbase_session = getattr(g, 'pgbase_session', None)
+                if pgbase_session is not None:
+                    pgbase_session.remove()
+
+        else:
+            session = init_db_conn()
+            if 'runserver' not in sys.argv:
+                @app.before_request
+                def before_request():
+                    g.pgbase_session = session
 
 
 def init_app(module, BASE_DIR, **kwargs):
@@ -152,7 +144,8 @@ def execute_command(cmd, **kwargs):
     """
     execute a console command
     """
-    init_postgres(is_command_line=True)
+    init_postgres(is_console_command=True)
+
     cmd_dict = {
         c: 'flaskutils.commands_flaskutils.' + c for c
             in dir(commands_flaskutils) if not c.startswith('_') and c != 'os'  # noqa
