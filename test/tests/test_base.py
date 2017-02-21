@@ -1,11 +1,10 @@
 from datetime import date, datetime
 from unittest.mock import Mock
-
+from pgsqlutils.orm import Session
 from flaskutils import app
 from flaskutils.test import TransactionalTestCase
 from flask import Flask
 from jsonschema import ValidationError
-from pgsqlutils.base import Session
 
 from tests.test_app.models import User
 from tests.test_app.serializers import (

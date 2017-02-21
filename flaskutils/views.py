@@ -1,8 +1,14 @@
-from flask import abort, json, render_template, Response
+from flaskutils import app
+from flask import abort, json, render_template, Response, g
 from flask.views import MethodView
 
 
 class BaseView(MethodView):
+    def __init__(self, *args, **kwargs):
+        if 'POSTGRESQL_DATABASE_URI' in app.config:
+            if hasattr(g, 'pgbase_session'):
+                self.PGSession = g.pgbase_session
+        super(BaseView, self).__init__(*args, **kwargs)
 
     def json_response(self, status=200, data={}):
         mimetype = 'application/json'
