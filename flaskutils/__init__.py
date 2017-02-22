@@ -64,7 +64,7 @@ def init_postgres(is_console_command=False):
 
         else:
             session = init_db_conn()
-            if 'runserver' not in sys.argv:
+            if 'runserver' not in sys.argv and 'runuwsgi' not in sys.argv:
                 @app.before_request
                 def before_request():
                     g.pgbase_session = session
