@@ -52,6 +52,7 @@ class TestAuth(TransactionalTestCase):
         user = User(
             username='user', email='user@user.com', password='123')
         user.add()
+        self.PGSession.commit()
 
         credentials = {'username': 'user', 'email': 'user@user.com'}
         result = self.client.post(
@@ -96,6 +97,7 @@ class TestAuth(TransactionalTestCase):
             username='user', email='user@user.com',
             password='123', is_active=True)
         user.add()
+        self.PGSession.commit()
         credentials = {
             'username': 'user', 'email': 'user@user.com', 'password': '123'}
         result = self.client.post(
@@ -118,6 +120,7 @@ class TestAuth(TransactionalTestCase):
         user = User(
             username='user', email='user@user.com', password='123')
         user.add()
+        self.PGSession.commit()
         credentials = {
             'username': 'user', 'email': 'user@user.com', 'password': '1233'}
         result = self.client.post(
@@ -135,12 +138,12 @@ class TestAuth(TransactionalTestCase):
             '/protected',
             headers=self.json_request_headers
         )
-
         assert 401 == result.status_code
         user = User(
             username='user', email='user@user.com',
             password='123', is_active=True)
         user.add()
+        self.PGSession.commit()
         credentials = {
             'username': 'user', 'email': 'user@user.com', 'password': '123'}
         result = self.client.post(
@@ -162,6 +165,7 @@ class TestAuth(TransactionalTestCase):
             username='user', email='user@user.com',
             password='123', is_active=True)
         user.add()
+        self.PGSession.commit()
         credentials = {
             'username': 'user', 'email': 'user@user.com', 'password': '123'}
         result = self.client.post(

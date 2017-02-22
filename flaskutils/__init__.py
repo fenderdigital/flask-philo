@@ -28,7 +28,7 @@ def get_login_manager():
     return app.login_manager
 
 
-def init_postgres(is_console_command=False):
+def init_postgres():
     """
     If postgresql url is defined in configuration params a
     scoped session will be created and will be used by
@@ -42,7 +42,7 @@ def init_postgres(is_console_command=False):
         dbconf = get_db_conf()
         dbconf.DATABASE_URI = app.config['POSTGRESQL_DATABASE_URI']
 
-        if 'test' not in sys.argv and not is_console_command:
+        if 'test' not in sys.argv:
             """
             Establish a new connection every request
             """
@@ -63,8 +63,9 @@ def init_postgres(is_console_command=False):
                     pgbase_session.remove()
 
         else:
-            session = init_db_conn()
             if 'runserver' not in sys.argv and 'runuwsgi' not in sys.argv:
+                session = init_db_conn()
+
                 @app.before_request
                 def before_request():
                     g.pgbase_session = session
@@ -144,7 +145,7 @@ def execute_command(cmd, **kwargs):
     """
     execute a console command
     """
-    init_postgres(is_console_command=True)
+    init_postgres()
 
     cmd_dict = {
         c: 'flaskutils.commands_flaskutils.' + c for c
