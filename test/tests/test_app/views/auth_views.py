@@ -26,7 +26,6 @@ def load_user(id):
 class LoginView(BaseView):
     def post(self):
         data = {}
-
         try:
             serializer = LoginSerializer(
                 request=request)
