@@ -28,13 +28,14 @@ def get_login_manager():
     return app.login_manager
 
 
-def init_postgres():
+def init_postgres(is_cmd=True):
     """
     If postgresql url is defined in configuration params a
     scoped session will be created and will be used by
     pgsqlutils
     https://github.com/Riffstation/sqlalchemypostgresutils
     """
+
     if 'POSTGRESQL_DATABASE_URI' in app.config:
         from flask import _app_ctx_stack
         from pgsqlutils.base import init_db_conn, get_db_conf
@@ -62,13 +63,19 @@ def init_postgres():
                 if pgbase_session is not None:
                     pgbase_session.remove()
 
-        else:
-            if 'runserver' not in sys.argv and 'runuwsgi' not in sys.argv:
-                session = init_db_conn()
+            # initialize a new connection in case of command line but not for
+            # runuwsgi or runserver
+            if is_cmd:
+                if 'runserver' not in sys.argv and 'runuwsgi' not in sys.argv:
+                    session = init_db_conn()
 
-                @app.before_request
-                def before_request():
-                    g.pgbase_session = session
+        else:
+            # unit testing have different connection life cicle with database
+            session = init_db_conn()
+
+            @app.before_request
+            def before_request():
+                g.pgbase_session = session
 
 
 def init_app(module, BASE_DIR, **kwargs):
@@ -145,7 +152,7 @@ def execute_command(cmd, **kwargs):
     """
     execute a console command
     """
-    init_postgres()
+    init_postgres(is_cmd=True)
 
     cmd_dict = {
         c: 'flaskutils.commands_flaskutils.' + c for c
