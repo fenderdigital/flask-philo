@@ -146,6 +146,7 @@ def init_app(module, BASE_DIR, **kwargs):
 
     app = Flask(module)
     init_config()
+    return app
 
 
 def execute_command(cmd, **kwargs):
