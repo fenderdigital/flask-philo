@@ -33,8 +33,8 @@ class UserResourceView(BaseResourceView):
 
     def post(self):
         try:
-            serializer = PostUserSerializer(request=request)
-            user = User(serializer=serializer)
+            data = PostUserSerializer(request=request).to_json()
+            user = User(**data)
             user.add()
             self.PGSession.commit()
             user = User.objects.get(id=user.id)
@@ -49,11 +49,10 @@ class UserResourceView(BaseResourceView):
     def put(self, id):
         try:
             serializer = PutUserSerializer(request=request)
-            user = User(serializer=serializer)
-            user.update()
+            serializer.update()
             self.PGSession.commit()
             return self.json_response(
-                status=200, data=PutUserSerializer(model=user).to_json())
+                status=200, data=serializer.to_json())
         except Exception as e:
             app.logger.error(e)
             self.PGSession.rollback()

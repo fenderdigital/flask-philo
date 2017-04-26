@@ -1,4 +1,5 @@
 from flaskutils.serializers import BaseSerializer, uuid_schema
+from tests.test_app.models import User
 
 
 class GetUserSerializer(BaseSerializer):
@@ -36,6 +37,7 @@ class PostUserSerializer(BaseSerializer):
 
 
 class PutUserSerializer(BaseSerializer):
+    __model__ = User
     _schema = {
         'type': 'object',
         'properties': {

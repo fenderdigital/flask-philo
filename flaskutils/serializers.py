@@ -20,6 +20,8 @@ class BaseSerializer(object):
 
     _json = {}
 
+    __model__ = None
+
     def __init__(self, request=None, model=None, data=None):
         """
         A serializer object can be built from a request object or
@@ -76,10 +78,16 @@ class BaseSerializer(object):
             if name in self._properties:
                 setattr(self, name, value)
 
-    def to_model(self):
+    def update(self):
         """
-        Builds a model based on request input
+        Finds record and update it based in serializer values
         """
+        obj = self.__model__.objects.get_for_update(id=self.id)
+        for name, value in self.__dict__.items():
+            if name in self._properties:
+                setattr(obj, name, value)
+        obj.update()
+        return obj
 
     def to_json(self):
         """

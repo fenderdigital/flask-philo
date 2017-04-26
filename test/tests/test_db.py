@@ -43,7 +43,7 @@ class TestDBAccess(TransactionalTestCase):
             'username': 'userupdated', 'password': '123',
             'email': 'email@test.com'}
         request.json = user_dict
-        user_serializer = PostUserSerializer(request=request)
-        user_model = User(serializer=user_serializer)
+        data = PostUserSerializer(request=request).to_json()
+        user_model = User(**data)
         assert user_dict['username'] == user_model.username
         assert user_model.email == user_dict['email']
