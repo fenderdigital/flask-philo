@@ -10,7 +10,7 @@ def string_to_datetime(strdate):
     DATETIME_FORMAT by default '%Y-%m-%d %H:%M:%S'
     this format can be overide in the app configuration settings
     """
-    return datetime.strptime(strdate, app.config['DATETIME_FORMAT'])
+    return datetime.strptime(strdate[:19], app.config['DATETIME_FORMAT'])
 
 
 def string_to_date(strdate):
