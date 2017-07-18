@@ -1,5 +1,5 @@
-from flaskutils.test import TransactionalTestCase
-from pgsqlutils.orm import Session
+from flaskutils.test import FlaskTestCase
+from flaskutils.db.postgresql.connection import get_pool
 
 from unittest.mock import Mock
 
@@ -7,26 +7,32 @@ from tests.test_app.models import User
 from tests.test_app.serializers import GetUserSerializer, PostUserSerializer
 
 
-class TestDBAccess(TransactionalTestCase):
+class TestDBAccess(FlaskTestCase):
     def test_connection_open(self):
         """
         checks if connection is open
         """
-        result = Session.execute('SELECT 19;')
+        pool = get_pool()
+        result = pool.connections['DEFAULT'].session.execute('SELECT 19;')
         assert result.fetchone()[0] == 19
-        Session.close()
+        pool.connections['DEFAULT'].session.close()
 
     def test_get_insert(self):
+        pool = get_pool()
         assert 0 == User.objects.count()
         user = User(
             username='username1', email='email1@email.com', password='123')
         user.add()
+        pool.commit()
         assert 1 == User.objects.count()
 
     def test_model_to_json(self):
+        pool = get_pool()
+        assert 0 == User.objects.count()
         user = User(
             username='username1', email='email1@email.com', password='123')
         user.add()
+        pool.commit()
 
         user2 = User.objects.get(id=user.id)
         serializer = GetUserSerializer(model=user2)

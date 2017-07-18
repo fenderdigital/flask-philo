@@ -3,12 +3,11 @@ from flask_oauthlib.provider import OAuth2Provider
 from . import default_settings
 from .commands_flaskutils import *  # noqa
 from .exceptions import ConfigurationError
+from .db import init_db
 
-import flask_login
 import logging
 import importlib
 import os
-import sys
 
 
 # Alex Martelli's 'Borg'
@@ -20,62 +19,7 @@ class Borg:
 
 
 app = None
-login_manager = flask_login.LoginManager()
 oauth = OAuth2Provider()
-
-
-def get_login_manager():
-    return app.login_manager
-
-
-def init_postgres(is_cmd=True):
-    """
-    If postgresql url is defined in configuration params a
-    scoped session will be created and will be used by
-    pgsqlutils
-    https://github.com/Riffstation/sqlalchemypostgresutils
-    """
-
-    if 'POSTGRESQL_DATABASE_URI' in app.config:
-        from flask import _app_ctx_stack
-        from pgsqlutils.base import init_db_conn, get_db_conf
-
-        dbconf = get_db_conf()
-        dbconf.DATABASE_URI = app.config['POSTGRESQL_DATABASE_URI']
-
-        if 'test' not in sys.argv:
-            """
-            Establish a new connection every request
-            """
-
-            @app.before_request
-            def before_request():
-
-                g.pgbase_session = init_db_conn(scopefunc=_app_ctx_stack)
-
-            @app.teardown_request
-            def teardown_request(exception):
-                """
-                Releasing connection after finish request, not required in unit
-                testing
-                """
-                pgbase_session = getattr(g, 'pgbase_session', None)
-                if pgbase_session is not None:
-                    pgbase_session.remove()
-
-            # initialize a new connection in case of command line but not for
-            # runuwsgi or runserver
-            if is_cmd:
-                if 'runserver' not in sys.argv and 'runuwsgi' not in sys.argv:
-                    session = init_db_conn()
-
-        else:
-            # unit testing have different connection life cicle with database
-            session = init_db_conn()
-
-            @app.before_request
-            def before_request():
-                g.pgbase_session = session
 
 
 def init_app(module, BASE_DIR, **kwargs):
@@ -83,7 +27,6 @@ def init_app(module, BASE_DIR, **kwargs):
     Initalize an app, call this method once from start_app
     """
     global app
-    global login_manager
 
     def init_config():
         """
@@ -124,24 +67,14 @@ def init_app(module, BASE_DIR, **kwargs):
             log_level = app.config['LOG_LEVEL']
             app.logger.setLevel(getattr(logging, log_level))
 
-        def init_flask_login():
-            """
-            Initialize flask login
-            https://flask-login.readthedocs.io
-            """
-            login_manager.session_protection = 'strong'
-            login_manager.init_app(app)
-
         def init_flask_oauthlib():
             """
             http://flask-oauthlib.readthedocs.io/en/latest/oauth2.html
             """
             oauth.init_app(app)
-
-        init_postgres()
+        init_db(g, app)
         init_logging()
         init_urls()
-        init_flask_login()
         init_flask_oauthlib()
 
     app = Flask(module)
@@ -153,8 +86,6 @@ def execute_command(cmd, **kwargs):
     """
     execute a console command
     """
-    init_postgres(is_cmd=True)
-
     cmd_dict = {
         c: 'flaskutils.commands_flaskutils.' + c for c
             in dir(commands_flaskutils) if not c.startswith('_') and c != 'os'  # noqa
@@ -166,8 +97,7 @@ def execute_command(cmd, **kwargs):
         for cm in console_commands.__all__:
             if not cm.startswith('_'):
                 cmd_dict[cm] = 'console_commands.' + cm
-    except Exception as e:
-        print(e)
+    except Exception:
         pass
 
     if cmd not in cmd_dict:

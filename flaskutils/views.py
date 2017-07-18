@@ -5,9 +5,10 @@ from flask.views import MethodView
 
 class BaseView(MethodView):
     def __init__(self, *args, **kwargs):
-        if 'POSTGRESQL_DATABASE_URI' in app.config:
-            if hasattr(g, 'pgbase_session'):
-                self.PGSession = g.pgbase_session
+        if 'DATABASES' in app.config and\
+                'POSTGRESQL' in app.config['DATABASES']:
+            if hasattr(g, 'postgresql_pool'):
+                self.postgresql_pool = g.postgresql_pool
         super(BaseView, self).__init__(*args, **kwargs)
 
     def json_response(self, status=200, data={}):

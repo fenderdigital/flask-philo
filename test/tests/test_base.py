@@ -1,8 +1,7 @@
 from datetime import date, datetime
 from unittest.mock import Mock
-from pgsqlutils.orm import Session
 from flaskutils import app
-from flaskutils.test import TransactionalTestCase
+from flaskutils.test import FlaskTestCase
 from flask import Flask
 from jsonschema import ValidationError
 
@@ -88,12 +87,13 @@ class TestValidators(object):
         assert str(data['key']) == jdata['key']
 
 
-class TestApiRequest(TransactionalTestCase):
+class TestApiRequest(FlaskTestCase):
 
     def test_get_resource(self):
         """
         Get a Rest resource in json format
         """
+        assert 0 == User.objects.count()
         user = User(
             username='username1', email='email1@email.com', password='123')
         user.add()
@@ -101,7 +101,7 @@ class TestApiRequest(TransactionalTestCase):
         user2 = User(
             username='username2', email='email2@email.com', password='123')
         user2.add()
-
+        self.postgresql_pool.commit()
         result = self.client.get('/users/{}'.format(user.id))
         assert 200 == result.status_code
         data = json.loads(result.get_data().decode('utf-8'))
@@ -113,6 +113,7 @@ class TestApiRequest(TransactionalTestCase):
         """
         Get a list of rest resources
         """
+        assert 0 == User.objects.count()
         user = User(
             username='username1', email='email1@email.com', password='123')
         user.add()
@@ -120,6 +121,7 @@ class TestApiRequest(TransactionalTestCase):
         user2 = User(
             username='username2', email='email2@email.com', password='123')
         user2.add()
+        self.postgresql_pool.commit()
         result = self.client.get('/users')
         assert 200 == result.status_code
         data = json.loads(result.get_data().decode('utf-8'))
@@ -141,6 +143,7 @@ class TestApiRequest(TransactionalTestCase):
             data=json.dumps(user),
             headers=self.json_request_headers
         )
+        self.postgresql_pool.commit()
         assert 1 == User.objects.count()
         assert 201 == response.status_code
         data = json.loads(response.get_data().decode('utf-8'))
@@ -151,10 +154,11 @@ class TestApiRequest(TransactionalTestCase):
         """
         Test A valid put request
         """
+        assert 0 == User.objects.count()
         user = User(
             username='username1', email='email1@email.com', password='123')
         user.add()
-        Session.commit()
+        self.postgresql_pool.commit()
         data = {
             'id': user.id, 'username': 'updatedusername',
             'email': user.email, 'password': '123'}
@@ -175,10 +179,11 @@ class TestApiRequest(TransactionalTestCase):
         """
         deleting a resource using delete
         """
+        assert 0 == User.objects.count()
         user = User(
             username='username1', email='email1@email.com', password='123')
         user.add()
-        Session.commit()
+        self.postgresql_pool.commit()
         assert 1 == User.objects.count()
         result = self.client.delete(
             '/users/{}'.format(user.id),

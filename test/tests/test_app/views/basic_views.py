@@ -1,7 +1,7 @@
 from flask import request
 from flaskutils import app
 from flaskutils.views import BaseView, BaseResourceView
-from pgsqlutils.exceptions import NotFoundError
+from flaskutils.db.exceptions import NotFoundError
 from tests.test_app.models import User
 
 from tests.test_app.serializers import (
@@ -28,7 +28,12 @@ class UserResourceView(BaseResourceView):
                     model=User.objects.get(id=id)).to_json()
 
             return self.json_response(data=data)
-        except NotFoundError:
+        except NotFoundError as e:
+            app.logger.error(e)
+            return self.json_response(status=404)
+
+        except Exception as e:
+            app.logger.error(e)
             return self.json_response(status=400)
 
     def post(self):
@@ -36,35 +41,35 @@ class UserResourceView(BaseResourceView):
             data = PostUserSerializer(request=request).to_json()
             user = User(**data)
             user.add()
-            self.PGSession.commit()
+            self.postgresql_pool.commit()
             user = User.objects.get(id=user.id)
             app.logger.info('user with id {} has been created'.format(user.id))
             return self.json_response(status=201, data={'id': user.id})
 
         except Exception as e:
             app.logger.error(e)
-            self.PGSession.rollback()
+            self.postgresql_pool.rollback()
             return self.json_response(status=500)
 
     def put(self, id):
         try:
             serializer = PutUserSerializer(request=request)
             serializer.update()
-            self.PGSession.commit()
+            self.postgresql_pool.commit()
             return self.json_response(
                 status=200, data=serializer.to_json())
         except Exception as e:
             app.logger.error(e)
-            self.PGSession.rollback()
+            self.postgresql_pool.rollback()
             return self.json_response(status=500)
 
     def delete(self, id):
         try:
             user = User.objects.get(id=id)
             user.delete()
-            self.PGSession.commit()
+            self.postgresql_pool.commit()
             return self.json_response()
         except Exception as e:
             app.logger.error(e)
-            self.PGSession.rollback()
+            self.postgresql_pool.rollback()
             return self.json_response(status=500)

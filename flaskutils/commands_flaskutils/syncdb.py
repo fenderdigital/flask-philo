@@ -1,4 +1,4 @@
-from pgsqlutils.base import syncdb
+from flaskutils.db.postgresql import syncdb
 
 
 def run(*args, **kwargs):

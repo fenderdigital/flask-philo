@@ -1,12 +1,12 @@
-from flaskutils.models import FlaskModel
+from flaskutils.db.postgresql.orm import BaseModel
 from flaskutils.exceptions import AuthenticationError
-from pgsqlutils.types import Password
-from pgsqlutils.exceptions import NotFoundError
+from flaskutils.db.postgresql.types import Password
+from flaskutils.db.exceptions import NotFoundError
 from flask_login import UserMixin
 from sqlalchemy import Boolean, Column, String
 
 
-class User(FlaskModel, UserMixin):
+class User(BaseModel, UserMixin):
     __tablename__ = 'users'
     username = Column(String(64))
     password = Column(Password)
