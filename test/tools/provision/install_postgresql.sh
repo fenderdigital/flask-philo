@@ -12,6 +12,12 @@ sudo -u postgres psql -c "ALTER DATABASE ds OWNER TO ds;"
 sudo -u postgres psql -c "ALTER DATABASE ds_test OWNER TO ds;"
 sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE ds to ds;"
 sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE ds_test to ds;"
+sudo -u postgres psql -c "CREATE DATABASE ds2;"
+sudo -u postgres psql -c "CREATE DATABASE ds2_test;"
+sudo -u postgres psql -c "ALTER DATABASE ds2 OWNER TO ds;"
+sudo -u postgres psql -c "ALTER DATABASE ds2_test OWNER TO ds;"
+sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE ds2 to ds;"
+sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE ds2_test to ds;"
 echo 'host all all  127.0.0.1/32   md5' | sudo tee -a /etc/postgresql/9.4/main/pg_hba.conf
 echo "listen_addresses = 'localhost'" | sudo tee -a  /etc/postgresql/9.4/main/postgresql.conf
 sudo service postgresql restart

@@ -1,10 +1,12 @@
-TESTING = False
-
-DEBUG = False
-
 URLS = 'tests.test_app.urls'
 
-POSTGRESQL_DATABASE_URI = 'postgresql://ds:dsps@localhost:5432/ds'
+DATABASES = {
+    'POSTGRESQL': {
+        'DEFAULT': 'postgresql://ds:dsps@localhost:5432/ds',
+        'DB2': 'postgresql://ds:dsps@localhost:5432/ds2'
+    }
+}
+
 
 DEBUG = True
 

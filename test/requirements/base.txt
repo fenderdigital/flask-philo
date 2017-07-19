@@ -1,7 +1,7 @@
+bcrypt
 psycopg2
 markdown
 flask
 jsonschema
--e git+https://github.com/Riffstation/sqlalchemypostgresutils.git@1.0.5#egg=sqlalchemypostgresutils
-flask-login
 flask_oauthlib
+SQLAlchemy
