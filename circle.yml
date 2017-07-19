@@ -14,7 +14,7 @@ database:
   override:
     - createdb ds_test
     - createdb ds2_test
-    - psql -U postgres -c "CREATE ROLE ds WITH ENCRYPTED PASSWORD 'dsps;"
+    - psql -U postgres -c "CREATE ROLE ds WITH ENCRYPTED PASSWORD 'dsps';"
     - psql -U postgres -c "ALTER ROLE ds WITH ENCRYPTED PASSWORD 'dsps'";
     - psql -U postgres  -c "ALTER ROLE ds SET client_encoding TO 'utf8';"
     - psql -U postgres  -c "ALTER ROLE ds  WITH LOGIN;"
