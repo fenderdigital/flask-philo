@@ -6,6 +6,32 @@ dependencies:
     pre:
         - pip3 install -r test/requirements/dev.txt
         - pip3 install flake8
+
+services:
+    - postgresql
+
+database:
+  override:
+    - createdb ds_test
+    - createdb ds2_test
+    - psql -U postgres -c "CREATE ROLE ds WITH ENCRYPTED PASSWORD 'dsps;"
+    - psql -U postgres -c "ALTER ROLE ds WITH ENCRYPTED PASSWORD 'dsps'";
+    - psql -U postgres  -c "ALTER ROLE ds SET client_encoding TO 'utf8';"
+    - psql -U postgres  -c "ALTER ROLE ds  WITH LOGIN;"
+    - psql -U postgres  -c "ALTER ROLE ds SET default_transaction_isolation TO 'read committed';"
+    - psql -U postgres  -c "ALTER ROLE ds SET timezone TO 'UTC';"
+    - psql -U postgres  -c "CREATE DATABASE ds;"
+    - psql -U postgres  -c "CREATE DATABASE ds_test;"
+    - psql -U postgres  -c "ALTER DATABASE ds OWNER TO ds;"
+    - psql -U postgres  -c "ALTER DATABASE ds_test OWNER TO ds;"
+    - psql -U postgres  -c "GRANT ALL PRIVILEGES ON DATABASE ds to ds;"
+    - psql -U postgres  -c "GRANT ALL PRIVILEGES ON DATABASE ds_test to ds;"
+    - psql -U postgres  -c "CREATE DATABASE ds2;"
+    - psql -U postgres  -c "CREATE DATABASE ds2_test;"
+    - psql -U postgres  -c "ALTER DATABASE ds2 OWNER TO ds;"
+    - psql -U postgres  -c "ALTER DATABASE ds2_test OWNER TO ds;"
+    - psql -U postgres  -c "GRANT ALL PRIVILEGES ON DATABASE ds2 to ds;"
+    - psql -U postgres  -c "GRANT ALL PRIVILEGES ON DATABASE ds2_test to ds;"
 test:
     override:
         -  flake8 --exclude build ./

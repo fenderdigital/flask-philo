@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='flaskutils',
-    version='1.2.0',
+    version='2.0.0',
     description='Flask Utilities',
     packages=['flaskutils', 'flaskutils.commands_flaskutils'],
     author='Manuel Ignacio Franco Galeano',
