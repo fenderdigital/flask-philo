@@ -4,3 +4,4 @@ markdown
 flask
 jsonschema
 flask_oauthlib
+SQLAlchemy
