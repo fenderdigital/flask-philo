@@ -13,6 +13,8 @@ setup(
         'jsonschema',
         'pytest',
         'flask',
-        'flask_oauthlib'
+        'flask_oauthlib',
+        'bcrypt',
+        'SQLAlchemy>=1.0'
     ],
 )
