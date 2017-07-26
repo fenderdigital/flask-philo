@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='flaskutils',
-    version='2.0.0',
+    version='2.1.0',
     description='Flask Utilities',
     packages=[
         'flaskutils', 'flaskutils.commands_flaskutils', 'flaskutils.db',
@@ -17,4 +17,9 @@ setup(
         'bcrypt',
         'SQLAlchemy>=1.0'
     ],
+    entry_points={
+        "console_scripts": [
+            "flaskutils-admin = flaskutils.__main__:main",
+        ]
+    }
 )
