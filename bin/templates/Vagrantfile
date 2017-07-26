@@ -1,0 +1,22 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = '2'
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = "debian/jessie64"
+
+  config.vm.hostname = '{{project_name}}'
+  config.vm.network 'private_network', ip: '192.168.30.101', netmask: '255.255.255.0'
+  config.vm.synced_folder "./", "/src"
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = "4096"
+  end
+
+  config.vm.provision "shell",
+    inline: "sudo chmod 777 /src/tools/provision/*; \
+             /src/tools/provision/bootstrap.sh; \
+             sudo /src/tools/provision/install_python.sh; \
+             /src/tools/provision/install_postgresql.sh;"  
+
+end
