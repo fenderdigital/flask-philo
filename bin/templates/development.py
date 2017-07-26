@@ -1,7 +1,6 @@
 URLS = 'app.urls'
 
-POSTGRESQL_DATABASE_URI = "postgresql://riff_dev:YzY4Y2MwZjRkNDcyOWVhN"\
-    "jYyOTc1MzVh@localhost/play_riffstation"
+POSTGRESQL_DATABASE_URI = ""
 
 DEBUG = True
 

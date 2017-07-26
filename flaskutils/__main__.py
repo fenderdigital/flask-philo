@@ -36,47 +36,23 @@ def main():
         # ./
         project_name = args.name
         os.mkdir('./' + project_name)
-        root_folders = ('docker', 'documentation', 'src', 'tools')
+        root_folders = ('documentation', 'src', 'tools')
         for folder in root_folders:
             os.mkdir('./' + project_name + '/{}'.format(folder))
 
         open('./' + project_name + '/README.md', 'x')
 
-        create_from_template(**{
-            "project_name": project_name,
-            "path": "",
-            "filename": "Vagrantfile",
-        })
-
-        # ./docker
-        os.mkdir('./' + project_name + '/docker/development')
-
-        docker_files = (
-            'Dockerfile',
-            'Dockerfile_postgres',
-            'docker-compose.yml',
-            'wait-for-it.sh'
-        )
-        for dfile in docker_files:
-            create_from_template(**{
-                "project_name": project_name,
-                "path": "docker/development",
-                "filename": dfile,
-            })
-
         # ./src
         src_folders = (
-            'app', 'bdd_tests', 'config', 'console_commands', 'tests')
+            'app', 'config', 'console_commands', 'tests')
         for folder in src_folders:
             os.mkdir('./' + project_name + '/src/{}'.format(folder))
 
-        src_files = ('manage.py', 'run_bdd_tests.py')
-        for sfile in src_files:
-            create_from_template(**{
-                "project_name": project_name,
-                "path": "src",
-                "filename": sfile,
-            })
+        create_from_template(**{
+            "project_name": project_name,
+            "path": "src",
+            "filename": "manage.py",
+        })
 
         # ./src/app
         app_folders = ('models', 'serializers', 'views')
@@ -99,40 +75,8 @@ def main():
             "filename": "example_views.py",
         })
 
-        # ./src/bdd_tests
-        create_from_template(**{
-            "project_name": project_name,
-            "path": "src/bdd_tests",
-            "filename": "environment.py",
-        })
-
-        bdd_folders = ('config', 'features', 'page_objects', 'steps')
-        for folder in bdd_folders:
-            os.mkdir('./' + project_name + '/src/bdd_tests/{}'.format(folder))
-            open(
-                './' + project_name + '/src/bdd_tests/{}/__init__.py'.format(
-                    folder), 'x')
-
-        create_from_template(**{
-            "project_name": project_name,
-            "path": "src/bdd_tests/config",
-            "filename": "local_settings.py",
-        })
-
-        create_from_template(**{
-            "project_name": project_name,
-            "path": "src/bdd_tests/features",
-            "filename": "example.feature",
-        })
-
-        create_from_template(**{
-            "project_name": project_name,
-            "path": "src/bdd_tests/steps",
-            "filename": "example_steps.py",
-        })
-
         # ./src/config
-        config_files = ('development.py', 'test.py', 'docker_development.py')
+        config_files = ('development.py', 'test.py')
         for cfile in config_files:
             create_from_template(**{
                 "project_name": project_name,
@@ -157,9 +101,7 @@ def main():
         })
 
         # ./tools
-        tools_folders = ('requirements', 'provision')
-        for folder in tools_folders:
-            os.mkdir('./' + project_name + '/tools/{}'.format(folder))
+        os.mkdir('./' + project_name + '/tools/requirements')
 
         req_files = ('dev.txt', 'base.txt')
         for rfile in req_files:
@@ -167,15 +109,6 @@ def main():
                 "project_name": project_name,
                 "path": "tools/requirements",
                 "filename": rfile,
-            })
-
-        prov_files = (
-            'bootstrap.sh', 'install_postgresql.sh', 'install_python.sh')
-        for pfile in prov_files:
-            create_from_template(**{
-                "project_name": project_name,
-                "path": "tools/provision",
-                "filename": pfile,
             })
 
 
