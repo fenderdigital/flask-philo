@@ -1,0 +1,4 @@
+-r base.txt
+ipdb==0.10.2
+-e git+https://github.com/getsentry/responses.git#egg=responses
+boto3==1.4.0

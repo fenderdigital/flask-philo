@@ -32,5 +32,5 @@ database:
     - psql -U postgres  -c "GRANT ALL PRIVILEGES ON DATABASE ds2_test to ds;"
 test:
     override:
-        -  flake8 --exclude build ./
+        -  flake8 --exclude build,bin ./
         -  cd test; python3 manage.py test --settings tests.config.ci

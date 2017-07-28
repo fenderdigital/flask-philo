@@ -32,3 +32,14 @@ In order to run test a vagrant instance is required, below steps required to exe
 * [Flask Website](http://flask.pocoo.org/)
 
 * [Flask Book](http://flaskbook.com/)
+
+
+## Creating a new project
+Flaskutils includes the `flaskutils-admin` command line tool.
+To quickly generate a new flaskutils project, navigate to the directory in which you want to create the project and run:
+
+```
+flaskutils-admin startproject <project_name>
+```
+
+This will create a folder called project_name which will contain the basic structure of a flaskutils application, including a Vagrantfile, basic unit tests and bdd tests and configuration.
