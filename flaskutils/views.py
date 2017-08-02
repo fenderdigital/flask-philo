@@ -5,10 +5,19 @@ from flask.views import MethodView
 
 class BaseView(MethodView):
     def __init__(self, *args, **kwargs):
+
+        # assign postgresql pool connections
         if 'DATABASES' in app.config and\
                 'POSTGRESQL' in app.config['DATABASES']:
             if hasattr(g, 'postgresql_pool'):
                 self.postgresql_pool = g.postgresql_pool
+
+
+        # assign redis pool connections
+        if 'DATABASES' in app.config and 'REDIS' in app.config['DATABASES']:
+            if hasattr(g, 'redis_pool'):
+                self.redis_pool = g.redis_pool
+
         super(BaseView, self).__init__(*args, **kwargs)
 
     def json_response(self, status=200, data={}):

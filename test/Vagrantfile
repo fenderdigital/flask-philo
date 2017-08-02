@@ -39,7 +39,6 @@ Vagrant.configure(2) do |config|
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
   config.vm.synced_folder "../", "/src"
-  config.vm.synced_folder "../../sqlalchemypostgresutils", "/sqlalchemypostgresutils"
    #Provider-specific configuration so you can fine-tune various
    #backing providers for Vagrant. These expose provider-specific options.
    #Example for VirtualBox:
@@ -71,9 +70,11 @@ Vagrant.configure(2) do |config|
      sudo chmod 777 /src/test//tools/provision/bootstrap.sh
      sudo chmod 777 /src/test/tools/provision/install_postgresql.sh
      sudo chmod 777 /src/test/tools/provision/install_python.sh
+     sudo chmod 777 /src/test/tools/provision/install_redis.sh
      sudo /src/test/tools/provision/bootstrap.sh
      /src/test/tools/provision/install_postgresql.sh
      /src/test/tools/provision/install_python.sh
+    /src/test/tools/provision/install_redis.sh
    SHELL
   # config.vm.provision :shell, :path => "/src/tools/provision/bootstrap.sh"
 end

@@ -6,6 +6,7 @@ dependencies:
     pre:
         - pip3 install -r test/requirements/dev.txt
         - pip3 install flake8
+        - apt-get install -y redis-server redis-tools
 
 services:
     - postgresql

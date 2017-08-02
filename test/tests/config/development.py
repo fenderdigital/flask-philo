@@ -4,6 +4,14 @@ DATABASES = {
     'POSTGRESQL': {
         'DEFAULT': 'postgresql://ds:dsps@localhost:5432/ds',
         'DB2': 'postgresql://ds:dsps@localhost:5432/ds2'
+    },
+
+    'REDIS': {
+        'DEFAULT': {
+            'HOST': 'localhost',
+            'PORT': 6379,
+            'DB': 0
+        }
     }
 }
 

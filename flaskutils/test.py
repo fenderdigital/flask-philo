@@ -2,6 +2,7 @@ from flaskutils import app
 from flaskutils.db.postgresql.orm import BaseModel
 from flaskutils.db.postgresql import syncdb
 from flaskutils.db.postgresql.connection import get_pool
+from flaskutils.db.redis.connection import get_pool as get_redis_pool
 
 
 class FlaskTestCase(object):
@@ -20,6 +21,10 @@ class FlaskTestCase(object):
             self.postgresql_pool = get_pool()
             syncdb()
 
+        if 'DATABASES' in app.config and 'REDIS' in app.config['DATABASES']:
+            self.redis_pool = get_redis_pool()
+
+
     def teardown(self):
         if 'DATABASES' in app.config and 'POSTGRESQL'\
                 in app.config['DATABASES']:
@@ -28,3 +33,6 @@ class FlaskTestCase(object):
                 for c_name, conn in self.postgresql_pool.connections.items():
                     conn.session.execute(sql)
                     conn.session.commit()
+
+        if 'DATABASES' in app.config and 'REDIS' in app.config['DATABASES']:
+            self.redis_pool.flushall()
