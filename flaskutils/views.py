@@ -12,7 +12,6 @@ class BaseView(MethodView):
             if hasattr(g, 'postgresql_pool'):
                 self.postgresql_pool = g.postgresql_pool
 
-
         # assign redis pool connections
         if 'DATABASES' in app.config and 'REDIS' in app.config['DATABASES']:
             if hasattr(g, 'redis_pool'):

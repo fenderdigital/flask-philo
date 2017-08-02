@@ -1,10 +1,8 @@
-from unittest.mock import Mock
 from flaskutils import app
 from flaskutils.test import FlaskTestCase
 
 
 import json
-import pytest
 
 
 class TestAppCase(FlaskTestCase):
@@ -42,3 +40,13 @@ class TestAppCase(FlaskTestCase):
         assert 200 == result.status_code
         data2 = json.loads(result.get_data().decode('utf-8'))
         assert data == data2
+
+    def test_delete(self):
+        rclient = self.redis_pool.connections['DEFAULT']
+        data = {'key1': 1}
+        rclient.set('key1', json.dumps(data))
+        result = self.client.get('/redis/key1')
+        assert 200 == result.status_code
+        result = self.client.delete('/redis/key1')
+        result = self.client.get('/redis/key1')
+        assert 404 == result.status_code

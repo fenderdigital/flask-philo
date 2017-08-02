@@ -24,7 +24,6 @@ class FlaskTestCase(object):
         if 'DATABASES' in app.config and 'REDIS' in app.config['DATABASES']:
             self.redis_pool = get_redis_pool()
 
-
     def teardown(self):
         if 'DATABASES' in app.config and 'POSTGRESQL'\
                 in app.config['DATABASES']:
