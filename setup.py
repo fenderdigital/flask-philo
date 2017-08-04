@@ -6,7 +6,7 @@ setup(
     description='Flask Utilities',
     packages=[
         'flaskutils', 'flaskutils.commands_flaskutils', 'flaskutils.db',
-        'flaskutils.db.postgresql'],
+        'flaskutils.db.postgresql', 'flaskutils.db.redis'],
     author='Manuel Ignacio Franco Galeano',
     author_email='maigfrga@gmail.com',
     install_requires=[
