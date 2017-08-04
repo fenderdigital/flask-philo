@@ -2,11 +2,11 @@ from setuptools import setup
 
 setup(
     name='flaskutils',
-    version='2.1.0',
+    version='2.3.0',
     description='Flask Utilities',
     packages=[
         'flaskutils', 'flaskutils.commands_flaskutils', 'flaskutils.db',
-        'flaskutils.db.postgresql'],
+        'flaskutils.db.postgresql', 'flaskutils.db.redis'],
     author='Manuel Ignacio Franco Galeano',
     author_email='maigfrga@gmail.com',
     install_requires=[
@@ -15,7 +15,8 @@ setup(
         'flask',
         'flask_oauthlib',
         'bcrypt',
-        'SQLAlchemy>=1.0'
+        'SQLAlchemy>=1.0',
+        'redis'
     ],
     entry_points={
         "console_scripts": [

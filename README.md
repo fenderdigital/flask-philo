@@ -26,6 +26,12 @@ In order to run test a vagrant instance is required, below steps required to exe
 ```
 
 
+## Basic Features
+
+* REST out of the box.
+
+* Simple sqlalchemy orm customized for postgresql with multiple dabatases.
+
 
 ## External Resources
 
