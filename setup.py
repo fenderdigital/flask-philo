@@ -6,7 +6,8 @@ setup(
     description='Flask Utilities',
     packages=[
         'flaskutils', 'flaskutils.commands_flaskutils', 'flaskutils.db',
-        'flaskutils.db.postgresql', 'flaskutils.db.redis'],
+        'flaskutils.db.postgresql', 'flaskutils.db.redis',
+        'flaskutils.db.elasticsearch'],
     author='Manuel Ignacio Franco Galeano',
     author_email='maigfrga@gmail.com',
     install_requires=[
@@ -16,7 +17,8 @@ setup(
         'flask_oauthlib',
         'bcrypt',
         'SQLAlchemy>=1.0',
-        'redis'
+        'redis',
+        'elasticsearch'
     ],
     entry_points={
         "console_scripts": [

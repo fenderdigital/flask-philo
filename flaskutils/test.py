@@ -3,6 +3,7 @@ from flaskutils.db.postgresql.orm import BaseModel
 from flaskutils.db.postgresql import syncdb
 from flaskutils.db.postgresql.connection import get_pool
 from flaskutils.db.redis.connection import get_pool as get_redis_pool
+from flaskutils.db.elasticsearch.connection import get_pool as get_el_pool
 
 
 class FlaskTestCase(object):
@@ -24,6 +25,11 @@ class FlaskTestCase(object):
         if 'DATABASES' in app.config and 'REDIS' in app.config['DATABASES']:
             self.redis_pool = get_redis_pool()
 
+        if 'DATABASES' in app.config and\
+            'ELASTICSEARCH' in app.config['DATABASES']:
+            self.elasticsearch_pool = get_el_pool()
+
+
     def teardown(self):
         if 'DATABASES' in app.config and 'POSTGRESQL'\
                 in app.config['DATABASES']:
@@ -35,3 +41,10 @@ class FlaskTestCase(object):
 
         if 'DATABASES' in app.config and 'REDIS' in app.config['DATABASES']:
             self.redis_pool.flushall()
+
+        if 'DATABASES' in app.config and\
+            'ELASTICSEARCH' in app.config['DATABASES']:
+            self.elasticsearch_pool.flushall()
+            for c_name, conn in self.elasticsearch_pool.connections.items():
+                for idx in conn.get_alias():
+                    conn.delete_index(idx)
