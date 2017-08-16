@@ -7,7 +7,7 @@ dependencies:
         - pip3 install -r test/requirements/dev.txt
         - pip3 install flake8
         - sudo apt-get install -y redis-server 
-
+        - sudo test/tools/provision/install_elastic_search.sh
 services:
     - postgresql
 
