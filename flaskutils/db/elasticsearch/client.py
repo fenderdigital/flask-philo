@@ -1,7 +1,5 @@
 from elasticsearch.helpers import bulk
 
-import json
-
 
 class ElasticSearchClient(object):
     def __init__(self, el):
@@ -24,7 +22,8 @@ class ElasticSearchClient(object):
             it['_id'] = item['id']
             it['_op_type'] = 'index'
             it['_type'] = doc_type
-            it['doc'] = item
+            for k, v in item.items():
+                it[k] = v
             actions.append(it)
         bulk(self.el, actions, index=index)
 

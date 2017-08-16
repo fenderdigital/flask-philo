@@ -26,9 +26,8 @@ class FlaskTestCase(object):
             self.redis_pool = get_redis_pool()
 
         if 'DATABASES' in app.config and\
-            'ELASTICSEARCH' in app.config['DATABASES']:
+                'ELASTICSEARCH' in app.config['DATABASES']:
             self.elasticsearch_pool = get_el_pool()
-
 
     def teardown(self):
         if 'DATABASES' in app.config and 'POSTGRESQL'\
@@ -43,7 +42,7 @@ class FlaskTestCase(object):
             self.redis_pool.flushall()
 
         if 'DATABASES' in app.config and\
-            'ELASTICSEARCH' in app.config['DATABASES']:
+                'ELASTICSEARCH' in app.config['DATABASES']:
             self.elasticsearch_pool.flushall()
             for c_name, conn in self.elasticsearch_pool.connections.items():
                 for idx in conn.get_alias():

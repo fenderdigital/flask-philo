@@ -102,28 +102,41 @@ class TestDBAccess(FlaskTestCase):
         assert 2 == len(results['hits']['hits'])
         body = {
             'query': {
-                'match':
-                 {'msg': 'user 1 create table server 2'}
+                'match': {'msg': 'user'}
             }
         }
 
         results = self.elasticsearch_pool.search(
-            index='test-index', body=body)
-        print(results)
-        #import ipdb; ipdb.set_trace()
+            index='test-index', doc_type='logs', body=body)
 
-REPO_ACTIONS = [
-    {'_type': 'repos', '_id': 'elasticsearch', '_source': {
-        'owner': {'name': 'Shay Bannon', 'email': 'kimchy@gmail.com'},
-        'created_at': datetime(2010, 2, 8, 15, 22, 27),
-        'tags': ['search', 'distributed', 'lucene'],
-        'description': 'You know, for search.'}
-    },
+        assert len(docs) == len(results['hits']['hits'])
 
-    {'_type': 'repos', '_id': 'elasticsearch-py', '_op_type': 'update', 'doc': {
-        'owner': {'name': u'Honza Král', 'email': 'honza.kral@gmail.com'},
-        'created_at': datetime(2013, 5, 1, 16, 37, 32),
-        'tags': ['elasticsearch', 'search', 'python', 'client'],
-        'description': 'For searching snakes.'}
-    },
-]
+        body = {
+            'query': {
+                'match': {'msg': 'table'}
+            }
+        }
+
+        results = self.elasticsearch_pool.search(
+            index='test-index', doc_type='logs', body=body)
+        assert 2 == len(results['hits']['hits'])
+
+        body = {
+            'query': {
+                'bool': {
+                    'must': {
+                        'match': {'msg': 'user update record'},
+                    },
+                    'must_not': {
+                        'match': {'msg': 'create'}
+                    }
+
+                }
+            }
+        }
+        results = self.elasticsearch_pool.search(
+            index='test-index', doc_type='logs', body=body)
+
+        for hit in results['hits']['hits']:
+            assert 'update' in hit['_source']['msg']
+        assert 1 == len(results['hits']['hits'])

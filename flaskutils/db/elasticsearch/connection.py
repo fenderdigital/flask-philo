@@ -4,7 +4,6 @@ import elasticsearch
 import sys
 
 
-
 class ElasticSearchPool:
     """
     """
@@ -32,9 +31,9 @@ class ElasticSearchPool:
         return self.connections[db].delete(index, doc_type, id)
 
     def index(
-        self, db='DEFAULT', index=None, doc_type=None, id=None, body=None):
-            return self.connections[db].index(
-                index=index, doc_type=doc_type, id=id, body=body)
+            self, db='DEFAULT', index=None, doc_type=None, id=None, body=None):
+        return self.connections[db].index(
+            index=index, doc_type=doc_type, id=id, body=body)
 
     def count(self, index, db='DEFAULT'):
         return self.connections[db].count(index)
@@ -79,11 +78,12 @@ def init_db_conn(connection_name, HOSTS=None):
 
 def initialize(g, app):
     """
-    If elastic search connection parameters are defined in configuration params a
-    session will be created
+    If elastic search connection parameters are defined in configuration
+    params a session will be created
     """
 
-    if 'DATABASES' in app.config and 'ELASTICSEARCH' in app.config['DATABASES']:
+    if 'DATABASES' in app.config and\
+            'ELASTICSEARCH' in app.config['DATABASES']:
 
         # Initialize connections for console commands
         for k, v in app.config['DATABASES']['ELASTICSEARCH'].items():
