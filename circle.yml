@@ -17,9 +17,12 @@ dependencies:
         - sudo sed -i 's/info/debug/g; s/error/debug/g' /etc/elasticsearch/log4j2.properties # for debugging only
         - sudo java -version
         - sudo /etc/init.d/elasticsearch stop
-        - sudo /etc/init.d/elasticsearch start
-        - sleep 10
-        - strace -f -o /var/log/strace.log sudo /etc/init.d/elasticsearch start
+#        - sudo /etc/init.d/elasticsearch start
+#        - sleep 10
+#        - strace -f -o /var/log/strace.log sudo /etc/init.d/elasticsearch start
+
+    post:
+        - sudo /etc/init.d/elasticsearch start  
         - sleep 10 && wget --waitretry=5 --retry-connrefused -v http://127.0.0.1:9200/
 
 services:
