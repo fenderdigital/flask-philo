@@ -17,8 +17,9 @@ dependencies:
         - sudo sed -i 's/info/debug/g; s/error/debug/g' /etc/elasticsearch/log4j2.properties # for debugging only
         - sudo java -version
         - sudo bash -x /etc/init.d/elasticsearch stop
-#        - sudo bash -x /etc/init.d/elasticsearch start
-        - sudo start-stop-daemon -d /usr/share/elasticsearch --start --user elasticsearch -c elasticsearch --pidfile /var/run/elasticsearch/elasticsearch.pid --exec /usr/share/elasticsearch/bin/elasticsearch -- -d -p /var/run/elasticsearch/elasticsearch.pid -Edefault.path.logs=/var/log/elasticsearch -Edefault.path.data=/var/lib/elasticsearch -Edefault.path.conf=/etc/elasticsearch
+        - sudo bash -x /etc/init.d/elasticsearch start
+        - sleep 10
+        - sudo strace -f -s10000 /etc/init.d/elasticsearch start
         - sleep 10 && wget --waitretry=5 --retry-connrefused -v http://127.0.0.1:9200/
 
 services:
