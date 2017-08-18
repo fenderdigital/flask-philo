@@ -29,7 +29,7 @@ dependencies:
 
 services:
     - postgresql
-    - elasticsearch
+#    - elasticsearch
 
 database:
   override:
@@ -53,6 +53,6 @@ database:
     - psql -U postgres  -c "GRANT ALL PRIVILEGES ON DATABASE ds2_test to ds;"
 test:
     override:
-#        - sudo /etc/init.d/elasticsearch start
+        - sudo /etc/init.d/elasticsearch start
         -  flake8 --exclude build,bin ./
         -  cd test; python3 manage.py test --settings tests.config.ci
