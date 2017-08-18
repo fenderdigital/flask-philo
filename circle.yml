@@ -53,8 +53,9 @@ database:
     - psql -U postgres  -c "GRANT ALL PRIVILEGES ON DATABASE ds2_test to ds;"
 test:
     override:
-        - sudo sed -i 's/info/debug/g; s/error/debug/g' /etc/elasticsearch/log4j2.properties 
-        - sudo /etc/init.d/elasticsearch start &
+        #- sudo sed -i 's/info/debug/g; s/error/debug/g' /etc/elasticsearch/log4j2.properties 
+        - sudo /etc/init.d/elasticsearch start &:
+            background: true
         - sleep 10 && wget --waitretry=5 --retry-connrefused -v http://127.0.0.1:9200/
         -  flake8 --exclude build,bin ./
         -  cd test; python3 manage.py test --settings tests.config.ci
