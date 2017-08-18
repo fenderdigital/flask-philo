@@ -21,7 +21,7 @@ dependencies:
 #        - sleep 10
 #        - strace -f -o /var/log/strace.log sudo /etc/init.d/elasticsearch start
 
-    post:
+    override:
         - sudo /etc/init.d/elasticsearch start  
         - sleep 10 && wget --waitretry=5 --retry-connrefused -v http://127.0.0.1:9200/
 
