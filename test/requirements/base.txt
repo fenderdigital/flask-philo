@@ -6,3 +6,4 @@ jsonschema
 flask_oauthlib
 SQLAlchemy
 redis
+elasticsearch

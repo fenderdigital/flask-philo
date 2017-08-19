@@ -48,7 +48,7 @@ Vagrant.configure(2) do |config|
      # vb.gui = true
   
      # Customize the amount of memory on the VM:
-     vb.memory = "1024"
+     vb.memory = "2096"
    end
   #
   # View the documentation for the provider you are using for more
@@ -75,6 +75,7 @@ Vagrant.configure(2) do |config|
      /src/test/tools/provision/install_postgresql.sh
      /src/test/tools/provision/install_python.sh
     /src/test/tools/provision/install_redis.sh
+    /src/test/tools/provision/install_elk.sh
    SHELL
   # config.vm.provision :shell, :path => "/src/tools/provision/bootstrap.sh"
 end
