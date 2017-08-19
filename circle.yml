@@ -7,29 +7,18 @@ dependencies:
         - pip3 install -r test/requirements/dev.txt
         - pip3 install flake8
         - sudo apt-get install -y redis-server 
-#        - sudo apt-get remove elasticsearch
         - echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
         - sudo apt-add-repository ppa:webupd8team/java -y
         - sudo apt-get update
         - sudo apt-get install oracle-java8-installer -y
-#        - wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.1.2.deb
-#        - sudo dpkg -i elasticsearch-5.1.2.deb
-#        - sudo sed -i 's/info/debug/g; s/error/debug/g' /etc/elasticsearch/log4j2.properties # for debugging only
-#        - sudo java -version
-#        - sudo /etc/init.d/elasticsearch stop
-#        - sudo /etc/init.d/elasticsearch start
-#        - sleep 10
-#        - strace -f -o /var/log/strace.log sudo /etc/init.d/elasticsearch start
-
-    post:
         - wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.1.2.deb
         - sudo dpkg -i elasticsearch-5.1.2.deb
-#        - sudo /etc/init.d/elasticsearch start
-#        - sleep 10 && wget --waitretry=5 --retry-connrefused -v http://127.0.0.1:9200/
+        - sudo /etc/init.d/elasticsearch start &:
+            background: true
+        - sleep 10 && wget --waitretry=5 --retry-connrefused -v http://127.0.0.1:9200/
 
 services:
     - postgresql
-#    - elasticsearch
 
 database:
   override:
@@ -53,9 +42,5 @@ database:
     - psql -U postgres  -c "GRANT ALL PRIVILEGES ON DATABASE ds2_test to ds;"
 test:
     override:
-        #- sudo sed -i 's/info/debug/g; s/error/debug/g' /etc/elasticsearch/log4j2.properties 
-        - sudo /etc/init.d/elasticsearch start &:
-            background: true
-        - sleep 10 && wget --waitretry=5 --retry-connrefused -v http://127.0.0.1:9200/
         -  flake8 --exclude build,bin ./
         -  cd test; python3 manage.py test --settings tests.config.ci
