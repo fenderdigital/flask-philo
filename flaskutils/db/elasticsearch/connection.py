@@ -59,6 +59,7 @@ class ElasticSearchPool:
         for k, v in self.connections.items():
             v.flush()
 
+
 el_pool = ElasticSearchPool()
 el_pool.connections = {}
 
