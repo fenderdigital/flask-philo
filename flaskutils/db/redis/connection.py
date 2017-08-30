@@ -59,12 +59,14 @@ def get_pool():
     return redis_pool
 
 
-def init_db_conn(connection_name, HOST=None, PORT=None, DB=None, PASSWORD=None):
+def init_db_conn(
+        connection_name, HOST=None, PORT=None, DB=None, PASSWORD=None):
     """
     Initialize a redis connection by each connection string
     defined in the configuration file
     """
-    rpool = redis.ConnectionPool(host=HOST, port=PORT, db=DB, password=PASSWORD)
+    rpool = redis.ConnectionPool(
+        host=HOST, port=PORT, db=DB, password=PASSWORD)
     r = redis.Redis(connection_pool=rpool)
     redis_pool.connections[connection_name] = RedisClient(r)
 
