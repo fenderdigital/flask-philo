@@ -19,9 +19,14 @@ class BaseView(MethodView):
 
         super(BaseView, self).__init__(*args, **kwargs)
 
-    def json_response(self, status=200, data={}):
+    def json_response(self, status=200, data={}, headers={}):
         mimetype = 'application/json'
-        return Response(json.dumps(data), status=status, mimetype=mimetype)
+
+        return Response(
+            json.dumps(data),
+            status=status,
+            mimetype=mimetype,
+            headers=headers)
 
     def render_template(self, template_name, **values):
         return render_template(template_name, **values)
