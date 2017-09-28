@@ -10,7 +10,7 @@ setup(
         'flaskutils.db.postgresql', 'flaskutils.db.redis',
         'flaskutils.db.elasticsearch'],
     include_package_data=True,
-    package_data = {
+    package_data={
         '': ['../bin/templates/*']
     },
     author='Manuel Ignacio Franco Galeano',
