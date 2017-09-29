@@ -23,6 +23,8 @@ def create_from_template(**data):
 
     with open('./{}/{}/{}'.format(project_name, path, filename), 'w') as f:
         f.write(template)
+        if template:
+            f.write("\n")
 
 
 def main():

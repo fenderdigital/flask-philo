@@ -1,5 +1,3 @@
-from flask import request
-from flaskutils import app
 from flaskutils.views import BaseResourceView
 
 
