@@ -6,12 +6,14 @@ NGINX and uWSGI for FlaskUtils app deployment
 Install uWSGI:
 
 ::
- sudo pip install uwsgi
+
+   sudo pip install uwsgi
 
 Install NGINX:
 
 ::
- sudo apt-get install nginx
+
+  sudo apt-get install nginx
 
 
 1. Create a flask app using flaskutils:
