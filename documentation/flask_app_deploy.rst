@@ -192,6 +192,7 @@ Example: How to deploy using Heroku
 ===================================
 
 1. Create a ``uwsgi.ini`` file with the following content:
+----------------------------------------------------------
 
 ::
 
@@ -205,19 +206,25 @@ Example: How to deploy using Heroku
  stats = :22222
  exec-pre-app = /sbin/ifconfig eth0
 
+
 2. Create a file called "Procfile" with the following content:
+--------------------------------------------------------------
 
 ::
 
   web: uwsgi --ini uwsgi.ini
 
+
 3. Then run the following command on a terminal window inside your project dir:
+-------------------------------------------------------------------------------
 
 ::
 
   git push heroku master
 
-4. to see more about how to deploy on Heroku, go to:
+
+4. To know more about how to deploy on Heroku, go to:
+-----------------------------------------------------
 
 ::
 
