@@ -207,7 +207,7 @@ Example: How to deploy using Heroku
  exec-pre-app = /sbin/ifconfig eth0
 
 
-2. Create a file called "Procfile" with the following content:
+2. Create a file called ``Procfile`` with the following content:
 --------------------------------------------------------------
 
 ::
