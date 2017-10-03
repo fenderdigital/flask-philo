@@ -185,8 +185,7 @@ You will need to create a service file, for example ``my_project.service``. This
   WantedBy=multi-user.target
   Alias=my_project.service
 
-
-
+-----
 
 Example: How to deploy using Heroku
 ===================================

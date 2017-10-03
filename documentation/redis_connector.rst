@@ -12,9 +12,7 @@ Where's Redis on FlaskUtils project
 
 FlaskUtils Redis client and connector can be found at:
 
-::
-
- https://github.com/Riffstation/flaskutils/tree/dev/flaskutils/db/redis
+https://github.com/Riffstation/flaskutils/tree/dev/flaskutils/db/redis
 
 
 Importing Redis Connection
@@ -100,9 +98,7 @@ You can use the following syntax to add data from Redis:
 
 You have a set of operations that can be done on Redis. You can find it here:
 
-::
-
- https://github.com/Riffstation/flaskutils/tree/dev/flaskutils/db/redis
+https://github.com/Riffstation/flaskutils/tree/dev/flaskutils/db/redis
 
 
 You can also operate direct on server, for example, to retrieve a value by giving its proper key.
