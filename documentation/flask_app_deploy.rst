@@ -23,6 +23,7 @@ Install NGINX:
 To quickly generate a new flaskutils project, navigate to the directory in which you want to create the project and run:
 
 ::
+
  flaskutils-admin startproject my_project
 
 
@@ -58,6 +59,7 @@ For example, you can call the file ``manage_uwsgi.py``:
 In order to create something robust for long-term usage. You will create a uWSGI configuration file with some options.
 
 ::
+
   [uwsgi]
   pythonpath = <%= @code_dir %>/src/
   wsgi-file = <%= @code_dir %>/src/manage_uwsgi.py
@@ -166,6 +168,7 @@ systemd will be responsible to start, stop, and keep alive the processes needed.
 You will need to create a service file, for example ``my_project.service``. This file will contain the following content:
 
 ::
+
   [Unit]
   Description=My Project
   After=syslog.target
