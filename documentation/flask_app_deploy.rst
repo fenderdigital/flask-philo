@@ -185,6 +185,40 @@ You will need to create a service file, for example ``my_project.service``. This
   WantedBy=multi-user.target
   Alias=my_project.service
 
-You can configure your code deployment tool [AWS CodeDeploy (https://aws.amazon.com/codedeploy/), Heroku (http://uwsgi-docs.readthedocs.io/en/latest/tutorials/heroku_python.html), etc.] to handle these processes by adding some automated steps.
+
+Example: How to deploy using Heroku
+===================================
+
+1. Create a ``uwsgi.ini`` file with the following content:
+
+::
+
+ [uwsgi]
+ http-socket = :$(PORT)
+ master = true
+ processes = 4
+ die-on-term = true
+ module = manage_uwsgi:app
+ memory-report = true
+ stats = :22222
+ exec-pre-app = /sbin/ifconfig eth0
+
+2. Create a file called "Procfile" with the following content:
+
+::
+
+  web: uwsgi --ini uwsgi.ini
+
+3. Then run the following command on a terminal window inside your project dir:
+
+::
+
+  git push heroku master
+
+4. to see more about how to deploy on Heroku, go to:
+
+::
+  http://uwsgi-docs.readthedocs.io/en/latest/tutorials/heroku_python.html
+
 
 You can also configure Chef (https://www.chef.io/) to perform all the steps in an automated fashion.
