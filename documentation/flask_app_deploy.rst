@@ -1,19 +1,20 @@
 NGINX and uWSGI for FlaskUtils app deployment
 =============================================
 
-1. Install the tools you will need:
+0. Install the tools you will need:
+-----------------------------------
 
 Install uWSGI:
 
 ::
 
-sudo pip install uwsgi
+ sudo pip install uwsgi
 
 Install NGINX:
 
 ::
 
-  sudo apt-get install nginx
+ sudo apt-get install nginx
 
 
 1. Create a flask app using flaskutils:
@@ -21,7 +22,7 @@ Install NGINX:
 To quickly generate a new flaskutils project, navigate to the directory in which you want to create the project and run:
 
 ::
-  flaskutils-admin startproject my_project
+ flaskutils-admin startproject my_project
 
 
 2. Create the WSGI Entry Point
