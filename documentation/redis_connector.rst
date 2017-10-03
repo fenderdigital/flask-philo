@@ -36,11 +36,11 @@ In your flask app, in the file ``src/config/development/py``, insert the followi
  DATABASES = {
      # existing database connections would be here
      'REDIS': {
-         'DEFAULT': {
-             'HOST': 'your_host',
-             'PORT': <your_port>,
-             'DB': 0,
-             'PASSWORD': 'your_password'
+         'DEFAULT': { # Your cluster connection name
+             'HOST': '<your_host>', #By default will be 127.0.0.1
+             'PORT': <your_port>, # By default redis uses 6379
+             'DB': <your_db_name>, # By default redis uses DB:0
+             'PASSWORD': '<your_password>' # In case your redis cluster is with auth
          }
      }
  }

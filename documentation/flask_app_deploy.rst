@@ -185,6 +185,35 @@ You will need to create a service file, for example ``my_project.service``. This
   WantedBy=multi-user.target
   Alias=my_project.service
 
+6. To manage systemd service:
+-----------------------------
+
+If you want to start systemd service, Debian-like for example, you should:
+
+- Place your ``my_project.service`` file in ``/etc/systemd/system/`` folder
+- Run the following commands:
+
+::
+
+ systemctl daemon-reload
+ systemctl start|stop|restart my_project
+
+or
+
+::
+
+ systemctl daemon-reload
+ systemctl start|stop|restart my_project.service
+
+
+For example, to start the service:
+
+::
+
+ systemctl daemon-reload
+ systemctl start my_project.service
+
+
 -----
 
 Example: How to deploy using Heroku
@@ -225,9 +254,7 @@ Example: How to deploy using Heroku
 4. To know more about how to deploy on Heroku, go to:
 -----------------------------------------------------
 
-::
-
-  http://uwsgi-docs.readthedocs.io/en/latest/tutorials/heroku_python.html
+http://uwsgi-docs.readthedocs.io/en/latest/tutorials/heroku_python.html
 
 
 You can also configure Chef (https://www.chef.io/) to perform all the steps in an automated fashion.
