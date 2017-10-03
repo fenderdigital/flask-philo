@@ -101,4 +101,4 @@ You have a set of operations that can be done on Redis. You can find it here:
 https://github.com/Riffstation/flaskutils/tree/dev/flaskutils/db/redis
 
 
-You can also operate direct on server, for example, to retrieve a value by giving its proper key.
+You can also operate direct on Redis server, for example, to retrieve a value by giving its proper key.
