@@ -48,7 +48,7 @@ For example, you can call the file ``manage_uwsgi.py``:
 
   from flaskutils import init_app, execute_command
 
-  os.environ.setdefault('FLASKUTILS_SETTINGS_MODULE', "config.app_config")
+  os.environ.setdefault('FLASKUTILS_SETTINGS_MODULE', "config.development")
 
   app = init_app(__name__, BASE_DIR)
 
@@ -61,8 +61,8 @@ In order to create something robust for long-term usage. You will create a uWSGI
 ::
 
   [uwsgi]
-  pythonpath = <%= @code_dir %>/src/
-  wsgi-file = <%= @code_dir %>/src/manage_uwsgi.py
+  pythonpath = <you_code_dir>/src/
+  wsgi-file = <you_code_dir>/src/manage_uwsgi.py
   enable-threads = true
   reload-on-rss=200
   cpu-affinity = 1
@@ -98,7 +98,7 @@ Create the NGNIX config file in order to establish the connection between NGNIX 
 ::
 
  server {
-             server_name                    <%= @master_variables['general']['server_nginx_name'] %>;
+             server_name                    <your_nginx_server_name>;
              listen                         80;
              rewrite                        ^ https://$server_name$request_uri? permanent;
              access_log                     off;
@@ -108,7 +108,7 @@ Create the NGNIX config file in order to establish the connection between NGNIX 
              listen                          443  ssl;
              ssl_certificate                 /etc/nginx/ssl/nginx.crt;
              ssl_certificate_key             /etc/nginx/ssl/nginx.key;
-             server_name                     <%= @master_variables['general']['server_nginx_name'] %>;
+             server_name                     <your_nginx_server_name>;
              underscores_in_headers          on;
 
              keepalive_timeout               0;
@@ -149,7 +149,7 @@ Create the NGNIX config file in order to establish the connection between NGNIX 
          gzip_disable                        "MSIE [1-6].(?!.*SV1)";
          gzip_proxied                        expired no-cache no-store private auth;
 
-You will need to create some config files to handle variables and make reference to them like this: ``<%= @master_variables['general']['server_nginx_name'] %>``.
+You will need to create some config files to handle variables and make reference to them like this: ``<your_nginx_server_name>``.
 
 
 5. Using systemd service file to manage multiple applications:
@@ -172,12 +172,12 @@ You will need to create a service file, for example ``my_project.service``. This
   [Unit]
   Description=My Project
   After=syslog.target
-  ConditionPathExists=<%= @code_dir %>/src/manage.py
+  ConditionPathExists=<you_code_dir>/src/manage.py
 
   [Service]
   ExecReload=/bin/kill -HUP $MAINPID
-  ExecStart=/usr/bin/uwsgi --ini <%= @code_dir %>/uwsgi.ini
-  RuntimeDirectory=<%= @code_dir %>/
+  ExecStart=/usr/bin/uwsgi --ini <you_code_dir>/uwsgi.ini
+  RuntimeDirectory=<you_code_dir>/
   KillMode=process
   Restart=on-failure
 
@@ -185,6 +185,6 @@ You will need to create a service file, for example ``my_project.service``. This
   WantedBy=multi-user.target
   Alias=my_project.service
 
-You can configure your code deployment tool (AWS CodeDeploy, Heroku, etc.) to handle these processes by adding some automated steps.
+You can configure your code deployment tool [AWS CodeDeploy (https://aws.amazon.com/codedeploy/), Heroku (http://uwsgi-docs.readthedocs.io/en/latest/tutorials/heroku_python.html), etc.] to handle these processes by adding some automated steps.
 
 You can also configure Chef (https://www.chef.io/) to perform all the steps in an automated fashion.
