@@ -18,6 +18,7 @@ Install NGINX:
 
 
 1. Create a flask app using flaskutils:
+---------------------------------------
 
 To quickly generate a new flaskutils project, navigate to the directory in which you want to create the project and run:
 
@@ -26,6 +27,7 @@ To quickly generate a new flaskutils project, navigate to the directory in which
 
 
 2. Create the WSGI Entry Point
+------------------------------
 
 Next, you will need to create a file that will serve as the entry point for your application.
 This will tell your uWSGI server how to interact with the application.
@@ -33,6 +35,7 @@ This will tell your uWSGI server how to interact with the application.
 For example, you can call the file ``manage_uwsgi.py``:
 
 ::
+
   import os
   import sys
   import argparse
@@ -50,6 +53,7 @@ For example, you can call the file ``manage_uwsgi.py``:
 
 
 3. Create a uWSGI Configuration File
+------------------------------------
 
 In order to create something robust for long-term usage. You will create a uWSGI configuration file with some options.
 
@@ -84,66 +88,70 @@ Some important observations can be made here:
 - ``socket=/tmp/my_project.sock`` refers to the permissions on the socket, it's set this way to allow NGINX to access it;
 - ``callable = app`` is the entry point into the application where the web server can call a functions with some parameters.
 
-4. Configure NGNIX to proxy to uWSGI
 
+4. Configure NGNIX to proxy to uWSGI
+------------------------------------
 Create the NGNIX config file in order to establish the connection between NGNIX web server to uWSGI. This connection will be made via socket. You can call this file ``default``:
 
 ::
-server {
-            server_name                    <%= @master_variables['general']['server_nginx_name'] %>;
-            listen                         80;
-            rewrite                        ^ https://$server_name$request_uri? permanent;
-            access_log                     off;
-}
 
-server {
-            listen                          443  ssl;
-            ssl_certificate                 /etc/nginx/ssl/nginx.crt;
-            ssl_certificate_key             /etc/nginx/ssl/nginx.key;
-            server_name                     <%= @master_variables['general']['server_nginx_name'] %>;
-            underscores_in_headers          on;
+ server {
+             server_name                    <%= @master_variables['general']['server_nginx_name'] %>;
+             listen                         80;
+             rewrite                        ^ https://$server_name$request_uri? permanent;
+             access_log                     off;
+ }
 
-            keepalive_timeout               0;
-            keepalive_requests              1000;
-            client_max_body_size            20m;
-            client_body_buffer_size         128k;
-            server_tokens                   off;
-            sendfile                        on;
-            uwsgi_buffer_size               264k;
-            uwsgi_buffers                   8 264k;
-            uwsgi_busy_buffers_size         264k;
-            uwsgi_connect_timeout           600s;
-            uwsgi_read_timeout              600s;
-            uwsgi_send_timeout              600s;
-            uwsgi_ignore_client_abort       on;
-            uwsgi_intercept_errors          on;
-            uwsgi_max_temp_file_size        1024m;
+ server {
+             listen                          443  ssl;
+             ssl_certificate                 /etc/nginx/ssl/nginx.crt;
+             ssl_certificate_key             /etc/nginx/ssl/nginx.key;
+             server_name                     <%= @master_variables['general']['server_nginx_name'] %>;
+             underscores_in_headers          on;
 
-            location / {
-                uwsgi_read_timeout          30s;
-                include                     uwsgi_params;
-                proxy_connect_timeout       30s;
-                proxy_send_timeout          30s;
-                proxy_read_timeout          30s;
-                send_timeout                30s;
-                uwsgi_pass                  unix:/tmp/my_project.sock;
-                proxy_http_version          1.1;
-                proxy_redirect              off;
-            }
-        }
+             keepalive_timeout               0;
+             keepalive_requests              1000;
+             client_max_body_size            20m;
+             client_body_buffer_size         128k;
+             server_tokens                   off;
+             sendfile                        on;
+             uwsgi_buffer_size               264k;
+             uwsgi_buffers                   8 264k;
+             uwsgi_busy_buffers_size         264k;
+             uwsgi_connect_timeout           600s;
+             uwsgi_read_timeout              600s;
+             uwsgi_send_timeout              600s;
+             uwsgi_ignore_client_abort       on;
+             uwsgi_intercept_errors          on;
+             uwsgi_max_temp_file_size        1024m;
 
-        gzip_http_version                   1.1;
-        gzip_vary                           on;
-        gzip_comp_level                     6;
-        gzip_proxied                        any;
-        gzip_types                          application/javascript text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
-        gzip_buffers                        16 8k;
-        gzip_disable                        "MSIE [1-6].(?!.*SV1)";
-        gzip_proxied                        expired no-cache no-store private auth;
+             location / {
+                 uwsgi_read_timeout          30s;
+                 include                     uwsgi_params;
+                 proxy_connect_timeout       30s;
+                 proxy_send_timeout          30s;
+                 proxy_read_timeout          30s;
+                 send_timeout                30s;
+                 uwsgi_pass                  unix:/tmp/my_project.sock;
+                 proxy_http_version          1.1;
+                 proxy_redirect              off;
+             }
+         }
+
+         gzip_http_version                   1.1;
+         gzip_vary                           on;
+         gzip_comp_level                     6;
+         gzip_proxied                        any;
+         gzip_types                          application/javascript text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+         gzip_buffers                        16 8k;
+         gzip_disable                        "MSIE [1-6].(?!.*SV1)";
+         gzip_proxied                        expired no-cache no-store private auth;
 
 You will need to create some config files to handle variables and make reference to them like this: ``<%= @master_variables['general']['server_nginx_name'] %>``.
 
+
 5. Using systemd service file to manage multiple applications:
+--------------------------------------------------------------
 
 systemd will be responsible to start, stop, and keep alive the processes needed. It also:
 
