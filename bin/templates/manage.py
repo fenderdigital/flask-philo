@@ -9,7 +9,7 @@ sys.path.append(os.path.join(BASE_DIR, '../'))
 
 def main():
     from flaskutils import init_app, execute_command
-    description = 'Manage flask MIR application'
+    description = 'Manage flask application'
     parser = argparse.ArgumentParser(description=description)
     parser.add_argument('command', help='command to execute')
 
