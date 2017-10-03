@@ -35,5 +35,5 @@ Basic Features
 External Resources
 ------------------
 
-- [Flask Website](http://flask.pocoo.org/)
-- [Flask Book](http://flaskbook.com/)
+- `Flask Website<http://flask.pocoo.org/>`_
+- `Flask Book<http://flaskbook.com/>`_
