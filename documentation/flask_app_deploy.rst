@@ -186,6 +186,8 @@ You will need to create a service file, for example ``my_project.service``. This
   Alias=my_project.service
 
 
+
+
 Example: How to deploy using Heroku
 ===================================
 
@@ -218,6 +220,7 @@ Example: How to deploy using Heroku
 4. to see more about how to deploy on Heroku, go to:
 
 ::
+
   http://uwsgi-docs.readthedocs.io/en/latest/tutorials/heroku_python.html
 
 
