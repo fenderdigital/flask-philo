@@ -11,6 +11,7 @@ import uuid
 
 app = None
 
+
 def send_message(queue_url, message_body, region=None):
     client = boto3.client('sqs', region_name=region)
     return client.send_message(QueueUrl=queue_url, MessageBody=message_body)
@@ -60,6 +61,14 @@ def delete_message(queue_url, receipt_handle, region=None):
 def purge_queue(queue_url, region=None):
     client = boto3.client('sqs', region_name=region)
     result = client.purge_queue(
+        QueueUrl=queue_url,
+    )
+    return result
+
+
+def delete_queue(queue_url, region=None):
+    client = boto3.client('sqs', region_name=region)
+    result = client.delete_queue(
         QueueUrl=queue_url,
     )
     return result
@@ -152,6 +161,14 @@ def run(dapp, cmd):
         args, extra_params = parser.parse_known_args()
         print(purge_queue(args.queue_url, region=args.region))
 
+    def delete_queue_cmd():
+        parser = argparse.ArgumentParser()
+        parser.add_argument(
+            '--region', required=True, help='AWS Region')
+        parser.add_argument('--queue_url', required=True)
+        args, extra_params = parser.parse_known_args()
+        print(delete_queue(args.queue_url, region=args.region))
+
     actions = {
         'create_queue': create_queue_cmd,
         'list_queues': list_queues_cmd,
@@ -159,7 +176,8 @@ def run(dapp, cmd):
         'send_message_batch': send_message_batch_cmd,
         'receive_message': receive_message_cmd,
         'delete_message': delete_message_cmd,
-        'purge_queue': purge_queue_cmd
+        'purge_queue': purge_queue_cmd,
+        'delete_queue': delete_queue_cmd
     }
 
     run_action(actions, cmd)
