@@ -8,14 +8,13 @@ setup(
     packages=[
         'flaskutils', 'flaskutils.commands_flaskutils', 'flaskutils.db',
         'flaskutils.db.postgresql', 'flaskutils.db.redis',
-        'flaskutils.db.elasticsearch'],
-    include_package_data=True,
-    package_data={
-        '': ['../bin/templates/*']
-    },
+        'flaskutils.db.elasticsearch', 'flaskutils.cloud',
+        'flaskutils.cloud.aws'
+        ],
     author='Manuel Ignacio Franco Galeano',
     author_email='maigfrga@gmail.com',
     install_requires=[
+        'psycopg2',
         'jsonschema',
         'pytest',
         'flask',
@@ -23,7 +22,9 @@ setup(
         'bcrypt',
         'SQLAlchemy>=1.0',
         'redis',
-        'elasticsearch'
+        'elasticsearch',
+        'boto3',
+        'PrettyTable'
     ],
     entry_points={
         "console_scripts": [
