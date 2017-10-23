@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='flaskutils',
-    version='2.7.1',
+    version='2.8.1',
     description='Flask Utilities',
     packages=[
         'flaskutils', 'flaskutils.commands_flaskutils', 'flaskutils.db',
