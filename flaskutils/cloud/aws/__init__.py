@@ -2,13 +2,13 @@ import argparse
 import os
 
 from . import (
-    s3api, key_pair, sqs
+    s3api, key_pair, sqs, s3
 )
 
 
 def run(**kwargs):
     valid_commands = {
-        'sqs': sqs, 's3api': s3api, 'key_pair': key_pair
+        'sqs': sqs, 's3api': s3api, 'key_pair': key_pair, 's3': s3
     }
 
     description = 'AWS Flaskutils'
