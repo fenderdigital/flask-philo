@@ -40,7 +40,7 @@ def requires_basic_auth(f):
             try:
                 auth_string = base64.b64decode(auth_string).decode("utf-8")
                 username, password = auth_string.split(':')
-            except:
+            except Exception:
                 return authenticate()
         if not auth_string or not check_auth(username, password):
             return authenticate()

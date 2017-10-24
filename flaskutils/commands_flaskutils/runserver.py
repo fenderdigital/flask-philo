@@ -8,4 +8,4 @@ def run(**kwargs):
             host=app.config['HOST'], port=app.config['PORT'])
     else:
         raise ConfigurationError(
-            'Development server can run just in DEBUG mode')
+            'Development server only can run in DEBUG mode')
