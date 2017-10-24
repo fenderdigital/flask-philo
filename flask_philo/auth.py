@@ -1,13 +1,13 @@
 from functools import wraps
 from flask import request, Response
-from flaskutils import app
+from flask_philo import app
 import base64
 
 
 """
 http://flask.pocoo.org/snippets/8/
 This module exposes a decorator that can be used in a
-flaskutils app to enforce basic auth on an endpoint.
+flask_philo app to enforce basic auth on an endpoint.
 An example of usage can be found in `test/tests/test_app/views/auth_views.py`
 """
 

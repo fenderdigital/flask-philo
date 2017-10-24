@@ -1,7 +1,7 @@
 from flask import Flask, g
 from flask_oauthlib.provider import OAuth2Provider
 from . import default_settings
-from .commands_flaskutils import *  # noqa
+from .commands_flask_philo import *  # noqa
 from .exceptions import ConfigurationError
 from .db import init_db
 
@@ -33,7 +33,7 @@ def init_app(module, BASE_DIR, **kwargs):
         Load settings module and attach values to the application
         config dictionary
         """
-        if 'FLASKUTILS_SETTINGS_MODULE' not in os.environ:
+        if 'FLASK_PHILO_SETTINGS_MODULE' not in os.environ:
             raise ConfigurationError('No settings has been defined')
 
         app.config['BASE_DIR'] = BASE_DIR
@@ -47,7 +47,7 @@ def init_app(module, BASE_DIR, **kwargs):
 
         # app settings
         settings = importlib.import_module(
-            os.environ['FLASKUTILS_SETTINGS_MODULE'])
+            os.environ['FLASK_PHILO_SETTINGS_MODULE'])
         for v in dir(settings):
             if not v.startswith('_'):
                 app.config[v] = getattr(settings, v)
@@ -87,8 +87,8 @@ def execute_command(cmd, **kwargs):
     execute a console command
     """
     cmd_dict = {
-        c: 'flaskutils.commands_flaskutils.' + c for c
-            in dir(commands_flaskutils) if not c.startswith('_') and c != 'os'  # noqa
+        c: 'flask_philo.commands_flask_philo.' + c for c
+            in dir(commands_flask_philo) if not c.startswith('_') and c != 'os'  # noqa
     }
 
     # loading specific app commands

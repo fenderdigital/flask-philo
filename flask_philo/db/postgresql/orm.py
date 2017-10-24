@@ -2,9 +2,9 @@ from sqlalchemy import Column, Integer
 from sqlalchemy.ext.declarative import declared_attr
 from sqlalchemy.sql import text
 
-from flaskutils.db.exceptions import NotFoundError, InvalidQueryError
-from flaskutils.db.postgresql.schema import Base
-from flaskutils.db.postgresql.connection import get_pool
+from flask_philo.db.exceptions import NotFoundError, InvalidQueryError
+from flask_philo.db.postgresql.schema import Base
+from flask_philo.db.postgresql.connection import get_pool
 
 
 class BaseManager(object):

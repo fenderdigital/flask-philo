@@ -1,7 +1,7 @@
 from flask import request
-from flaskutils import app
-from flaskutils.views import BaseView, BaseResourceView
-from flaskutils.db.exceptions import NotFoundError
+from flask_philo import app
+from flask_philo.views import BaseView, BaseResourceView
+from flask_philo.db.exceptions import NotFoundError
 from tests.test_app.models import User
 
 from tests.test_app.serializers import (

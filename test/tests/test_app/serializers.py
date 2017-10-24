@@ -1,4 +1,4 @@
-from flaskutils.serializers import BaseSerializer, uuid_schema
+from flask_philo.serializers import BaseSerializer, uuid_schema
 from tests.test_app.models import User
 
 

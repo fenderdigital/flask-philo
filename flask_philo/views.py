@@ -1,4 +1,4 @@
-from flaskutils import app
+from flask_philo import app
 from flask import abort, json, render_template, make_response, Response, g
 from flask.views import MethodView
 

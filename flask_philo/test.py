@@ -1,9 +1,9 @@
-from flaskutils import app
-from flaskutils.db.postgresql.orm import BaseModel
-from flaskutils.db.postgresql import syncdb
-from flaskutils.db.postgresql.connection import get_pool
-from flaskutils.db.redis.connection import get_pool as get_redis_pool
-from flaskutils.db.elasticsearch.connection import get_pool as get_el_pool
+from flask_philo import app
+from flask_philo.db.postgresql.orm import BaseModel
+from flask_philo.db.postgresql import syncdb
+from flask_philo.db.postgresql.connection import get_pool
+from flask_philo.db.redis.connection import get_pool as get_redis_pool
+from flask_philo.db.elasticsearch.connection import get_pool as get_el_pool
 
 
 class FlaskTestCase(object):

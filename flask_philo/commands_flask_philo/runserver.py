@@ -1,4 +1,4 @@
-from flaskutils.exceptions import ConfigurationError
+from flask_philo.exceptions import ConfigurationError
 
 
 def run(**kwargs):

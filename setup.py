@@ -2,14 +2,14 @@ from setuptools import setup
 
 
 setup(
-    name='flaskutils',
-    version='2.7.2',
-    description='Flask Utilities',
+    name='Flask-Philo',
+    version='3.0.0',
+    description='Simple web framework based on flask',
     packages=[
-        'flaskutils', 'flaskutils.commands_flaskutils', 'flaskutils.db',
-        'flaskutils.db.postgresql', 'flaskutils.db.redis',
-        'flaskutils.db.elasticsearch', 'flaskutils.cloud',
-        'flaskutils.cloud.aws'
+        'flask_philo', 'flask_philo.commands_flask_philo', 'flask_philo.db',
+        'flask_philo.db.postgresql', 'flask_philo.db.redis',
+        'flask_philo.db.elasticsearch', 'flask_philo.cloud',
+        'flask_philo.cloud.aws'
         ],
     author='Manuel Ignacio Franco Galeano',
     author_email='maigfrga@gmail.com',
@@ -28,7 +28,7 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "flaskutils-admin = flaskutils.__main__:main",
+            "flask_philo-admin = flask_philo.__main__:main",
         ]
     }
 )

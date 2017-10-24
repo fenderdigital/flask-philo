@@ -29,7 +29,7 @@ def create_from_template(**data):
 
 def main():
     parser = argparse.ArgumentParser(
-        description='admin tool for flaskutils projects')
+        description='admin tool for flask_philo projects')
     parser.add_argument('command', help='command to be executed')
     parser.add_argument('name', help='name of project')
 

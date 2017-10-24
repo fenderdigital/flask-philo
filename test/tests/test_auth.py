@@ -1,5 +1,5 @@
-from flaskutils.exceptions import AuthenticationError
-from flaskutils.test import FlaskTestCase
+from flask_philo.exceptions import AuthenticationError
+from flask_philo.test import FlaskTestCase
 
 from tests.test_app.models import User
 

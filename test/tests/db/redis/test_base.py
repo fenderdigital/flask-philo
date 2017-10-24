@@ -1,4 +1,4 @@
-from flaskutils.test import FlaskTestCase
+from flask_philo.test import FlaskTestCase
 
 
 class TestDBAccess(FlaskTestCase):
