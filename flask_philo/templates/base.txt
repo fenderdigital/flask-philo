@@ -1,0 +1,12 @@
+psycopg2
+jsonschema
+pytest
+flask
+flask_oauthlib
+bcrypt
+SQLAlchemy
+redis
+elasticsearch
+boto3
+PrettyTable
+-e git+https://github.com/Riffstation/Flask-Philo.git@dev#egg=flask-philo
