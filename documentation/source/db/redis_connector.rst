@@ -1,30 +1,29 @@
-FlaskUtils Redis Connector
-==========================
+Flask-Philo Redis Connector
+============================
 
-What's Redis about
-------------------
-
-Redis is a fast key-value store and can be used to support high performance scalable web applications.
+Redis is a fast key-value store and can be used to support high performance scalable web
+applications.
 
 
-Where's Redis on FlaskUtils project
------------------------------------
+Where's Redis on Flask-Philo project
+----------------------------------------
 
-FlaskUtils Redis client and connector can be found at:
+Flask-Philo Redis client and connector can be found at:
 
-https://github.com/Riffstation/flaskutils/tree/dev/flaskutils/db/redis
+https://github.com/Riffstation/flask-philo/tree/dev/flask_philo/db/redis
 
 
 Importing Redis Connection
---------------------------
+----------------------------
 
 To import redis connection, just do:
 
 ::
 
- from flaskutils.db.redis.connection import *
+ from flask_philo.db.redis.connection import get_pool as get_redis_pool
 
-
+ redis_pool = get_redis_pool()
+ client = redis_pool.connections['DETAULT']
 
 Setting up your development config file
 ---------------------------------------
@@ -45,17 +44,6 @@ In your flask app, in the file ``src/config/development/py``, insert the followi
      }
  }
 
-To initialize a Redis connection
---------------------------------
-
-Once you have you Redis db connection set, you can initialize it in this way:
-
-::
-
- from flaskutils.db.redis.connection import get_pool
-
- redis_pool = get_pool()
- client = redis_pool.connections['DETAULT']
 
 
 To add or update data on Redis
@@ -65,17 +53,10 @@ You can use the following syntax to add data to Redis:
 
 ::
 
- from flaskutils.db.redis.connection import get_pool
+    from flask_philo.db.redis.connection import get_pool as get_redis_pool
 
- def run(**kwags):
-    data_set = [
-        # data you need to set up on redis
-    ]
-
-    redis_pool = get_pool()
-    # setting up a connection
+    redis_pool = get_redis_pool()
     client = redis_pool.connections['DETAULT']
-    # adding/update data
     client.set('your_key', data_set)
 
 
@@ -86,19 +67,17 @@ You can use the following syntax to add data from Redis:
 
 ::
 
- from flaskutils.db.redis.connection import get_pool
+    from flask_philo.db.redis.connection import get_pool as get_redis_pool
 
- redis_pool = get_pool()
-
- # setting up a connection
- client = redis_pool.connections['DETAULT']
- # retrieving data
- client.get('your_key')
+    redis_pool = get_redis_pool()
+    client = redis_pool.connections['DETAULT']
+    # retrieving data
+    client.get('your_key')
 
 
 You have a set of operations that can be done on Redis. You can find it here:
 
-https://github.com/Riffstation/flaskutils/tree/dev/flaskutils/db/redis
+https://github.com/Riffstation/flask_philo/tree/dev/flask_philo/db/redis
 
 
 You can also operate direct on Redis server, for example, to retrieve a value by giving its proper key.

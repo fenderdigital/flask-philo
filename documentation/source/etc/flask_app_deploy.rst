@@ -1,8 +1,8 @@
-NGINX and uWSGI for FlaskUtils app deployment
-=============================================
+NGINX and uWSGI for Flask-Philo app deployment
+=====================================================
 
 0. Install the tools you will need:
------------------------------------
+-------------------------------------
 
 Install uWSGI:
 
@@ -17,18 +17,19 @@ Install NGINX:
  sudo apt-get install nginx
 
 
-1. Create a flask app using flaskutils:
----------------------------------------
+1. Create a flask app using flask-philo:
+-----------------------------------------
 
-To quickly generate a new flaskutils project, navigate to the directory in which you want to create the project and run:
+To quickly generate a new Flask-Philo project, navigate to the directory in which you
+want to create the project and run:
 
 ::
 
- flaskutils-admin startproject my_project
+ flask-philo-admin startproject my_project
 
 
 2. Create the WSGI Entry Point
-------------------------------
+-------------------------------------
 
 Next, you will need to create a file that will serve as the entry point for your application.
 This will tell your uWSGI server how to interact with the application.
@@ -46,17 +47,18 @@ For example, you can call the file ``manage_uwsgi.py``:
   sys.path.append(os.path.join(BASE_DIR, '../'))
 
 
-  from flaskutils import init_app, execute_command
+  from flaskutils import init_app
 
-  os.environ.setdefault('FLASKUTILS_SETTINGS_MODULE', "config.development")
+  os.environ.setdefault('FLASK_PHILO_SETTINGS_MODULE', "config.development")
 
   app = init_app(__name__, BASE_DIR)
 
 
 3. Create a uWSGI Configuration File
-------------------------------------
+---------------------------------------
 
-In order to create something robust for long-term usage. You will create a uWSGI configuration file with some options.
+In order to create something robust for long-term usage. You will create a uWSGI
+configuration file with some options.
 
 ::
 
@@ -86,14 +88,22 @@ In order to create something robust for long-term usage. You will create a uWSGI
 Some important observations can be made here:
 
 -  ``processes = 8`` refers to the number of worker processes that will serve actual requests;
-- Since you will be using NGINX to handle client connections that will pass requests to uWSGI and the components will operate on the same computer, you will use a Unix socket. Sockets will be a more secure and faster solution;
-- ``socket=/tmp/my_project.sock`` refers to the permissions on the socket, it's set this way to allow NGINX to access it;
-- ``callable = app`` is the entry point into the application where the web server can call a functions with some parameters.
+
+- Since you will be using NGINX to handle client connections that will pass requests to
+  uWSGI and the components will operate on the same computer, you will use a Unix socket.
+  Sockets will be a more secure and faster solution;
+
+- ``socket=/tmp/my_project.sock`` refers to the permissions on the socket, it's set this
+  way to allow NGINX to access it;
+
+- ``callable = app`` is the entry point into the application where the web server can call a
+  functions with some parameters.
 
 
 4. Configure NGNIX to proxy to uWSGI
-------------------------------------
-Create the NGNIX config file in order to establish the connection between NGNIX web server to uWSGI. This connection will be made via socket. You can call this file ``default``:
+----------------------------------------------
+Create the NGNIX config file in order to establish the connection between NGNIX web server to 
+uWSGI. This connection will be made via socket. You can call this file ``default``:
 
 ::
 
@@ -153,7 +163,7 @@ You will need to create some config files to handle variables and make reference
 
 
 5. Using systemd service file to manage multiple applications:
---------------------------------------------------------------
+--------------------------------------------------------------------
 
 systemd will be responsible to start, stop, and keep alive the processes needed. It also:
 
@@ -186,7 +196,7 @@ You will need to create a service file, for example ``my_project.service``. This
   Alias=my_project.service
 
 6. To manage systemd service:
------------------------------
+--------------------------------
 
 If you want to start systemd service, Debian-like for example, you should:
 
@@ -220,7 +230,7 @@ Example: How to deploy using Heroku
 ===================================
 
 1. Create a ``uwsgi.ini`` file with the following content:
-----------------------------------------------------------
+-------------------------------------------------------------
 
 ::
 
@@ -236,7 +246,7 @@ Example: How to deploy using Heroku
 
 
 2. Create a file called ``Procfile`` with the following content:
---------------------------------------------------------------
+------------------------------------------------------------------------
 
 ::
 
