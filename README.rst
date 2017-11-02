@@ -4,14 +4,14 @@ Small and very opinionated framework to build flask based microservices.
 
 ## What this project is about?
 
-Flask is an awsome web microframework that works great out of the box. Nevertheless,
-additional configuration and integration with complementaries libraries are required 
+Flask is an awesome web microframework that works great out of the box. Nevertheless,
+additional configuration and integration with complementary libraries are required 
 in order to build complex applications. Here in [riffstation.com](play.riffstation.com) we have several
 HTTP REST based microservices, anytime that we want to create a new microservice we need to bootstrap
 very similar common code.
 
 This framework collect all the logic related with HTTP, REST and data access in one common place.
-Feel free to use it and extendent it. We are willing to hear about your suggestions and improvements.
+Feel free to use it and extend it. We are willing to hear about your suggestions and improvements.
 
 ## Executing test
 
@@ -55,11 +55,13 @@ In order to run test a vagrant instance is required, below steps required to exe
 
 
 ## Creating a new project
-Flaskutils includes the `flaskutils-admin` command line tool.
-To quickly generate a new flaskutils project, navigate to the directory in which you want to create the project and run:
+Flask-Philo includes the `flask-philo-admin` command line tool.
+To quickly generate a new Flask-Philo project, navigate to the directory in which you want to create
+the project and run:
 
 ```
 flask-philo-admin startproject <project_name>
 ```
 
-This will create a folder called project_name which will contain the basic structure of a flaskutils application, basic unit tests and configuration.
+This will create a folder called project_name which will contain the basic structure of a Flask-Philo application,
+basic unit tests and configuration.
