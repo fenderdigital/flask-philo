@@ -1,5 +1,0 @@
-requests
-psycopg2
-isodate
-snowballstemmer
--e git+https://github.com/Riffstation/flaskutils.git@dev#egg=flaskutils

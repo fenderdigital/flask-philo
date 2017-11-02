@@ -1,5 +1,5 @@
-from flaskutils.auth import requires_basic_auth
-from flaskutils.views import BaseView
+from flask_philo.auth import requires_basic_auth
+from flask_philo.views import BaseView
 
 
 class RequiresBasicAuthView(BaseView):

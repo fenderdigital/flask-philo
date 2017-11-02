@@ -7,3 +7,5 @@ flask_oauthlib
 SQLAlchemy
 redis
 elasticsearch
+boto3
+PrettyTable

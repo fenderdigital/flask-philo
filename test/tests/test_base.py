@@ -1,7 +1,7 @@
 from datetime import date, datetime
 from unittest.mock import Mock
-from flaskutils import app
-from flaskutils.test import FlaskTestCase
+from flask_philo import app
+from flask_philo.test import FlaskTestCase
 from flask import Flask
 from jsonschema import ValidationError
 

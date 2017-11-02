@@ -1,6 +1,6 @@
 from datetime import datetime
 from elasticsearch.exceptions import NotFoundError
-from flaskutils.test import FlaskTestCase
+from flask_philo.test import FlaskTestCase
 
 import pytest
 import time

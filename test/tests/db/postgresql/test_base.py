@@ -1,6 +1,6 @@
-from flaskutils.test import FlaskTestCase
-from flaskutils.db.postgresql.connection import get_pool
-from flaskutils.db.postgresql.types import PasswordHash
+from flask_philo.test import FlaskTestCase
+from flask_philo.db.postgresql.connection import get_pool
+from flask_philo.db.postgresql.types import PasswordHash
 
 
 class TestDBAccess(FlaskTestCase):

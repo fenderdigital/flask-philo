@@ -1,7 +1,7 @@
-from flaskutils.db.postgresql.orm import BaseModel
-from flaskutils.exceptions import AuthenticationError
-from flaskutils.db.postgresql.types import Password
-from flaskutils.db.exceptions import NotFoundError
+from flask_philo.db.postgresql.orm import BaseModel
+from flask_philo.exceptions import AuthenticationError
+from flask_philo.db.postgresql.types import Password
+from flask_philo.db.exceptions import NotFoundError
 from sqlalchemy import Boolean, Column, String
 
 

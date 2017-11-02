@@ -1,4 +1,4 @@
-from flaskutils.db.postgresql.orm import BaseModel
+from flask_philo.db.postgresql.orm import BaseModel
 
 from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship

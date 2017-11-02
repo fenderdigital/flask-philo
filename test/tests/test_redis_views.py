@@ -1,5 +1,5 @@
-from flaskutils import app
-from flaskutils.test import FlaskTestCase
+from flask_philo import app
+from flask_philo.test import FlaskTestCase
 
 
 import json

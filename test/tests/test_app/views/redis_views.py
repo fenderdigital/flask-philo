@@ -1,5 +1,5 @@
 from flask import request
-from flaskutils.views import BaseResourceView
+from flask_philo.views import BaseResourceView
 
 
 class RedisView(BaseResourceView):

@@ -1,6 +1,6 @@
-from flaskutils.test import FlaskTestCase
-from flaskutils.db.exceptions import NotFoundError
-from flaskutils.db.postgresql.connection import get_pool
+from flask_philo.test import FlaskTestCase
+from flask_philo.db.exceptions import NotFoundError
+from flask_philo.db.postgresql.connection import get_pool
 
 from tests.test_app.models import User
 from tests.test_app.serializers import GetUserSerializer, PostUserSerializer
