@@ -36,7 +36,8 @@ setup(
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
-        'Topic :: Software Development :: Web Framework',
+        'Topic :: Software Development',
+        'Framework :: Flask',
         'Programming Language :: Python :: 3',
     ],
     keywords='web framework flask microservice',
