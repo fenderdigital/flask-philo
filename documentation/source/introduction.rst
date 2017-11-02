@@ -33,6 +33,20 @@ Basic Features
 - Basic AWS integration.
 
 
+Installation
+--------------------
+
+::
+
+    pip3 install Flask-Philo
+
+
+Alternatively, you can create a virtual environment first:
+
+::
+
+    mkvirtualenv -p /usr/bin/python3 philo
+    pip install Flask-Philo
 
 
 Creating a new project
