@@ -13,7 +13,7 @@ setup(
         'flask_philo.cloud.aws', 'flask_philo.templates'
         ],
     package_data={
-        'flask_philo.templates': '*'
+        'flask_philo.templates': ['*']
     },
     url='https://github.com/Riffstation/flask-philo',
     author='Manuel Ignacio Franco Galeano',
