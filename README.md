@@ -2,6 +2,9 @@
 
 Small and very opinionated framework to build flask based microservices.
 
+You can check the official documentation [here](http://flask-philo.readthedocs.io/en/latest/)
+
+
 ## What this project is about?
 
 Flask is an awesome web microframework that works great out of the box. Nevertheless,
@@ -12,6 +15,14 @@ very similar common code.
 
 This framework collect all the logic related with HTTP, REST and data access in one common place.
 Feel free to use it and extend it. We are willing to hear about your suggestions and improvements.
+
+
+## Installation
+
+```
+pip3 install Flask-Philo
+```
+
 
 ## Executing test
 
