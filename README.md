@@ -6,7 +6,7 @@ Small and very opinionated framework to build flask based microservices.
 
 Flask is an awesome web microframework that works great out of the box. Nevertheless,
 additional configuration and integration with complementary libraries are required 
-in order to build complex applications. Here in [riffstation.com](play.riffstation.com) we have several
+in order to build complex applications. Here in [riffstation.com](https://play.riffstation.com) we have several
 HTTP REST based microservices, anytime that we want to create a new microservice we need to bootstrap
 very similar common code.
 
