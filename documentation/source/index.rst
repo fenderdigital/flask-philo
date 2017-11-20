@@ -1,4 +1,4 @@
-.. flaskutils documentation master file, created by
+.. flask_philo documentation master file, created by
    sphinx-quickstart on Tue Aug 15 16:27:54 2017.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.

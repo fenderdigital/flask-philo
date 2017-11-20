@@ -47,7 +47,7 @@ For example, you can call the file ``manage_uwsgi.py``:
   sys.path.append(os.path.join(BASE_DIR, '../'))
 
 
-  from flaskutils import init_app
+  from flask_philo import init_app
 
   os.environ.setdefault('FLASK_PHILO_SETTINGS_MODULE', "config.development")
 

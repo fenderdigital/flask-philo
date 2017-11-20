@@ -19,7 +19,7 @@ To import Elastic Search connection, just do:
 
 ::
 
- from flaskutils.db.elasticsearch.connection import get_pool as get_el_pool
+ from flask_philo.db.elasticsearch.connection import get_pool as get_el_pool
 
  elasticsearch_pool = get_el_pool()
  client = elasticsearch_pool.connections['DEFAULT']
