@@ -76,11 +76,11 @@ Postgresql Connection Pool
 One of the design decisions taken for the development team was to leave to the
 developer the management of the Postgresql connection, therefore, it is developers
 responsablity to commit or rollback the  `SQL Alchemy <http://www.sqlalchemy.org/>`_
-session using ``flaskutils.db.postgresql.connection.get_pool``
+session using ``flask_philo.db.postgresql.connection.get_pool``
 
 ::
 
-      from flaskutils.db.postgresql.connection import get_pool
+      from flask_philo.db.postgresql.connection import get_pool
       pool = get_pool()
 
 
@@ -145,7 +145,7 @@ Here's an example of a configuration  that we use in some applications:
  }
 
 
-Now you can access to the specific database using ``flaskutils.db.postgresql.connection.get_pool``:
+Now you can access to the specific database using ``flask_philo.db.postgresql.connection.get_pool``:
 
 ::
 

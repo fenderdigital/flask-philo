@@ -1,4 +1,4 @@
-from flaskutils.views import BaseResourceView
+from flask_philo.views import BaseResourceView
 
 
 class ExampleView(BaseResourceView):
