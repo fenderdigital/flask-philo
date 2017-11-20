@@ -4,6 +4,8 @@ machine:
 
 dependencies:
     pre:
+        - git clone https://github.com/awslabs/git-secrets.git && cd git-secrets && sudo make install
+        - git secrets --register-aws ; git secrets --scan --scan-history -r .
         - pip3 install -r test/requirements/dev.txt
         - pip3 install flake8
         - wget http://download.redis.io/releases/redis-4.0.1.tar.gz
