@@ -10,8 +10,12 @@ Where's Postgresql ORM on Flask-Philo project
 Flask-Philo Postgresql ORM can be found at:
 
 
-https://github.com/Riffstation/flask-philo/tree/dev/flask_philo/db/postgresql
+[https://github.com/Riffstation/flask-philo/tree/dev/flask_philo/db/postgresql]
 
+
+
+Database Settings
+-----------------
 
 The first
 thing you need to do is to add the relevant configuration
@@ -28,8 +32,11 @@ to your settings file:
 
 
 
-Creating Database Models
-----------------------------
+Models
+======
+
+Quick example
+-------------
 
 In order to create simple models all you have to do is
 create classes that inherit from Flask-Philo ``flask_philo.db.postgresql.orm.BaseModel``.
@@ -68,6 +75,27 @@ your application:
         name = Column(String(256))
         description = Column(String(256))
 
+Fields
+======
+
+Field types
+-----------
+
+
+Field options
+-------------
+
+
+Database DML Operations
+=======================
+
+
+
+
+
+
+Deleting a record
+-----------------
 
 
 Postgresql Connection Pool
@@ -75,26 +103,74 @@ Postgresql Connection Pool
 
 One of the design decisions taken for the development team was to leave to the
 developer the management of the Postgresql connection, therefore, it is developers
-responsablity to commit or rollback the  `SQL Alchemy <http://www.sqlalchemy.org/>`_
+responsibility to commit or rollback the  `SQL Alchemy <http://www.sqlalchemy.org/>`_
 session using ``flask_philo.db.postgresql.connection.get_pool``
 
 ::
 
-      from flask_philo.db.postgresql.connection import get_pool
-      pool = get_pool()
+    from flask_philo.db.postgresql.connection import get_pool
+    pool = get_pool()
 
 
 The following are examples are about how to use the ORM to query the database:
 
+Adding a record
+---------------
+
+Here we will insert a new genre based on the model (Genre) above:
+
 ::
 
-        rock = Genre(name='Rock', description='rock yeah!!!')
-        rock.add()
-        pool.commit()
-        pink = Artist(
-            genre_id=rock.id, name='Pink Floyd', description='Awsome')
-        pink.add()
-        pool.commit()
+    rock = Genre(name='Rock', description='Rock and Roll')
+    rock.add()
+
+
+Now we have two options: commit or rollback the insert operation.
+
+To commit the operation and create a new record:
+
+::
+    pool.commit()
+
+
+In case the record is not needed, we can rollback the transaction and nothing will be changed in the database:
+
+::
+
+    pool.rollback()
+
+
+Let's suppose we've created and committed the new genre.
+
+Now we can retrieve the record from the database by using the filter_by function:
+
+::
+
+    rock = Genre.objects.filter_by(name="Rock").first()
+
+
+We can retrieve column values for the record above:
+
+::
+
+    print(rock.name)
+
+
+It will print:
+
+::
+
+    Rock
+
+
+Updating a record
+-----------------
+
+
+Here follow some more examples:
+
+::
+
         dark = Album(
             artist_id=pink.id, name='Dark side of the moon',
             description='Interesting')
@@ -128,7 +204,7 @@ Using multiple Postgresql databases
 -------------------------------------
 
 Flask-Philo allows you to connect to multiple postgresql database instances in the same
-application. 
+application.
 
 To take advantage of this feature, simply add a `DATABASES` block in an application
 configuration file in `src/config`.
