@@ -81,7 +81,7 @@ your application:
 
 As you can see in Album model, the Artist model (artist table) has its own id that can be referred as artist.id.
 
-
+----
 
 Fields
 ======
@@ -100,12 +100,12 @@ Examples:
 
 ::
 
-class Artist(BaseModel):
-    __tablename__ = 'artist'
-    name = Column(String(256))
-    description = Column(String(256))
-    albums = relationship('Album', backref='artist')
-    genre_id = Column(Integer, ForeignKey('genre.id'))
+    class Artist(BaseModel):
+        __tablename__ = 'artist'
+        name = Column(String(256))
+        description = Column(String(256))
+        albums = relationship('Album', backref='artist')
+        genre_id = Column(Integer, ForeignKey('genre.id'))
 
 
 Field data types
@@ -184,6 +184,11 @@ The following constraints can be set in your ORM:
 
 - unique: defines that the column should have unique values for each line
 
+::
+
+    name = Column(String(256), unique=True)
+
+
 - nullable: defines if a column can accept null values or not
 
 ::
@@ -197,7 +202,7 @@ The following constraints can be set in your ORM:
 
     is_famous = Column(Boolean, default=False)
 
-
+----
 
 Database DML Operations
 =======================
