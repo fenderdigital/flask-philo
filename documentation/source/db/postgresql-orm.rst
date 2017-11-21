@@ -91,9 +91,9 @@ Field types
 
 The most common examples of field types are:
 
-- Column: defines the properties of a given column
+- ``Column``: defines the properties of a given column
 
-- relationship: defines the relationship between two tables
+- ``relationship``: defines the relationship between two tables
 
 
 Examples:
@@ -111,41 +111,41 @@ Examples:
 Field data types
 ----------------
 
-- String: stores string format data
+- ``String``: stores string format data
 
 ::
 
     name = Column(String(256))
 
 
-- Integer: stores integer format data
+- ``Integer``: stores integer format data
 
 ::
 
     amount = Column(Integer)
 
-- Boolean: stores boolean format data
+- ``Boolean``: stores boolean format data
 
 ::
 
     is_famous = Column(Boolean, default=False)
 
 
-- Numeric: store numbers with a very large number of digits. Scale is the count of decimal digits in the fractional part. Precision refers to the total count of digits in the whole number.
+- ``Numeric``: store numbers with a very large number of digits. Scale is the count of decimal digits in the fractional part. Precision refers to the total count of digits in the whole number.
 
 ::
 
     tempo = Column(Numeric(precision=32, scale=16))
 
 
-- ARRAY: store array data
+- ``ARRAY``: store array data
 
 ::
 
     possible_names = Column(ARRAY(String(256)))
 
 
-- JSON: stores JSON format data
+- ``JSON``: stores JSON format data
 
 ::
 
@@ -153,7 +153,7 @@ Field data types
 
 
 
-- Enum: provides a set of possible string values that work as constraints for the given column.
+- ``Enum``: provides a set of possible string values that work as constraints for the given column.
 
 ::
 
@@ -168,35 +168,35 @@ Field options
 
 The following constraints can be set in your ORM:
 
-- PrimaryKey: defines that a given column is a primary (not nullable and unique)
+- ``PrimaryKey``: defines that a given column is a primary (not nullable and unique)
 
 ::
 
     id = Column(Integer, primary_key=True)
 
 
-- ForeignKey: defines the foreign key that represents the relation with a different table
+- ``ForeignKey``: defines the foreign key that represents the relation with a different table
 
 ::
 
     genre_id = Column(Integer, ForeignKey('genre.id'))
 
 
-- unique: defines that the column should have unique values for each line
+- ``unique``: defines that the column should have unique values for each line
 
 ::
 
     name = Column(String(256), unique=True)
 
 
-- nullable: defines if a column can accept null values or not
+- ``nullable``: defines if a column can accept null values or not
 
 ::
 
     name = Column(String(256), nullable=False, unique=True)
 
 
-- default: defines a default value in case it is not specified
+- ``default``: defines a default value in case it is not specified
 
 ::
 
@@ -334,10 +334,8 @@ An easy way to count records in a table is to use the following syntax:
     count = Genre.objects.count()
 
 
------
-
-
-Here follow some more examples:
+Examples using relations
+------------------------
 
 ::
 
@@ -365,8 +363,6 @@ Here follow some more examples:
             description='Interesting')
         wall.add()
         pool.commit()
-        assert 2 == len(pink.albums)
-        assert 2 == len(Artist.objects.filter_by(genre_id=rock.id)[:])
 
 
 
@@ -376,8 +372,8 @@ Using multiple Postgresql databases
 Flask-Philo allows you to connect to multiple postgresql database instances in the same
 application.
 
-To take advantage of this feature, simply add a `DATABASES` block in an application
-configuration file in `src/config`.
+To take advantage of this feature, simply add a ``DATABASES`` block in an application
+configuration file in ``src/config``.
 
 Here's an example of a configuration  that we use in some applications:
 
