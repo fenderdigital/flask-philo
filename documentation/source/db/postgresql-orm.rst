@@ -81,6 +81,8 @@ your application:
 
 As you can see in Album model, the Artist model (artist table) has its own id that can be referred as artist.id.
 
+The same happens when talking about timestamps. ``Flask-Philo`` ORM automatically handles ``created_at`` and ``updated_at`` fields.
+
 ----
 
 Fields
