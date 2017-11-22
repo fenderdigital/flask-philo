@@ -28,6 +28,10 @@ Welcome to Flask-Philo's documentation!
 
    etc/flask_app_deploy
 
+   cloud/aws/introduction
+
+   cloud/aws/sqs
+
 Indices and tables
 ==================
 
