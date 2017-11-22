@@ -306,11 +306,11 @@ In the same way you've added and updated a record, we can delete it:
     pool.commit()
 
 
-This way the record will no longer exist.
+This way the record should no longer exist.
 
 
-Querying using Raw SQLAlchemy
------------------------------
+Querying using Raw SQL
+----------------------
 
 You can use the ``raw_sql`` command to run queries also, like the following example:
 
@@ -393,6 +393,6 @@ Now you can access to the specific database using ``flask_philo.db.postgresql.co
 
 ::
 
-        rock = Genre(name='Blues', description='Still got the blues')
-        rock.add()
+        blues = Genre(name='Blues', description='Still got the blues')
+        blues.add()
         pool.commit(connection_name='MUSIC_CATALOG'))
