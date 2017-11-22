@@ -77,5 +77,3 @@ External Resources
 * `Python Redis <https://pypi.python.org/pypi/redis/2.10.3>`_
 
 * `Python Elastic Search <https://www.elastic.co/guide/en/elasticsearch/client/python-api/current/index.html>`_
-
-* `AWS Boto <https://pypi.python.org/pypi/boto3>`_
