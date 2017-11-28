@@ -159,6 +159,7 @@ Create a New Queue
 To create new queue via code:
 
 ::
+
     from flask_philo.cloud.aws.sqs import create_queue
     data = create_queue("new_test_queue", "us-west-2")
 
