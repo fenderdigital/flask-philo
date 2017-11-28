@@ -151,7 +151,11 @@ To create a new queue, we can use the console command below:
     python manage.py aws sqs create_queue --region us-west-2 --queue_name priority-list
 
 
-It will return a json string with the brand new URL, like this one: `https://us-west-2.queue.amazonaws.com/1234562/priority-list`
+It will return a json string with the brand new URL, like this one below:
+
+::
+
+    https://us-west-2.queue.amazonaws.com/1234562/priority-list
 
 
 
