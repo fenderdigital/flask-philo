@@ -4,6 +4,25 @@ USERNAME = 'username'
 
 PASSWORD = 'password'
 
+JINJA2_TEMPLATES = {
+    'DEFAULT': {
+        'LOADER': 'FileSystemLoader',
+        'PARAMETERS': {
+            'path': (
+                os.path.join(BASE_DIR, '../', '_templates'),
+            ),
+            'encoding': 'utf-8',
+            'followlinks': False
+        },
+        'AUTOESCAPING': {
+            'enabled_extensions': ('html', 'htm', 'xml'),
+            'disabled_extensions': [],
+            'default_for_string': True,
+            'default': False
+        }
+    }
+}
+
 DATABASES = {
     'POSTGRESQL': {
         'DEFAULT': 'postgresql://ds:dsps@localhost:5432/ds_test',
