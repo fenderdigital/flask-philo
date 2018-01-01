@@ -9,9 +9,15 @@ from tests.test_app.serializers import (
 )
 
 
-class BasicHTMLView(BaseView):
-    def get(self):
-        return self.render_template('home.html')
+class BasicTemplateView(BaseView):
+    def get(self, template_name='template1'):
+        if 'template1' == template_name:
+            tname = 'templates_1/index.html'
+            data = {'msg_1': 'hello template1'}
+        else:
+            tname = 'templates_2/index.html'
+            data = {'msg_2': 'hello template2'}
+        return self.render_template(tname, **data)
 
 
 class UserResourceView(BaseResourceView):

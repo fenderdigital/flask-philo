@@ -3,14 +3,14 @@ from setuptools import setup
 
 setup(
     name='Flask-Philo',
-    version='3.0.0',
+    version='3.1.0',
     description='Simple web framework based on Flask',
     long_description='Flask based framework to build RESTful microservices',
     packages=[
         'flask_philo', 'flask_philo.commands_flask_philo', 'flask_philo.db',
         'flask_philo.db.postgresql', 'flask_philo.db.redis',
         'flask_philo.db.elasticsearch', 'flask_philo.cloud',
-        'flask_philo.cloud.aws', 'flask_philo.templates'
+        'flask_philo.cloud.aws', 'flask_philo.templates', 'flask_philo.jinja2'
         ],
     package_data={
         'flask_philo.templates': ['*']

@@ -33,9 +33,12 @@ class TestAppCase(object):
         """
         Makes a HTTP GET REQUEST AND GETS html
         """
-        result = self.client.get('/')
+        result = self.client.get('/template1')
         assert 200 == result.status_code
-        assert b'<h1>hello world!!!</h1>' == result.get_data()
+        assert b'hello template1' == result.get_data()
+        result = self.client.get('/template2')
+        assert 200 == result.status_code
+        assert b'hello template2' == result.get_data()
 
 
 class TestValidators(object):

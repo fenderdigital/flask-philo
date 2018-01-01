@@ -17,6 +17,9 @@ class BaseView(MethodView):
             if hasattr(g, 'redis_pool'):
                 self.redis_pool = g.redis_pool
 
+        if 'JINJA2_TEMPLATES' in app.config:
+            if hasattr(g, 'jinja2_template_manager'):
+                self.jinja2_template_manager = g.jinja2_template_manager
         super(BaseView, self).__init__(*args, **kwargs)
 
     def json_response(self, status=200, data={}, headers={}):
@@ -28,14 +31,19 @@ class BaseView(MethodView):
             mimetype=mimetype,
             headers=headers)
 
-    def render_template(self, template_name, **values):
-        return render_template(template_name, **values)
+    def render_template(self, template_name, engine_name='DEFAULT', **values):
+        if not hasattr(self, 'jinja2_template_manager'):
+            return render_template(template_name, **values)
+        else:
+            return self.jinja2_template_manager.render(
+                template_name, **values)
 
-    def template_response(self, template_name, headers={}):  # noqa
+    def template_response(self, template_name, headers={}, **values):
         """
         Constructs a response, allowing custom template name and content_type
         """
-        response = make_response(render_template(template_name))
+        response = make_response(
+            self.render_template(template_name, **values))
 
         for field, value in headers.items():
             response.headers.set(field, value)

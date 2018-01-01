@@ -1,9 +1,9 @@
 from .views import (
-    BasicHTMLView, UserResourceView, RequiresBasicAuthView, RedisView
+    BasicTemplateView, UserResourceView, RequiresBasicAuthView, RedisView
 )
 
 URLS = (
-    ('/', BasicHTMLView, 'home'),
+    ('/<template_name>', BasicTemplateView, 'home'),
     ('/users', UserResourceView, 'user'),
     ('/users/<int:id>', UserResourceView, 'user_list'),
     ('/basic_auth', RequiresBasicAuthView, 'Basic Auth'),
