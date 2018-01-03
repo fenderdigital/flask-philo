@@ -2,6 +2,7 @@ from flask import Flask, g
 from flask_oauthlib.provider import OAuth2Provider
 from . import default_settings
 from .commands_flask_philo import *  # noqa
+from .jinja2 import init_jinja2
 from .exceptions import ConfigurationError
 from .db import init_db
 
@@ -76,6 +77,7 @@ def init_app(module, BASE_DIR, **kwargs):
         init_logging()
         init_urls()
         init_flask_oauthlib()
+        init_jinja2(g, app)
 
     app = Flask(module)
     init_config()

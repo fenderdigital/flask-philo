@@ -1,8 +1,30 @@
 from .development import *  # noqa
+import os
+
+BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 
 USERNAME = 'username'
 
 PASSWORD = 'password'
+
+JINJA2_TEMPLATES = {
+    'DEFAULT': {
+        'LOADER': 'FileSystemLoader',
+        'PARAMETERS': {
+            'path': (
+                os.path.join(BASE_DIR, '../', '_templates'),
+            ),
+            'encoding': 'utf-8',
+            'followlinks': False
+        },
+        'AUTOESCAPING': {
+            'enabled_extensions': ('html', 'htm', 'xml'),
+            'disabled_extensions': [],
+            'default_for_string': True,
+            'default': False
+        }
+    }
+}
 
 DATABASES = {
     'POSTGRESQL': {

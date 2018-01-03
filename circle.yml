@@ -49,4 +49,4 @@ database:
 test:
     override:
         -  flake8 --exclude build,bin ./
-        -  cd test; python3 manage.py test --settings tests.config.ci
+        -  cd test; python3 manage.py test --settings tests.config.ci --q tests/

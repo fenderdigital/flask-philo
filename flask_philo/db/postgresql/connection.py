@@ -13,7 +13,7 @@ class Connection(object):
 
 class ConnectionPool:
     """
-    Flaskutils supports multiple postgresql database connections,
+    Flask-philo supports multiple postgresql database connections,
     this class stores one connection by every db
     """
     _shared_state = {}
