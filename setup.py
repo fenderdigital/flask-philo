@@ -30,7 +30,8 @@ setup(
         'redis',
         'elasticsearch',
         'boto3',
-        'PrettyTable'
+        'PrettyTable',
+        'jinja2==2.10'
     ],
     python_requires='>=3',
     classifiers=[
