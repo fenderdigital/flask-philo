@@ -54,4 +54,5 @@ test:
 
 upload:
   override:
-    - if [ $CIRCLE_BRANCH == "master" ] ; then python3 setup.py sdist upload -r pypi ; fi
+    -  sed 's/GITHUB_TAG/$CIRCLE_TAG/' setup.py && cat setup.py 
+    #- if [ $CIRCLE_BRANCH == "master" ] ; then sed -i 's/GITHUB_TAG/$CIRCLE_TAG/' setup.py && python3 setup.py sdist upload -r pypi ; fi
