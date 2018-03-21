@@ -24,7 +24,7 @@ dependencies:
             background: true
         - sleep 10 && wget --waitretry=5 --retry-connrefused -v http://127.0.0.1:9200/
     post:
-        - sed 's/GITHUB_TAG/$CIRCLE_TAG/' setup.py && cat setup.py 
+        - sed "s/GITHUB_TAG/$CIRCLE_TAG/" setup.py && cat setup.py 
         #- if [ $CIRCLE_BRANCH == "master" ] ; then sed -i 's/GITHUB_TAG/$CIRCLE_TAG/' setup.py && python3 setup.py sdist upload -r pypi ; fi
 
 services:
