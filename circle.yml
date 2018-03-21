@@ -8,7 +8,6 @@ dependencies:
         - git secrets --register-aws ; git secrets --add '\-{5}BEGIN\ RSA\ PRIVATE\ KEY-{5}' ; git secrets --scan --scan-history -r .
         - pip3 install -r test/requirements/dev.txt
         - pip3 install flake8
-        - cp .pypirc ~
         - wget http://download.redis.io/releases/redis-4.0.1.tar.gz
         - tar xzf redis-4.0.1.tar.gz
         - cd redis-4.0.1 && make
@@ -55,7 +54,10 @@ test:
         -  flake8 --exclude build,bin ./
         -  cd test; python3 manage.py test --settings tests.config.ci --q tests/
 
-#deployment:
-#  override:
-#    -  sed 's/GITHUB_TAG/$CIRCLE_TAG/' setup.py && cat setup.py 
-    #- if [ $CIRCLE_BRANCH == "master" ] ; then sed -i 's/GITHUB_TAG/$CIRCLE_TAG/' setup.py && python3 setup.py sdist upload -r pypi ; fi
+deployment:
+  production:
+    tag: /[0-9]*\.[0-9]*\.[0-9]*/
+    commands:
+        - cp .pypirc ~
+        - sed -i 's/GITHUB_TAG/$CIRCLE_TAG/' setup.py 
+        - python3 setup.py sdist upload -r pypi
