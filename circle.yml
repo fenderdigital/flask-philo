@@ -22,9 +22,6 @@ dependencies:
         - sudo /etc/init.d/elasticsearch start &:
             background: true
         - sleep 10 && wget --waitretry=5 --retry-connrefused -v http://127.0.0.1:9200/
-    post:
-        - sed "s/GITHUB_TAG/$CIRCLE_TAG/" setup.py && cat setup.py 
-        #- if [ $CIRCLE_BRANCH == "master" ] ; then sed -i 's/GITHUB_TAG/$CIRCLE_TAG/' setup.py && python3 setup.py sdist upload -r pypi ; fi
 
 services:
     - postgresql
@@ -58,6 +55,8 @@ deployment:
   production:
     tag: /[0-9]*\.[0-9]*\.[0-9]*/
     commands:
+        - sed -i "s/USER/$RIFF_USER/g" .pypirc 
+        - sed -i "s/PASS/$RIFF_PASS/g" .pypirc 
+        - sed -i "s/GITHUB_TAG/$CIRCLE_TAG/" setup.py 
         - cp .pypirc ~
-        - sed -i 's/GITHUB_TAG/$CIRCLE_TAG/' setup.py 
         - python3 setup.py sdist upload -r pypi
