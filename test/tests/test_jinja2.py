@@ -16,9 +16,9 @@ class TestJinja2FileSystemLoader(FlaskTestCase):
         assert 'DEFAULT' in manager.environments
         loader = manager.environments['DEFAULT'].loader
         assert FileSystemLoader == loader.__class__
-        assert 2 == len(loader.list_templates())
-        assert 'templates_1/index.html' == loader.list_templates()[0]
-        assert 'templates_2/index.html' == loader.list_templates()[1]
+        assert 3 == len(loader.list_templates())
+        assert 'templates_1/index.html' == loader.list_templates()[1]
+        assert 'templates_2/index.html' == loader.list_templates()[2]
 
     def test_load_templates(self):
         """
@@ -40,3 +40,10 @@ class TestJinja2FileSystemLoader(FlaskTestCase):
         env = manager.environments['DEFAULT']
         assert 'FLASK_PHILO_CONFIG' in env.globals
         assert env.globals['REQUEST'].path == '/hello-template'
+
+    def test_custom_tag(self):
+        manager = self.get_manager()
+        env = manager.environments['DEFAULT']
+        template_idx1 = env.get_template('home.html')
+        idx1 = template_idx1.render()
+        assert 'hello world!!!' == idx1
