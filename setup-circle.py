@@ -1,9 +1,8 @@
 from setuptools import setup
 
-
 setup(
     name='Flask-Philo',
-    version='3.1.2',
+    version='GITHUB_TAG',
     description='Simple web framework based on Flask',
     long_description='Flask based framework to build RESTful microservices',
     packages=[
