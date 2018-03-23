@@ -50,3 +50,13 @@ test:
     override:
         -  flake8 --exclude build,bin ./
         -  cd test; python3 manage.py test --settings tests.config.ci --q tests/
+
+deployment:
+  production:
+    tag: /[0-9]*\.[0-9]*\.[0-9]*/
+    commands:
+        - sed -i "s/USER/$RIFF_USER/g" .pypirc 
+        - sed -i "s/PASS/$RIFF_PASS/g" .pypirc 
+        - sed -i "s/GITHUB_TAG/$CIRCLE_TAG/" setup-circle.py 
+        - cp .pypirc ~
+        - python3 setup.py sdist upload -r pypi
