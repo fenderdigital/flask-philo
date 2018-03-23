@@ -59,4 +59,4 @@ deployment:
         - sed -i "s/PASS/$RIFF_PASS/g" .pypirc 
         - sed -i "s/GITHUB_TAG/$CIRCLE_TAG/" setup-circle.py 
         - cp .pypirc ~
-        - python3 setup.py sdist upload -r pypi
+        - python3 setup-circle.py sdist upload -r pypi
