@@ -55,6 +55,7 @@ deployment:
   production:
     tag: /[0-9]*\.[0-9]*\.[0-9]*/
     commands:
+        - pip install --upgrade setuptools
         - sed -i "s/USER/$RIFF_USER/g" .pypirc 
         - sed -i "s/PASS/$RIFF_PASS/g" .pypirc 
         - sed -i "s/GITHUB_TAG/$CIRCLE_TAG/" setup-circle.py 
