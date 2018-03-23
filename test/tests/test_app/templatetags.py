@@ -10,10 +10,14 @@ class TestExtension(Extension):
         super(TestExtension, self).__init__(environment)
 
     def parse(self, parser):
-        import ipdb; ipdb.set_trace()
         lineno = next(parser.stream).lineno
+        import ipdb; ipdb.set_trace()
         args = [parser.parse_expression()]
-        body = parser.parse_statements(['name:endtest_tag'], drop_needle=True)
+        body = 'aaaa'
+
+        
+        while parser.stream.current.type != 'block_end':
+            print(parser.parse_expression())
         return nodes.CallBlock(self.call_method('_test_tag', args),
                                [], [], body).set_lineno(lineno)
 
