@@ -44,6 +44,6 @@ class TestJinja2FileSystemLoader(FlaskTestCase):
     def test_custom_tag(self):
         manager = self.get_manager()
         env = manager.environments['DEFAULT']
-        template_idx1 = env.get_template('home.html')
-        idx1 = template_idx1.render()
-        assert 'hello world!!!' == idx1
+        template = env.get_template('home.html')
+        txt = template.render()
+        assert 'random_msg hello world!!!' == txt
