@@ -92,3 +92,4 @@ ENV/
 
 src/
 build/
+.pytest_cache/
