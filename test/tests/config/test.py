@@ -25,7 +25,10 @@ JINJA2_TEMPLATES = {
             'disabled_extensions': [],
             'default_for_string': True,
             'default': False
-        }
+        },
+        'EXTENSIONS': (
+            'tests.test_app.templatetags.TestExtension',
+        )
     }
 }
 

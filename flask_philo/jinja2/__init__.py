@@ -1,6 +1,8 @@
 from jinja2 import (
     FileSystemLoader, Environment, select_autoescape)
 
+from pydoc import locate
+
 
 class TemplatesManager:
     """
@@ -48,6 +50,20 @@ def get_autoescaping_params(**config):
     return autoescaping_params
 
 
+def load_extensions_from_config(**config):
+    """
+    Loads extensions
+    """
+    extensions = []
+    if 'EXTENSIONS' in config:
+        for ext in config['EXTENSIONS']:
+            try:
+                extensions.append(locate(ext))
+            except Exception as e:
+                print(e)
+    return extensions
+
+
 def init_filesystem_loader(**config):
     params = {}
     template_location = config['PARAMETERS']['path']
@@ -56,6 +72,7 @@ def init_filesystem_loader(**config):
     env = Environment(
         loader=FileSystemLoader(template_location, **params),
         autoescape=select_autoescape(**get_autoescaping_params(**config)),
+        extensions=load_extensions_from_config(**config)
     )
     return env
 
