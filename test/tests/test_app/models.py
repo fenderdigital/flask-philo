@@ -2,7 +2,7 @@ from flask_philo.db.postgresql.orm import BaseModel
 from flask_philo.exceptions import AuthenticationError
 from flask_philo.db.postgresql.types import Password
 from flask_philo.db.exceptions import NotFoundError
-from sqlalchemy import Boolean, Column, String
+from sqlalchemy import Boolean, Column, String, Numeric
 
 
 class User(BaseModel):
@@ -11,6 +11,7 @@ class User(BaseModel):
     password = Column(Password)
     email = Column(String(64))
     is_active = Column(Boolean(), nullable=False, default=False)
+    credit_score = Column(Numeric(), nullable=True)
 
     def get_id(self):
         return self.id

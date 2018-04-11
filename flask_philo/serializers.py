@@ -1,4 +1,5 @@
 from datetime import date, datetime
+from decimal import Decimal
 from jsonschema import validate, FormatChecker
 
 from flask_philo import utils
@@ -9,6 +10,12 @@ import uuid
 uuid_schema = {
     "type": "string",
     "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"  # noqa
+}
+
+
+decimal_schema = {
+    "type": "string",
+    "pattern": "\d+\.\d+"
 }
 
 
@@ -58,8 +65,13 @@ class BaseSerializer(object):
         """
         self._json = data
         self._validate()
+
         for name, value in self._json.items():
             if name in self._properties:
+                if '$ref' in self._properties[name]:
+                    if 'decimal' in self._properties[name]['$ref']:
+                        value = Decimal(value)
+
                 # applying proper formatting when required
                 if 'format' in self._properties[name]:
                     format = self._properties[name]['format']
@@ -102,6 +114,8 @@ class BaseSerializer(object):
                 elif isinstance(v, date):
                     v = utils.date_to_string(v)
                 elif isinstance(v, uuid.UUID):
+                    v = str(v)
+                elif isinstance(v, Decimal):
                     v = str(v)
                 data[k] = v
         return data

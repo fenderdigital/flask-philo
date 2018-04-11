@@ -1,4 +1,6 @@
-from flask_philo.serializers import BaseSerializer, uuid_schema
+from flask_philo.serializers import (
+    BaseSerializer, uuid_schema, decimal_schema
+)
 from tests.test_app.models import User
 
 
@@ -39,6 +41,10 @@ class PostUserSerializer(BaseSerializer):
 class PutUserSerializer(BaseSerializer):
     __model__ = User
     _schema = {
+        'definitions': {
+            'decimal': decimal_schema
+        },
+
         'type': 'object',
         'properties': {
             'email': {'type': 'string', 'format': 'email'},
@@ -46,6 +52,7 @@ class PutUserSerializer(BaseSerializer):
             'id': {'type': 'number'},
             'last_login': {'type': 'string', 'format': 'date-time'},
             'password': {'type': 'string'},
+            'credit_score': {'$ref': '#/definitions/decimal'},
         },
         'required': ['id', 'email', 'username']
     }
@@ -76,4 +83,17 @@ class UUIDSerializer(BaseSerializer):
             'key': {'$ref': '#/definitions/key'},
         },
         'required': ['key']
+    }
+
+
+class DecimalSerializer(BaseSerializer):
+    _schema = {
+        'definitions': {
+            'decimal': decimal_schema
+        },
+        'type': 'object',
+        'properties': {
+            'credit_score': {'$ref': '#/definitions/decimal'},
+        },
+        'required': ['credit_score']
     }
