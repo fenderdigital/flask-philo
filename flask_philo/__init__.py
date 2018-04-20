@@ -65,7 +65,7 @@ def init_app(module, BASE_DIR, **kwargs):
             initialize logger for the app
             """
             hndlr = logging.StreamHandler()
-            formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+            formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s') # noqa
             hndlr.setFormatter(formatter)
             app.logger.addHandler(hndlr)
             log_level = app.config['LOG_LEVEL']
