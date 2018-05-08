@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='Flask-Philo',
-    version='3.4.0',
+    version='3.4.1',
     description='Simple web framework based on Flask',
     long_description='Flask based framework to build RESTful microservices',
     packages=[
@@ -23,7 +23,7 @@ setup(
         'psycopg2',
         'jsonschema',
         'pytest',
-        'flask',
+        'Flask',
         'flask_oauthlib',
         'bcrypt',
         'SQLAlchemy',
