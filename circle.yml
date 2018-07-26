@@ -92,10 +92,10 @@ workflows:
               only: /^v.*/
 
       - deployment_production:
-        requires:
-          - install_and_build
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /^v.*/
+          requires:
+            - install_and_build
+            filters:
+              branches:
+                ignore: /.*/
+              tags:
+                only: /^v.*/
