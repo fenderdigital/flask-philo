@@ -55,7 +55,7 @@ jobs:
             psql -U postgres  -c "GRANT ALL PRIVILEGES ON DATABASE ds2 to ds;"
             psql -U postgres  -c "GRANT ALL PRIVILEGES ON DATABASE ds2_test to ds;"
             flake8 --exclude build,bin ./
-            cd test; python3 manage.py test --settings tests.config.ci --q tests/
+            cd ~/circleci-flaskphilo/test; python3 manage.py test --settings tests.config.ci --q tests/
 
   deployment_production:
     <<: *defaults
