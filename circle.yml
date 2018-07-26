@@ -36,9 +36,6 @@ jobs:
             sudo /etc/init.d/elasticsearch start &:
               background: true
             sleep 10 && wget --waitretry=5 --retry-connrefused -v http://127.0.0.1:9200/
-
-#database:
-#  override:
             psql -U postgres -c "CREATE ROLE ds WITH ENCRYPTED PASSWORD 'dsps';"
             psql -U postgres -c "ALTER ROLE ds WITH ENCRYPTED PASSWORD 'dsps'";
             psql -U postgres  -c "ALTER ROLE ds SET client_encoding TO 'utf8';"
