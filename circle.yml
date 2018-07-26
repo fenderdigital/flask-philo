@@ -15,8 +15,7 @@ jobs:
     working_directory: ~/circleci-flaskphilo
     steps:
       - checkout
-      - run:
-          command: |
+      - run: |
             git clone https://github.com/awslabs/git-secrets.git && cd git-secrets && sudo make install
             git secrets --register-aws ; git secrets --add '\-{5}BEGIN\ RSA\ PRIVATE\ KEY-{5}' ; git secrets --scan --scan-history -r .
             pip3 install -r test/requirements/dev.txt
