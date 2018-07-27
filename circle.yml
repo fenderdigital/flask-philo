@@ -45,7 +45,7 @@ jobs:
             export ES_SKIP_SET_KERNEL_PARAMETERS=true && sudo -E dpkg -i elasticsearch-5.1.2.deb
       - run:
           command:
-            sudo /etc/init.d/elasticsearch start &
+            sudo /etc/init.d/elasticsearch start
           background: true
       - run:
           command: |
