@@ -47,24 +47,24 @@ jobs:
           command: |
             sudo apt-get install -y postgresql-client
             sleep 10 && wget --waitretry=5 --retry-connrefused -v http://127.0.0.1:9200/
-            psql -U postgres -c "CREATE ROLE ds WITH ENCRYPTED PASSWORD 'dsps';"
-            psql -U postgres -c "ALTER ROLE ds WITH ENCRYPTED PASSWORD 'dsps'";
-            psql -U postgres  -c "ALTER ROLE ds SET client_encoding TO 'utf8';"
-            psql -U postgres  -c "ALTER ROLE ds  WITH LOGIN;"
-            psql -U postgres  -c "ALTER ROLE ds SET default_transaction_isolation TO 'read committed';"
-            psql -U postgres  -c "ALTER ROLE ds SET timezone TO 'UTC';"
-            psql -U postgres  -c "CREATE DATABASE ds;"
-            psql -U postgres  -c "CREATE DATABASE ds_test;"
-            psql -U postgres  -c "ALTER DATABASE ds OWNER TO ds;"
-            psql -U postgres  -c "ALTER DATABASE ds_test OWNER TO ds;"
-            psql -U postgres  -c "GRANT ALL PRIVILEGES ON DATABASE ds to ds;"
-            psql -U postgres  -c "GRANT ALL PRIVILEGES ON DATABASE ds_test to ds;"
-            psql -U postgres  -c "CREATE DATABASE ds2;"
-            psql -U postgres  -c "CREATE DATABASE ds2_test;"
-            psql -U postgres  -c "ALTER DATABASE ds2 OWNER TO ds;"
-            psql -U postgres  -c "ALTER DATABASE ds2_test OWNER TO ds;"
-            psql -U postgres  -c "GRANT ALL PRIVILEGES ON DATABASE ds2 to ds;"
-            psql -U postgres  -c "GRANT ALL PRIVILEGES ON DATABASE ds2_test to ds;"
+            psql -h localhost -p 5432 -U postgres -c "CREATE ROLE ds WITH ENCRYPTED PASSWORD 'dsps';"
+            psql -h localhost -p 5432 -U postgres -c "ALTER ROLE ds WITH ENCRYPTED PASSWORD 'dsps'";
+            psql -h localhost -p 5432 -U postgres  -c "ALTER ROLE ds SET client_encoding TO 'utf8';"
+            psql -h localhost -p 5432 -U postgres  -c "ALTER ROLE ds  WITH LOGIN;"
+            psql -h localhost -p 5432 -U postgres  -c "ALTER ROLE ds SET default_transaction_isolation TO 'read committed';"
+            psql -h localhost -p 5432 -U postgres  -c "ALTER ROLE ds SET timezone TO 'UTC';"
+            psql -h localhost -p 5432 -U postgres  -c "CREATE DATABASE ds;"
+            psql -h localhost -p 5432 -U postgres  -c "CREATE DATABASE ds_test;"
+            psql -h localhost -p 5432 -U postgres  -c "ALTER DATABASE ds OWNER TO ds;"
+            psql -h localhost -p 5432 -U postgres  -c "ALTER DATABASE ds_test OWNER TO ds;"
+            psql -h localhost -p 5432 -U postgres  -c "GRANT ALL PRIVILEGES ON DATABASE ds to ds;"
+            psql -h localhost -p 5432 -U postgres  -c "GRANT ALL PRIVILEGES ON DATABASE ds_test to ds;"
+            psql -h localhost -p 5432 -U postgres  -c "CREATE DATABASE ds2;"
+            psql -h localhost -p 5432 -U postgres  -c "CREATE DATABASE ds2_test;"
+            psql -h localhost -p 5432 -U postgres  -c "ALTER DATABASE ds2 OWNER TO ds;"
+            psql -h localhost -p 5432 -U postgres  -c "ALTER DATABASE ds2_test OWNER TO ds;"
+            psql -h localhost -p 5432 -U postgres  -c "GRANT ALL PRIVILEGES ON DATABASE ds2 to ds;"
+            psql -h localhost -p 5432 -U postgres  -c "GRANT ALL PRIVILEGES ON DATABASE ds2_test to ds;"
             flake8 --exclude build,bin ./
             cd ~/circleci-flaskphilo/test; python3 manage.py test --settings tests.config.ci --q tests/
 
