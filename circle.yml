@@ -43,21 +43,9 @@ jobs:
       - run:
           command: |
             cd ~/circleci-flaskphilo
-     #       echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
-     #       sudo apt-get install software-properties-common 
-     #       sudo add-apt-repository "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main"
-     #       sudo apt-get update
-     #       sudo apt-get install oracle-java8-installer -y
-     #       wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.1.2.deb
-     #       export ES_SKIP_SET_KERNEL_PARAMETERS=true && sudo -E dpkg -i elasticsearch-5.1.2.deb
-     #       sudo cp -f ~/circleci-flaskphilo/elasticsearch-jvm.options /etc/elasticsearch/jvm.options
-     # - run:
-     #     name: Starting ElasticSearch
-     #     command: sudo /etc/init.d/elasticsearch start
-     #     background: true
       - run:
           command: |
-            apt-get install -y postgresql-client
+            sudo apt-get install -y postgresql-client
             sleep 10 && wget --waitretry=5 --retry-connrefused -v http://127.0.0.1:9200/
             psql -U postgres -c "CREATE ROLE ds WITH ENCRYPTED PASSWORD 'dsps';"
             psql -U postgres -c "ALTER ROLE ds WITH ENCRYPTED PASSWORD 'dsps'";
