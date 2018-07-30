@@ -42,7 +42,7 @@ def start_project():
         print('Directory {} already exists\n'.format(dir_name))
         exit(1)
 
-    root_folders = ('documentation', 'src', 'tools')
+    root_folders = ('documentation', 'src')
     for folder in root_folders:
         os.mkdir(os.path.join(dir_name, folder))
 
@@ -54,7 +54,7 @@ def start_project():
 
     # ./src
     src_folders = (
-        'app', 'config', 'console_commands', 'tests')
+        'app', 'config', 'console_commands', 'tests', 'tools')
 
     for folder in src_folders:
         os.mkdir(os.path.join(dir_name, 'src', folder))
@@ -114,15 +114,15 @@ def start_project():
         'filename': 'test_views.py',
     })
 
-    # ./tools
-    os.mkdir(os.path.join(dir_name, 'tools', 'requirements'))
+    # ./src/tools
+    os.mkdir(os.path.join(dir_name, 'src', 'tools', 'requirements'))
 
     req_files = ('dev.txt', 'base.txt')
     for rfile in req_files:
         create_from_template(**{
             'project_name': project_name,
             'path': os.path.join(
-                dir_name, 'tools', 'requirements'),
+                dir_name, 'src', 'tools', 'requirements'),
             'filename': rfile,
         })
 
