@@ -100,7 +100,7 @@ workflows:
             branches:
               ignore: /.*/
             tags:
-              only: /^v.*/
+              only: /[0-9]*\..*/
 
       - deployment_production:
           requires:
@@ -109,4 +109,4 @@ workflows:
             branches:
               ignore: /.*/
             tags:
-              only: /^v.*/
+              only: /[0-9]*\..*/
