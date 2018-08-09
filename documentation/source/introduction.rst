@@ -12,7 +12,7 @@ order to build complex applications. Here at `Riffstation <https://play.riffstat
 we have several HTTP REST-based microservices and whenever we want to create a new
 microservice we need to bootstrap very similar common code.
 
-This library wants to concentrate all logic related with HTTP, REST, databases in one common place.
+This library concentrates all logic related with HTTP, REST and databases in one common place.
 Feel free to use it and extend it. We are willing to hear about your suggestions and improvements.
 
 
@@ -21,7 +21,7 @@ Basic Features
 
 - REST out of the box.
 
-- Simple sqlalchemy orm customized for postgresql with multiple dabatases.
+- Simple SQLAlchemy ORM, customized for PostgreSQL with multiple dabatases.
 
 - Simple Redis integration.
 
