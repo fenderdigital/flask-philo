@@ -3,7 +3,7 @@ Flask-Philo
 
 Utilities to build flask based microservices.
 
-What this project is about?
+What is this project?
 ---------------------------
 
 Flask is an awesome web microframework that works great out of the box. Nevertheless,
