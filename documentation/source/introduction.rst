@@ -162,7 +162,7 @@ If you haven't already done so, run the following command to create your Flask-P
 
 Now, with the application running and with a route defined, the following URL address will now be accessible in the browser of your choice, and will return a JSON response:
 
-.. _http://localhost:8080/example: http://localhost:8080/example
+http://localhost:8080/example
 
 The port 8080 should be the same displayed when you run the server:
 
