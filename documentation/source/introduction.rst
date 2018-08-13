@@ -153,7 +153,7 @@ The defined route ``/example`` is mapped to the View class ``ExampleView``, whic
 Open the new Flask-Philo app in the browser
 ###########################################
 
-If you haven't already done so, run the following command to create your Flask-Philo application:
+If you haven't already done so, run the following terminal command to create your Flask-Philo application:
 
 ::
 
@@ -172,7 +172,7 @@ Note that the port number (in this case ``8080``) should match the port number d
     * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
     ...
 
-The browser will show you, the response defined on the view file:
+Your browser will display a JSON response, as defined by the **ExampleView** class :
 
 ::
 
