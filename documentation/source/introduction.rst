@@ -137,7 +137,7 @@ The URLs file ``urls.py`` defines all available routes for your Flask-Philo appl
         ('/example', ExampleView, 'example_route'),
     )
 
-The defined route ``/example`` is mapped to the View class ``ExampleView``, which is defined in `src/app/views/example_views.py``. All View classes should be defined in the ``src/app/views`` directory. Below you can find the content of the example View file:
+The defined route ``/example`` is mapped to the View class **ExampleView**, which is defined in `src/app/views/example_views.py``. All View classes should be defined in the ``src/app/views`` directory. Below you can find the content of the example View file:
 
 ::
 
@@ -178,7 +178,8 @@ Your browser will display a JSON response, as defined by the **ExampleView** cla
 
     {"some_data": "yes"}
 
-You will also be able to check the status code of the http request (in the same window you started the server):
+
+All incoming request to your Flask-Philo application and the corresponding HTTP status codes may be viewed in the same terminal window you used to start the application:
 
 ::
 
