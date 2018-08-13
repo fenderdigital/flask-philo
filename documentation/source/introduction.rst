@@ -124,10 +124,10 @@ The response from this command will be something like this:
 
 Access to the server's URL routes is controlled in two places: URL and View files.
 
-URLs
+URL Routes
 ####
 
-The URLs file defines all available routes for your Flask application. You can refer to the example created automatically by Flask-Philo by accessing the file ``urls.py`` located in the ``src/app`` directory. It will look like this:
+The URLs file ``urls.py`` defines all available routes for your Flask application. You can refer to the example created automatically by Flask-Philo by accessing the file ``urls.py`` located in the ``src/app`` directory. It will look like this:
 
 ::
 
@@ -137,7 +137,7 @@ The URLs file defines all available routes for your Flask application. You can r
         ('/example', ExampleView, 'example_route'),
     )
 
-The defined route ``/example`` is referring to the ``ExampleView`` class of the ``example_views.py`` file. This file can be accessed in the ``src/app/views`` directory. Below you can find the content of the file:
+The defined route ``/example`` references the View class ``ExampleView``, which is defined in `src/app/views/example_views.py``. All View classes should be defined in the ``src/app/views`` directory. Below you can find the content of the example View file:
 
 ::
 
