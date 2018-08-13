@@ -122,23 +122,22 @@ The response from this command will be something like this:
     * Debugger is active!
     * Debugger PIN: 147-416-135
 
-To access the server, you will have to take a look in two concepts: URLs and view files.
+Access to the server's URL routes is controlled in two places: URL and View files.
 
 URLs
 ####
 
-The urls file contains all the routes of the service. You can refer to the example created automatically by Flask-Philo by accessing the file ``urls.py`` located in the ``src/app``. It will look like this:
+The URLs file defines all available routes for your Flask application. You can refer to the example created automatically by Flask-Philo by accessing the file ``urls.py`` located in the ``src/app`` directory. It will look like this:
 
 ::
 
     from app.views.example_views import ExampleView
 
-
     URLS = (
         ('/example', ExampleView, 'example_route'),
     )
 
-The defined route ``/example`` is referring to the ``ExampleView`` class of the ``example_views.py`` file. This file can be accessed by going to the ``src/app/views``. Below you can find the content of the file:
+The defined route ``/example`` is referring to the ``ExampleView`` class of the ``example_views.py`` file. This file can be accessed in the ``src/app/views`` directory. Below you can find the content of the file:
 
 ::
 
