@@ -160,19 +160,17 @@ If you haven't already done so, run the following command to create your Flask-P
     python3 manage.py runserver
 
 
-Now, with the application running and with a route defined, the following URL address will now be accessible in the browser of your choice, and will return a JSON response:
+Now, with the application running and with a route defined, the following URL address will be accessible in the browser of your choice, and will return a JSON response:
 
 http://localhost:8080/example
 
-The port 8080 should be the same displayed when you run the server:
+Note that the port number (in this case ``8080``) should match the port number displayed when you start the application:
 
 ::
 
     # Port 8080 in this case
     * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
-    * Restarting with stat
-    * Debugger is active!
-    * Debugger PIN: 147-416-135
+    ...
 
 The browser will show you, the response defined on the view file:
 
