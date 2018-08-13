@@ -127,7 +127,7 @@ Access to the server's URL routes is controlled in two places: URL and View file
 URL Routes
 ####
 
-The URLs file ``urls.py`` defines all available routes for your Flask application. You can refer to the example created automatically by Flask-Philo by accessing the file ``urls.py`` located in the ``src/app`` directory. It will look like this:
+The URLs file ``urls.py`` defines all available routes for your Flask-Philo application. You can refer to the example created automatically by Flask-Philo by accessing the file ``urls.py`` located in the ``src/app`` directory. It will look like this:
 
 ::
 
@@ -137,7 +137,7 @@ The URLs file ``urls.py`` defines all available routes for your Flask applicatio
         ('/example', ExampleView, 'example_route'),
     )
 
-The defined route ``/example`` references the View class ``ExampleView``, which is defined in `src/app/views/example_views.py``. All View classes should be defined in the ``src/app/views`` directory. Below you can find the content of the example View file:
+The defined route ``/example`` is mapped to the View class ``ExampleView``, which is defined in `src/app/views/example_views.py``. All View classes should be defined in the ``src/app/views`` directory. Below you can find the content of the example View file:
 
 ::
 
@@ -153,16 +153,16 @@ The defined route ``/example`` references the View class ``ExampleView``, which 
 Open the new Flask-Philo app in the browser
 ###########################################
 
-If you don't have the server running in the browser, run the following command again:
+If you haven't already done so, run the following command to create your Flask-Philo application:
 
 ::
 
     python3 manage.py runserver
 
 
-Now, with the application running and with a route defined, if you open your favorite browser and type the following address you'll see the JSON code returned:
+Now, with the application running and with a route defined, the following URL address will now be accessible in the browser of your choice, and will return a JSON response:
 
-[http://localhost:8080/example]
+.. _http://localhost:8080/example: http://localhost:8080/example
 
 The port 8080 should be the same displayed when you run the server:
 
