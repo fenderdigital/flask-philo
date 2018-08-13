@@ -179,7 +179,7 @@ Your browser will display a JSON response, as defined by the **ExampleView** cla
     {"some_data": "yes"}
 
 
-All incoming request to your Flask-Philo application and their corresponding HTTP status codes may be viewed in the same terminal window you used to start the application:
+All incoming request to your Flask-Philo application and their corresponding HTTP status codes may be viewed in the same console session you used to start the application:
 
 ::
 
