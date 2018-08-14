@@ -1,7 +1,7 @@
 Writing Unit Test with Flask-Philo
 =============================================
 
-Flask-Philo supports unit tests. All you have to do is 
+Flask-Philo supports unit tests. All you have to do is
 create a class insised ``tests`` directory in your project
 that extends ``flask_philo.test.FlaskTestCase``.
 
@@ -33,20 +33,22 @@ E.g.
 Running Unit Tests
 --------------------
 
-  ::
+To run all Unit Tests for a Flask-Philo app, use the following console command:
+
+::
 
     python3 manage.py test
 
 
 
-You can execute the tests from one file by using the ``q`` parameter:
+To execute __only__ the tests from __one__ **source file**, use the ``--q`` parameter:
 
 ::
 
     python3 manage.py test --q tests/test_db.py
 
 
-You can execute the tests from one class by running:
+To execute __only__ the tests from __one__ **class** :
 
 
 ::
@@ -54,7 +56,7 @@ You can execute the tests from one class by running:
     python3 manage.py test --q tests/test_db.py::TestDBAccess
 
 
- You can execute a specific unit test by running:
+To execute one specific unit test :
 
 ::
 
