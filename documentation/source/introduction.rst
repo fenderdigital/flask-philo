@@ -203,7 +203,7 @@ All incoming request to your Flask-Philo application and their corresponding HTT
 Running Unit Tests
 #############
 
-Flask-Philo simplifies Unit Test coverage by providing a dedicated directory location for all test code : ``src/app/tests``. Within this directory, all Python source files begining with ``test_`` will be executed as part of a suite of Unit Tests.
+Flask-Philo simplifies Unit Test coverage by providing a sigle console command for running and managing all test. All test code should be written in the dedicated directory location : ``src/app/tests``. Within this directory, all Python source files begining with ``test_`` will be executed as part of a suite of Unit Tests.
 
 To run all Unit Tests for your new Flask-Philo app, use the following console command:
 
@@ -226,7 +226,14 @@ The return of the tests will be something like the print below:
     =================================== 1 passed in 0.02 seconds ===================================
 
 
-The ``test_views.py`` file can be found in the ``src/tests`` folder.
+In this example, the automatically-generated example Unit Test class **TestExampleEndpoints** is executed, as defined in ``src/tests/test_views.py``
+
+
+To run only specific subsets of Unit Tests for your app, use the ``--q <test_source.py>`` command argument :
+
+::
+
+    $ python3 manage.py test --q test_views.py
 
 
 Extending Flask-Philo projects
