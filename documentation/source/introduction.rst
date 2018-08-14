@@ -203,7 +203,7 @@ All incoming request to your Flask-Philo application and their corresponding HTT
 Running Unit Tests
 #############
 
-Flask-Philo simplifies Unit Test coverage by providing a sigle console command for running and managing all test. All test code should be written in the dedicated directory location : ``src/app/tests``. Within this directory, all Python source files begining with ``test_`` will be executed as part of a suite of Unit Tests.
+Flask-Philo simplifies Unit Test coverage by providing a single console command for running and managing all test. All test code should be written in the dedicated directory location : ``src/app/tests``. Within this directory, all Python source files begining with ``test_`` will be executed as part of a suite of Unit Tests.
 
 To run all Unit Tests for your new Flask-Philo app, use the following console command:
 
