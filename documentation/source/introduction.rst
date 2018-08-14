@@ -1,7 +1,7 @@
 Flask-Philo
 =============
 
-Utilities to build flask based microservices.
+Utilities to build Flask-based microservices.
 
 What is this project?
 ---------------------------
