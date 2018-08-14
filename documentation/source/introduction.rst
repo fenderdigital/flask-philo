@@ -103,16 +103,11 @@ The following folder structure is created for the new project:
 Running the server for the new project_name
 ###########################################
 
-In order to run the server for the new project, you should go the ``src`` folder:
+To run the listening server for your new Flask-Philo project, navigate to the ``src/`` directory and issue the ``runserver`` command :
 
 ::
 
-    flask-philo-example > cd src
-
-And run the following command:
-
-::
-
+    $ cd <your-project-dir/src
     $ python3 manage.py runserver
 
 The response from this command will be something like this:
