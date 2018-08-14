@@ -38,15 +38,15 @@ Installation
 
 ::
 
-    pip install Flask-Philo
+    $ pip install Flask-Philo
 
 
 Alternatively, you can create a virtual environment first:
 
 ::
 
-    mkvirtualenv -p /usr/bin/python3 philo
-    pip install Flask-Philo
+    $ mkvirtualenv -p /usr/bin/python3 philo
+    $ pip install Flask-Philo
 
 
 Creating a new project
@@ -58,7 +58,7 @@ To quickly generate a new Flask-Philo project, navigate to the directory in whic
 
 ::
 
-    flask-philo-admin startproject <project_name>
+    $ flask-philo-admin startproject <project_name>
 
 
 This will create a folder called <project_name> which will contain the basic structure of a Flask-Philo application.
@@ -67,7 +67,7 @@ Example:
 
 ::
 
-    flask-philo-admin startproject flask-philo-example
+    $ flask-philo-admin startproject flask-philo-example
 
 
 Folder structure
@@ -111,7 +111,7 @@ And run the following command:
 
 ::
 
-    python3 manage.py runserver
+    $ python3 manage.py runserver
 
 The response from this command will be something like this:
 
@@ -157,7 +157,7 @@ If you haven't already done so, run the following terminal command to create you
 
 ::
 
-    python3 manage.py runserver
+    $ python3 manage.py runserver
 
 
 Now, with the application running and with a route defined, the following URL address will be accessible in the browser of your choice, and will return a JSON response:
@@ -183,7 +183,7 @@ Alternatively, you can test this example URL route with a direct HTTP request us
 
 ::
 
-    curl http://localhost:8080/example
+  $ curl http://localhost:8080/example
 
 
 All incoming request to your Flask-Philo application and their corresponding HTTP status codes may be viewed in the same console session you used to start the application:
