@@ -137,7 +137,7 @@ The URLs file ``urls.py`` defines all available routes for your Flask-Philo appl
         ('/example', ExampleView, 'example_route'),
     )
 
-The defined route ``/example`` is mapped to the View class **ExampleView**, which is defined in `src/app/views/example_views.py``. All View classes should be defined in the ``src/app/views`` directory. Below you can find the content of the example View file:
+The defined route ``/example`` is mapped to the View class **ExampleView**, which is defined in ``src/app/views/example_views.py``. All View classes should be defined in the ``src/app/views`` directory. Below you can find the content of the example View file:
 
 ::
 
