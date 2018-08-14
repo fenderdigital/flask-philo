@@ -9,13 +9,13 @@ This let us write custom utilities and tools that take advantage of the inherent
 Running Console Commands
 --------------------
 
-In general, we use the `manage.py` program as our starting point for launching console commands. Many useful commands are already included as part of Flask-Philo:
+In general, we use the ``manage.py`` program as our starting point for launching console commands. Many useful commands are already included as part of Flask-Philo:
 
 ::
 
-    python3 manage.py runserver
-    python3 manage.py test
-    python3 manage.py syncdb
+    $ python3 manage.py runserver
+    $ python3 manage.py test
+    $ python3 manage.py syncdb
 
 
 Writing Custom Console Commands
