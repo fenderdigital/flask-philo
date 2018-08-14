@@ -41,14 +41,14 @@ To run all Unit Tests for a Flask-Philo app, use the following console command:
 
 
 
-To execute __only__ the tests from __one__ **source file**, use the ``--q`` parameter:
+To execute *only* the tests from *one* **source file**, use the ``--q`` parameter:
 
 ::
 
     python3 manage.py test --q tests/test_db.py
 
 
-To execute __only__ the tests from __one__ **class** :
+To execute *only* the tests from *one* **class** :
 
 
 ::
@@ -56,7 +56,7 @@ To execute __only__ the tests from __one__ **class** :
     python3 manage.py test --q tests/test_db.py::TestDBAccess
 
 
-To execute one specific unit test :
+To execute a single specific unit test :
 
 ::
 
