@@ -103,11 +103,11 @@ The following folder structure is created for the new project:
 Running the server for the new project_name
 ###########################################
 
-To run the listening server for your new Flask-Philo project, navigate to the ``src/`` directory and issue the ``runserver`` command :
+To run the listening server for your new Flask-Philo project, navigate to the project's ``src/`` directory and issue the ``runserver`` command :
 
 ::
 
-    $ cd <your-project-dir/src
+    $ cd <your-project-dir>/src
     $ python3 manage.py runserver
 
 The response from this command will be something like this:
@@ -240,7 +240,7 @@ Flask-Philo projects are fully customizable and fully extensible. There are a lo
 - ORM Integration using Postgresql: [http://flask-philo.readthedocs.io/en/latest/db/postgresql-orm.html]
 - AWS Integration [http://flask-philo.readthedocs.io/en/latest/cloud/aws/introduction.html]
 
-In order to deploy a Flask-Philo application, we can use any tool we have in the market, here follows an example:
+In order to deploy a Flask-Philo application, we can use any deployment tool on the market. For example :
 
 - NGINX and uWSGI for Flask-Philo app deployment: [http://flask-philo.readthedocs.io/en/latest/etc/flask_app_deploy.html]
 
