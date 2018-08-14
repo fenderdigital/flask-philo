@@ -1,3 +1,5 @@
 TESTING = True
 
 POSTGRESQL_DATABASE_URI = ""
+
+URLS = 'app.urls'
