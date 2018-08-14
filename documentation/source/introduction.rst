@@ -23,6 +23,8 @@ Basic Features
 
 - Simple SQLAlchemy ORM, customized for PostgreSQL with multiple dabatases.
 
+- Unit testing tools
+
 - Simple Redis integration.
 
 - Simple Elastic Search integration.
@@ -137,7 +139,7 @@ The URLs file ``urls.py`` defines all available routes for your Flask-Philo appl
         ('/example', ExampleView, 'example_route'),
     )
 
-The defined route ``/example`` is mapped to the View class **ExampleView**, which is defined in ``src/app/views/example_views.py``. All View classes should be defined in the ``src/app/views`` directory. Below you can find the content of the example View file:
+The defined route ``/example`` is mapped to the View class **ExampleView**, which is defined in ``src/app/views/example_views.py``. All View classes should be defined in the ``src/app/views/`` directory. Below you can find the content of the example View file:
 
 ::
 
@@ -198,9 +200,10 @@ All incoming request to your Flask-Philo application and their corresponding HTT
     127.0.0.1 - - [05/Dec/2017 00:06:01] "GET /example HTTP/1.1" 200 -
 
 
-Running tests
+Running Unit Tests
 #############
 
+Flask-Philo simplifies Unit Test coverage by providing a dedicated directory location for all test code : ``src/app/tests``. Within this directory, all Python source files begining with `test_` will be executed as part of a suite of Unit Tests.
 In order to run the test for the new app. You should run the following console command:
 
 ::
