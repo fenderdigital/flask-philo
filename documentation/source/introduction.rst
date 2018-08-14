@@ -73,7 +73,7 @@ Example:
 Folder structure
 ################
 
-Here follows the folder structure for the recent created project:
+The following folder structure is created for the new project:
 
 * README.md
 * documentation
@@ -150,7 +150,7 @@ The defined route ``/example`` is mapped to the View class **ExampleView**, whic
                 status=200, data={'some_data': 'yes'})
 
 
-Open the new Flask-Philo app in the browser
+Accessing the new Flask-Philo app
 ###########################################
 
 If you haven't already done so, run the following terminal command to create your Flask-Philo application:
@@ -172,12 +172,18 @@ Note that the port number (in this case ``8080``) should match the port number d
     * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
     ...
 
-Your browser will display a JSON response, as defined by the **ExampleView** class :
+Your browser will display a JSON response, as defined in the **ExampleView** class :
 
 ::
 
     {"some_data": "yes"}
 
+
+Alternatively, you can test this example URL route with a direct HTTP request using CURL:
+
+::
+    curl -H "Accept: application/json" -H "Content-Type: application/json" http://localhost:8080/example
+    
 
 All incoming request to your Flask-Philo application and their corresponding HTTP status codes may be viewed in the same console session you used to start the application:
 
