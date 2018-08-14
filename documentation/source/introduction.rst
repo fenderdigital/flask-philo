@@ -182,8 +182,9 @@ Your browser will display a JSON response, as defined in the **ExampleView** cla
 Alternatively, you can test this example URL route with a direct HTTP request using CURL:
 
 ::
+
     curl -H "Accept: application/json" -H "Content-Type: application/json" http://localhost:8080/example
-    
+
 
 All incoming request to your Flask-Philo application and their corresponding HTTP status codes may be viewed in the same console session you used to start the application:
 
