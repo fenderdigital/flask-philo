@@ -26,6 +26,8 @@ Welcome to Flask-Philo's documentation!
 
    etc/unit_test
 
+   etc/console_commands
+
    etc/flask_app_deploy
 
    cloud/aws/introduction
