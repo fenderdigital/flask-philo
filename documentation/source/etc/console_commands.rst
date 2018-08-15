@@ -32,7 +32,6 @@ We can extend our application's set of utility commands by adding Python program
 
     from tests.test_app.models import User
 
-
     def run(app=None):
         user_count = User.objects.count()
         print('User count :', user_count)
@@ -48,3 +47,37 @@ Once this simple program is saved to the ``src/console_commands`` directory, it 
 
 From this very simple example, we can see how our console command benefits from Flask-Philo's convenient ORM representation of our application's ``Users`` object.
 Typical uses for custom console commands could include exporting data dumps/reports, safe import/modification of data, sample data population/initialisation, etc.
+
+
+Arguments to Console Commands
+--------------------
+
+Flask-Philo console commands support the use of arguments using double-dashed (``--arg_name``) argument names. For example, the following console command program accepts a ``User.id`` value, and prints that user's details
+
+::
+
+    #!/usr/bin/env python
+    """
+    Example console command that outputs details for a specified User object
+    """
+
+    import argparse
+    from tests.test_app.models import User
+
+    def run(**kwargs):
+
+        # Define parsable argument name 'user_id', and ensure that it is a required argument
+        parser = argparse.ArgumentParser()
+        requiredNamed = parser.add_argument_group('required named arguments')
+        requiredNamed.add_argument('--user_id', help='User ID', required=True)
+
+        # Parse arguments
+        args, extra_params = parser.parse_known_args()
+
+        # Attempt to retrieve a User object by ID
+        user_obj = User.objects.get(id=args.user_id)
+
+        if user_obj:
+            print('User name :', user_obj.name)
+        else:
+            print('No user_id match :', args.user_id)
