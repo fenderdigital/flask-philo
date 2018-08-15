@@ -1,5 +1,8 @@
-Writing Unit Test with Flask-Philo
+Unit Tests
 =============================================
+
+Writing Unit Tests with Flask-Philo
+--------------------
 
 Flask-Philo supports unit tests. All you have to do is
 create a class insised ``tests`` directory in your project
