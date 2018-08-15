@@ -41,6 +41,7 @@ We can extend our application's set of utility commands by adding Python program
 Once this simple program is saved to the ``src/console_commands`` directory, it can be run as follows:
 
 ::
+
     $ python3 manage.py count_users
     User count : 13
 
