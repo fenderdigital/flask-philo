@@ -54,6 +54,7 @@ Arguments to Console Commands
 
 Flask-Philo console commands support the use of arguments using double-dashed (``--arg_name``) argument names. For example, the following console command program accepts a ``User.id`` value, and prints that user's details
 
+``src/console_commands/get_user_data.py``
 ::
 
     #!/usr/bin/env python
@@ -77,8 +78,18 @@ Flask-Philo console commands support the use of arguments using double-dashed (`
         # Attempt to retrieve a User object by ID
         user_obj = User.objects.get(id=args.user_id)
 
+        # Output details if match is found
         if user_obj:
             print('User name :', user_obj.name)
             print('User email address :', user_obj.email)
         else:
             print('No user_id match :', args.user_id)
+
+
+This example console command can be run as follows:
+
+::
+
+    $ python3 manage.py get_user_data --user_id 13
+    User name : John Doe
+    User email  address : whatsinthebox@seven.com
