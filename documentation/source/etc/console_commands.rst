@@ -79,5 +79,6 @@ Flask-Philo console commands support the use of arguments using double-dashed (`
 
         if user_obj:
             print('User name :', user_obj.name)
+            print('User email address :', user_obj.email)
         else:
             print('No user_id match :', args.user_id)
