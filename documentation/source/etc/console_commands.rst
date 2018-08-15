@@ -24,6 +24,7 @@ Writing Custom Console Commands
 We can extend our application's set of utility commands by adding Python programs to the ``src/console_commands`` directory. For example, when we save the following code to ``src/console_commands/count_users``, we now have a simple console command that counts our application's Users, and outputs it to the console:
 
 ::
+
     #!/usr/bin/env python
     """
     Example console command that outputs a count of all User objects
