@@ -44,7 +44,7 @@ To run all Unit Tests for a Flask-Philo app, use the following console command:
 
 
 
-To execute *only* the tests from one **source file**, use the ``--q`` parameter:
+To execute *only* the Unit Tests from one **source file**, use the ``--q <test_source.py>`` argument:
 
 ::
 
