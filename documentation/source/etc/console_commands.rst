@@ -23,6 +23,7 @@ Writing Custom Console Commands
 
 We can extend our application's set of utility commands by adding Python programs to the ``src/console_commands`` directory. For example, when we save the following code to ``src/console_commands/count_users.py``, we now have a simple console command that counts our application's Users, and outputs it to the console:
 
+``src/console_commands/count_users.py``
 ::
 
     #!/usr/bin/env python
@@ -30,10 +31,10 @@ We can extend our application's set of utility commands by adding Python program
     Example console command that outputs a count of all User objects
     """
 
-    from tests.test_app.models import User
+    from tests.test_app.models import User  # Import our 'User' ORM definition
 
     def run(app=None):
-        user_count = User.objects.count()
+        user_count = User.objects.count()   # Use build-in 'count()' ORM function
         print('User count :', user_count)
 
 
@@ -52,7 +53,7 @@ Typical uses for custom console commands could include exporting data dumps/repo
 Arguments to Console Commands
 --------------------
 
-Flask-Philo console commands support the use of arguments using double-dashed (``--arg_name``) argument names. For example, the following console command program accepts a ``User.id`` value, and prints that user's details
+Flask-Philo console commands support the use of arguments using double-dashed (``--arg_name``) argument names. For example, the following console command program accepts a ``User.id`` value, and prints that user's details:
 
 ``src/console_commands/get_user_data.py``
 ::
