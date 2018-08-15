@@ -46,7 +46,7 @@ Once this simple program is saved to the ``src/console_commands`` directory, it 
     User count : 13
 
 
-From this very simple example, we can see how our console command benefits from Flask-Philo's convenient ORM representation of our application's ``Users`` object.
+From this very simple example, we can see how our console command benefits from Flask-Philo's convenient ORM representation of our application's ``Users`` object, and its inherited class functions.
 Typical uses for custom console commands could include exporting data dumps/reports, safe import/modification of data, sample data population/initialisation, etc.
 
 
