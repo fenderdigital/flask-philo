@@ -20,3 +20,23 @@ In general, we use the ``manage.py`` program as our starting point for launching
 
 Writing Custom Console Commands
 --------------------
+
+We can extend our application's set of utility commands by adding Python programs to the ``src/console_commands`` directory. For example, when we save the following code to ``src/console_commands/count_users``, we now have a simple console command that counts our application's Users, and outputs it to the console:
+
+highlight:: python
+    #!/usr/bin/env python
+    """
+    Example console command that outputs a count of all User objects
+    """
+
+    from tests.test_app.models import User
+
+
+    def run(app=None):
+        print(User.objects.count())
+        print('hello world')
+
+
+
+
+Typical uses would be to
