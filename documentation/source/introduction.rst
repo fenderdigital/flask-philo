@@ -224,12 +224,6 @@ The return of the tests will be something like the print below:
 In this example, the automatically-generated example Unit Test class **TestExampleEndpoints** is executed, as defined in ``src/tests/test_views.py``
 
 
-To run only specific subsets of Unit Tests for your app, use the ``--q <test_source.py>`` command argument :
-
-::
-
-    $ python3 manage.py test --q test_views.py
-
 
 Extending Flask-Philo projects
 ##############################
