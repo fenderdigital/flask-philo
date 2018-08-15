@@ -34,7 +34,7 @@ We can extend our application's set of utility commands by adding Python program
     from tests.test_app.models import User  # Import our 'User' ORM definition
 
     def run(app=None):
-        user_count = User.objects.count()   # Use build-in 'count()' ORM function
+        user_count = User.objects.count()   # Use 'count()' ORM function
         print('User count :', user_count)
 
 
