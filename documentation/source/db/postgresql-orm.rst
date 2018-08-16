@@ -216,14 +216,10 @@ Database DML Operations
 Postgresql Connection Pool
 ------------------------------
 
-As a design decision, management of the PostgreSQL connection is the responsability of the developer.
-
-
-This is made simple with Flask-Philo's built-in connection management methods:
+As a design decision, management of the PostgreSQL connection is the responsability of the developer, but this is made simple with Flask-Philo's built-in connection management methods.
 
 * to instantiate a DB session, we use Flask-Philo's ``get_pool()`` method,
-* to modify, create or remove data in a session, we must commit or rollback the
-session using Flask-Philo's ``pool.commit()`` or ``pool.rollback()`` methods
+* to modify, create or remove data in a session, we must commit or rollback the session using Flask-Philo's ``pool.commit()`` or ``pool.rollback()`` methods
 
 
 As such, it is necessary to first instantiate a DB session with Flask-Philo's
