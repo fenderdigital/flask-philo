@@ -40,9 +40,13 @@ create classes that inherit from Flask-Philo's ``BaseModel`` class:
 
 ``BaseModel`` exposes a number of useful methods for retrieving and manipulating data:
 
-* get
-* filter_by
+* update
+* add
 * delete
+* objects.get
+* objects.filter_by
+* objects.count
+* objects.raw_sql
 
 
 
