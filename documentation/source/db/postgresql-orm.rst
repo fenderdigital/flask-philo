@@ -84,11 +84,9 @@ your application:
         description = Column(String(256))
 
 
-Flask-Philo's ORM automatically handles the creation of each model's ``id`` property, along with automatically creating and updating the timestamp fields ``created_at`` and ``updated_at``
+Flask-Philo's ORM automatically handles the creation of each model's integer ``id`` property, along with automatically creating and updating the timestamp fields ``created_at`` and ``updated_at``
 
-Foreign Keys may be defined using the ``ForeignKey(<key_name>)`` syntax, as is the case in our example **Album** model above.
-
-Here, the **Album** model references the **Artist** model (DB table ``artist``) as a foreign key using ``artist.id``
+Foreign Keys may be defined using the ``ForeignKey(<key_name>)`` syntax, as is the case in our example **Album** model above. Here, the **Album** model references the **Artist** model (DB table ``artist``) as a foreign key using ``artist.id``
 
 ----
 
@@ -115,6 +113,26 @@ Examples:
         description = Column(String(256))
         albums = relationship('Album', backref='artist')
         genre_id = Column(Integer, ForeignKey('genre.id'))
+
+
+This Flask-Philo model is mapped to the following PostgreSQL DB schema:
+
+::
+
+Table "public.users"
+Column    |           Type           |                     Modifiers
+--------------+--------------------------+----------------------------------------------------
+id           | integer                  | not null default nextval('users_id_seq'::regclass)
+username     | character varying(64)    |
+password     | text                     |
+email        | character varying(64)    |
+is_active    | boolean                  | not null
+credit_score | numeric                  |
+created_at   | timestamp with time zone | not null
+updated_at   | timestamp with time zone | not null
+Indexes:
+"pk_users" PRIMARY KEY, btree (id)
+
 
 
 Field data types
