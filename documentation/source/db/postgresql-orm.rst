@@ -242,15 +242,16 @@ Data Manipulation Examples
 Adding a record
 ^^^^^^^^^^^^^^^
 
-Here you will insert a new genre based on the model (Genre) above:
+In this example, we create a new **Genre** using the same model defined above:
 
 ::
 
-    rock = Genre(name='Rock', description='Rock and Roll')
-    rock.add()
+    pool = get_pool()   # open a DB session
+    rock = Genre(name='Rock', description='Rock and Roll')  # create a new Genre object
+    rock.add()  # Add the new Genre object to our session
 
 
-Now you have two options: commit or rollback the insert operation.
+At this point, we have added a new instance of the **Genre** model to our DB session, but we still need to either ``commit()`` or ``rollback()`` the insert operation
 
 To commit the operation and create a new record:
 
@@ -259,7 +260,7 @@ To commit the operation and create a new record:
     pool.commit()
 
 
-In case the record is not needed, you can rollback the transaction and nothing will be changed in the database:
+If the record is not needed, the transaction can be rolled-back, and nothing will be changed in the PostgreSQL database:
 
 ::
 
