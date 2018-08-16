@@ -7,5 +7,5 @@ from tests.test_app.models import User
 
 
 def run(app=None):
-    print(User.objects.count())
-    print('hello world')
+    user_count = User.objects.count()
+    print('User count :', user_count)
