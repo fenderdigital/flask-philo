@@ -9,12 +9,7 @@ Where is Flask-Philo's PostgreSQL ORM implementation?
 
 Flask-Philo PostgreSQL ORM can be found at:
 
-
 `<https://github.com/Riffstation/flask-philo/tree/dev/flask_philo/db/postgresql>`_
-
-
-[https://github.com/Riffstation/flask-philo/tree/dev/flask_philo/db/postgresql]
-
 
 
 Database Settings
@@ -47,7 +42,7 @@ create classes that inherit from Flask-Philo ``flask_philo.db.postgresql.orm.Bas
 
 ``BaseModel`` exposes a number of methods for retrieving and manipulating data.
 
-Here's 3 examples of models with some simple properties and examples of how you can use them in
+Here are 3 examples of models with some simple properties and examples of how you can use them in
 your application:
 
 ::
@@ -82,7 +77,7 @@ your application:
 
 ``Flask-Philo`` ORM automatically handles the creation of the id file.
 
-As you can see in Album model, the Artist model (artist table) has its own id that can be referred as artist.id.
+As you can see in the *Album* model, the *Artist* model (artist table) has its own id that can be referred as ``artist.id``
 
 The same happens when talking about timestamps. ``Flask-Philo`` ORM automatically handles ``created_at`` and ``updated_at`` fields.
 
