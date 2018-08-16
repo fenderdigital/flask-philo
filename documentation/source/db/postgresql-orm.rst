@@ -264,12 +264,11 @@ Data Manipulation Examples
 
 
 
-* **update()** - modify an existing ORM object
-* **delete()** - delete an ORM object
-* **objects.get(key=value)** - retrieve an ORM object by a specified key
-* **objects.filter_by(key=value)** - retrieve a collection of filtered objects by a specified key/keys
-* **objects.count()** - count all object instances of a Flask-Philo class
-* **objects.raw_sql(sql_query_string)** - run direct SQL queries on your application's database
+.. * **update()** - modify an existing ORM object
+.. * **delete()** - delete an ORM object
+.. * **objects.filter_by(key=value)** - retrieve a collection of filtered objects by a specified key/keys
+.. * **objects.count()** - count all object instances of a Flask-Philo class
+.. * **objects.raw_sql(sql_query_string)** - run direct SQL queries on your application's database
 
 
 
