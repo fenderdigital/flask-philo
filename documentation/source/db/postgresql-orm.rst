@@ -115,26 +115,6 @@ Examples:
         genre_id = Column(Integer, ForeignKey('genre.id'))
 
 
-This Flask-Philo model is mapped to the following PostgreSQL DB schema:
-
-::
-
-    Table "public.users"
-    Column    |           Type           |                     Modifiers
-    --------------+--------------------------+----------------------------------------------------
-    id           | integer                  | not null default nextval('users_id_seq'::regclass)
-    username     | character varying(64)    |
-    password     | text                     |
-    email        | character varying(64)    |
-    is_active    | boolean                  | not null
-    credit_score | numeric                  |
-    created_at   | timestamp with time zone | not null
-    updated_at   | timestamp with time zone | not null
-    Indexes:
-    "pk_users" PRIMARY KEY, btree (id)
-
-
-
 Field data types
 ----------------
 
