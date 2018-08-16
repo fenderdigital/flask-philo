@@ -33,19 +33,19 @@ to your settings file:
 Models
 ======
 
-In order to create simple models, simply create classes that inherit from Flask-Philo's ``BaseModel`` class:
+In order to create simple Models, simply create classes that inherit from Flask-Philo's ``BaseModel`` class:
 
 ``flask_philo.db.postgresql.orm.BaseModel``
 
 ``BaseModel`` exposes a number of useful methods for retrieving and manipulating data:
 
-* update
-* add
-* delete
-* objects.get
-* objects.filter_by
-* objects.count
-* objects.raw_sql
+* **update** - method description
+* **add** - method description
+* **delete** - method description
+* **objects.get** - method description
+* **objects.filter_by** - method description
+* **objects.count** - method description
+* **objects.raw_sql** - method description
 
 
 
