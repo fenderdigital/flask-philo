@@ -228,14 +228,14 @@ Opening a Flask-Philo DB session
 
     from flask_philo.db.postgresql.connection import get_pool
     pool = get_pool()
-    # Do some DB operations here
+    # Do some ORM operations here
     pool.commit()
 
 
-The following are examples are about how to use the ORM to query the database:
+The following examples demonstrate each of the core ORM operations you will commonly use to query the PostgreSQL database
 
 
-ORM query examples
+Data Manipulation Examples
 ------------------
 
 
