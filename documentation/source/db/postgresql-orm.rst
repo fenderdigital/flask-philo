@@ -90,10 +90,10 @@ Foreign Keys may be defined using the ``ForeignKey(<key_name>)`` syntax, as is t
 
 
 Fields
------------
+===========
 
 Field types
-^^^^^^^^^^^
+-----------
 
 The most common examples of field types are:
 
@@ -115,7 +115,7 @@ Examples:
 
 
 Supported data types
-^^^^^^^^^^^
+-----------
 
 - **String**: stores string format data
 
@@ -170,7 +170,7 @@ Supported data types
 
 
 Field options
-^^^^^^^^^^^
+-----------
 
 The following constraints can be set in your ORM:
 
