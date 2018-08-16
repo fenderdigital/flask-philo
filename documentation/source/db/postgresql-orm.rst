@@ -221,13 +221,8 @@ As a design decision, management of the PostgreSQL connection is the responsabil
 * to instantiate a DB session, we use Flask-Philo's ``get_pool()`` method,
 * to modify, create or remove data in a session, we must commit or rollback the session using Flask-Philo's ``pool.commit()`` or ``pool.rollback()`` methods
 
-
-As such, it is necessary to first instantiate a DB session with Flask-Philo's
-``get_pool()`` method, then to either commit or rollback changes using the
-``pool.commit()`` or ``pool.rollback()`` methods
-
-As such, upon modifying, creating or removing data in a session, it is necessary to commit or rollback the
-`SQL Alchemy <http://www.sqlalchemy.org/>`_ session using Flask-Philo's ``get_pool()`` method.
+Opening a Flask-Philo DB session
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ::
 
