@@ -228,13 +228,19 @@ Opening a Flask-Philo DB session
 
     from flask_philo.db.postgresql.connection import get_pool
     pool = get_pool()
+    # Do some DB operations here
+    pool.commit()
 
 
 The following are examples are about how to use the ORM to query the database:
 
 
+ORM query examples
+------------------
+
+
 Adding a record
----------------
+^^^^^^^^^^^^^^^
 
 Here you will insert a new genre based on the model (Genre) above:
 
@@ -284,7 +290,7 @@ It will print:
 
 
 Updating a record
------------------
+^^^^^^^^^^^^^^^
 
 The same way you retrieve a record, you can update it. Here follows an example:
 
@@ -302,7 +308,7 @@ The same way you retrieve a record, you can update it. Here follows an example:
 
 
 Deleting a record
------------------
+^^^^^^^^^^^^^^^
 
 In the same way you've added and updated a record, we can delete it:
 
@@ -317,7 +323,7 @@ This way the record should no longer exist.
 
 
 Querying using Raw SQL
-----------------------
+^^^^^^^^^^^^^^^
 
 You can use the ``raw_sql`` command to run queries also, like the following example:
 
