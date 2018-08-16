@@ -263,17 +263,21 @@ Data Manipulation Examples
 
 
 
-
-.. * **update()** - modify an existing ORM object
 .. * **delete()** - delete an ORM object
-.. * **objects.filter_by(key=value)** - retrieve a collection of filtered objects by a specified key/keys
 .. * **objects.count()** - count all object instances of a Flask-Philo class
 .. * **objects.raw_sql(sql_query_string)** - run direct SQL queries on your application's database
 
 
 
 
-Adding a record
+
+
+
+
+
+
+
+Adding a new record
 ^^^^^^^^^^^^^^^
 
 In this example, we create a new **Genre** using the same model defined in the **Example Models** section:
@@ -312,119 +316,61 @@ Now that we've created and committed our new 'Rock' genre, we can retrieve the r
     genre_obj = Genre.objects.get(name="Rock")
     genre_name = genre_obj.name
     genre_id = genre_obj.id
-    print("Genre", genre_id, ":", genre_name)
+    print("Genre", genre_id, ":", genre_name)   # Will print "Genre 13 : Rock"
 
 ...we can also retrieve a record that matches *multiple* field values:
 
 ::
 
     genre_obj = Genre.objects.get(id=13, name="Rock")
+    print("Genre", genre_obj.id, ":", genre_obj.name)   # Will print "Genre 13 : Rock"
 
 
 
+Filtering records
+^^^^^^^^^^^^^^^^^^^^
 
+We may also use Flask-Philo's ``filter_by()`` function to filter records and retrieve a collection of all matching instances of the desired model.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Adding a record
-^^^^^^^^^^^^^^^
-
-In this example, we create a new **Genre** using the same model defined above:
+Continuing our **Genre** example from earlier sub-sections:
 
 ::
 
-    pool = get_pool()
-    rock = Genre(name='Rock', description='Rock and Roll')
-    rock.add()
-
-
-At this point, we have added a new instance of the **Genre** model to our DB session, but we still need to either ``commit()`` or ``rollback()`` the insert operation
-
-To commit the operation and create a new record:
-
-::
-
-    pool.commit()
-
-
-If the record is not needed, the transaction can be rolled-back, and nothing will be changed in the PostgreSQL database:
-
-::
-
-    pool.rollback()
-
-
-Now that we've created and committed our new 'Rock' genre, we can retrieve the record from the database by using the ``filter_by()`` function:
-
-::
-
-    rock = Genre.objects.filter_by(name="Rock").first()
-
-
-You can retrieve column values for the record above:
-
-::
-
-    print(rock.name)
-
-
-It will print:
-
-::
-
-    Rock
+    genre_collection = Genre.objects.filter_by(name="Rock")
+    genre_obj = genre_collection.first()
+    print("Genre", genre_obj.id, ":", genre_obj.name)   # Will print "Genre 13 : Rock"
 
 
 Updating a record
 ^^^^^^^^^^^^^^^
 
-The same way you retrieve a record, you can update it. Here follows an example:
+Just as we can retrieve a record, we can update records in a similar manner:
 
 ::
 
-    rock = Genre.objects.filter_by(name="Rock").first()
-    rock.name = "Metal"
-    rock.update()
+    genre_obj = Genre.objects.filter_by(name="Rock").first()
+    genre_obj.name = "Metal"
+    genre_obj.update()
     pool.commit()
 
-    metal = Genre.objects.filter_by(name="Metal").first()
-
-    # Will print "Metal"
-    print(metal.name)
+    updated_genre_obj = Genre.objects.filter_by(name="Metal").first()
+    print("Genre", updated_genre_obj.id, ":", updated_genre_obj.name)   # Will print "Genre 13 : Metal"
 
 
 Deleting a record
 ^^^^^^^^^^^^^^^
 
-In the same way you've added and updated a record, we can delete it:
+In the same way we've added and updated a record, we can also delete it:
 
 ::
 
-    metal = Genre.objects.filter_by(name="Metal").first()
-    metal.delete()
+    genre_obj = Genre.objects.filter_by(name="Metal").first()
+    genre_obj.delete()
     pool.commit()
 
+    genre_obj = Genre.objects.filter_by(name="Metal").first()   # genre_obj == None
 
-This way the record should no longer exist.
+..once we have committed the ``delete()`` operation, this record no longer exists in our PostgreSQL DB.
 
 
 Querying using Raw SQL
