@@ -17,10 +17,9 @@ Database Settings
 
 The first
 thing you need to do is to add the relevant configuration
-to your settings file:
+to your application's settings file, typically ``<your_app>/config/development.py`` :
 
 ::
-
 
     DATABASES = {
         'POSTGRESQL': {
