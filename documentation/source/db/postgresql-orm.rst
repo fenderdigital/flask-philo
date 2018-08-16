@@ -174,35 +174,35 @@ Field options
 
 The following constraints can be set in your ORM:
 
-- ``PrimaryKey``: defines that a given column is a primary (not nullable and unique)
+- ``PrimaryKey``: specifies that a given column is a primary key. As such, it is unique and not nullable.
 
 ::
 
     id = Column(Integer, primary_key=True)
 
 
-- ``ForeignKey``: defines the foreign key that represents the relation with a different table
+- ``ForeignKey``: specifies a column that acts as foreign key, thereby defining a relationship with another table
 
 ::
 
     genre_id = Column(Integer, ForeignKey('genre.id'))
 
 
-- ``unique``: defines that the column should have unique values for each line
+- ``unique``: specifies that a column must have a unique value for each record
 
 ::
 
     name = Column(String(256), unique=True)
 
 
-- ``nullable``: defines if a column can accept null values or not
+- ``nullable``: specifies if a column accepts null values or not
 
 ::
 
     name = Column(String(256), nullable=False, unique=True)
 
 
-- ``default``: defines a default value in case it is not specified
+- ``default``: defines a default value in the case that it is not specified
 
 ::
 
