@@ -88,13 +88,12 @@ Flask-Philo's ORM automatically handles the creation of each model's integer ``i
 
 Foreign Keys may be defined using the ``ForeignKey(<key_name>)`` syntax, as is the case in our example **Album** model above. Here, the **Album** model references the **Artist** model (DB table ``artist``) as a foreign key using ``artist.id``
 
-----
 
 Fields
-======
+-----------
 
 Field types
------------
+^^^^^^^^^^^
 
 The most common examples of field types are:
 
@@ -115,8 +114,8 @@ Examples:
         genre_id = Column(Integer, ForeignKey('genre.id'))
 
 
-Field data types
-----------------
+Supported data types
+^^^^^^^^^^^
 
 - ``String``: stores string format data
 
@@ -171,7 +170,7 @@ Field data types
 
 
 Field options
--------------
+^^^^^^^^^^^
 
 The following constraints can be set in your ORM:
 
