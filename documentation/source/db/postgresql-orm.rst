@@ -84,11 +84,11 @@ your application:
         description = Column(String(256))
 
 
-``Flask-Philo`` ORM automatically handles the creation of each model's ``id`` property.
+Flask-Philo's ORM automatically handles the creation of each model's ``id`` property, along with automatically creating and updating the timestamp fields ``created_at`` and ``updated_at``
 
-As you can see in the **Album** model, the **Artist** model (artist table) has its own id that can be referred as ``artist.id``
+Foreign Keys may be defined using the ``ForeignKey(<key_name>)`` syntax, as is the case in our example **Album** model above.
 
-The same happens when talking about timestamps. ``Flask-Philo`` ORM automatically handles ``created_at`` and ``updated_at`` fields.
+Here, the **Album** model references the **Artist** model (DB table ``artist``) as a foreign key using ``artist.id``
 
 ----
 
