@@ -4,10 +4,13 @@ SQL Alchemy ORM for Postgresql
 Flask-Philo uses SQLAlchemy as an ORM.
 
 
-Where is Flask-Philo's Postgresql ORM implementation?
+Where is Flask-Philo's PostgreSQL ORM implementation?
 -----------------------------------------------
 
-Flask-Philo Postgresql ORM can be found at:
+Flask-Philo PostgreSQL ORM can be found at:
+
+
+`<https://github.com/Riffstation/flask-philo/tree/dev/flask_philo/db/postgresql>`_
 
 
 [https://github.com/Riffstation/flask-philo/tree/dev/flask_philo/db/postgresql]
