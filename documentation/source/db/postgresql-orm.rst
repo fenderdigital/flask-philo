@@ -216,10 +216,8 @@ Database DML Operations
 Postgresql Connection Pool
 ------------------------------
 
-One of the design decisions taken for the development team was to leave to the
-developer the management of the Postgresql connection, therefore, it is developers
-responsibility to commit or rollback the  `SQL Alchemy <http://www.sqlalchemy.org/>`_
-session using ``flask_philo.db.postgresql.connection.get_pool``
+As a design decisions, management of the PostgreSQL connection is the responsability of the developer.
+As such, upon interacting with the database, it is necessary to commit or rollback the  `SQL Alchemy <http://www.sqlalchemy.org/>`_ session using ``flask_philo.db.postgresql.connection.get_pool()``
 
 ::
 
