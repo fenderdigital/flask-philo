@@ -33,8 +33,7 @@ to your settings file:
 Models
 ======
 
-In order to create simple models all you have to do is
-create classes that inherit from Flask-Philo's ``BaseModel`` class:
+In order to create simple models, simply create classes that inherit from Flask-Philo's ``BaseModel`` class:
 
 ``flask_philo.db.postgresql.orm.BaseModel``
 
