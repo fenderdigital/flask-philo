@@ -117,41 +117,41 @@ Examples:
 Supported data types
 ^^^^^^^^^^^
 
-- ``String``: stores string format data
+- **String**: stores string format data
 
 ::
 
     name = Column(String(256))
 
 
-- ``Integer``: stores integer format data
+- **Integer**: stores integer format data
 
 ::
 
     amount = Column(Integer)
 
-- ``Boolean``: stores boolean format data
+- **Boolean**: stores boolean format data
 
 ::
 
     is_famous = Column(Boolean, default=False)
 
 
-- ``Numeric``: store numbers with a very large number of digits. Scale is the count of decimal digits in the fractional part. Precision refers to the total count of digits in the whole number.
+- **Numeric**: store numbers with a very large number of digits. Scale is the count of decimal digits in the fractional part. Precision refers to the total count of digits in the whole number.
 
 ::
 
     tempo = Column(Numeric(precision=32, scale=16))
 
 
-- ``ARRAY``: store array data
+- **ARRAY**: store array data
 
 ::
 
     possible_names = Column(ARRAY(String(256)))
 
 
-- ``JSON``: stores JSON format data
+- **JSON**: stores JSON format data
 
 ::
 
@@ -159,7 +159,7 @@ Supported data types
 
 
 
-- ``Enum``: provides a set of possible string values that work as constraints for the given column.
+- **Enum**: provides a set of possible string values that work as constraints for the given column.
 
 ::
 
