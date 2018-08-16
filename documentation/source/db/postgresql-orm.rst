@@ -37,7 +37,9 @@ Quick example
 -------------
 
 In order to create simple models all you have to do is
-create classes that inherit from Flask-Philo ``flask_philo.db.postgresql.orm.BaseModel``.
+create classes that inherit from Flask-Philo's ``BaseModel`` class:
+
+``flask_philo.db.postgresql.orm.BaseModel``
 
 
 ``BaseModel`` exposes a number of methods for retrieving and manipulating data.
@@ -75,9 +77,9 @@ your application:
         description = Column(String(256))
 
 
-``Flask-Philo`` ORM automatically handles the creation of the id file.
+``Flask-Philo`` ORM automatically handles the creation of each model's ``id`` property.
 
-As you can see in the *Album* model, the *Artist* model (artist table) has its own id that can be referred as ``artist.id``
+As you can see in the **Album** model, the **Artist** model (artist table) has its own id that can be referred as ``artist.id``
 
 The same happens when talking about timestamps. ``Flask-Philo`` ORM automatically handles ``created_at`` and ``updated_at`` fields.
 
