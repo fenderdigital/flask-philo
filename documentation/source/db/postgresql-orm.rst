@@ -95,11 +95,11 @@ Fields
 Field types
 -----------
 
-The most common examples of field types are:
+The most common field types are:
 
-- ``Column``: defines the properties of a given column
+- **Column**: defines the properties of a given column
 
-- ``relationship``: defines the relationship between two tables
+- **relationship**: defines the relationship between two tables
 
 
 Examples:
@@ -172,7 +172,7 @@ Supported data types
 Field options
 -----------
 
-The following constraints can be set in your ORM:
+The following ORM constraints can be set in your Flask-Philo Model:
 
 - **PrimaryKey**: specifies that a given column is a primary key. As such, it is unique and not nullable.
 
@@ -216,8 +216,8 @@ Database DML Operations
 Postgresql Connection Pool
 ------------------------------
 
-As a design decisions, management of the PostgreSQL connection is the responsability of the developer.
-As such, upon interacting with the database, it is necessary to commit or rollback the  `SQL Alchemy <http://www.sqlalchemy.org/>`_ session using ``flask_philo.db.postgresql.connection.get_pool()``
+As a design decision, management of the PostgreSQL connection is the responsability of the developer.
+As such, upon modifying, creating or removing data in a session, it is necessary to commit or rollback the  `SQL Alchemy <http://www.sqlalchemy.org/>`_ session using ``flask_philo.db.postgresql.connection.get_pool()``
 
 ::
 
