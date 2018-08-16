@@ -1,7 +1,7 @@
 SQL Alchemy ORM for Postgresql
 =======================================
 
-Flask-Philo uses SQLAlchemy as its Object Relational Mapper (ORM).
+Flask-Philo uses SQLAlchemy as its Object Relational Mapper (ORM). For mode detail and documentation on SQL Alchemy, visit `<https://www.sqlalchemy.org/>`_
 
 
 Where is Flask-Philo's PostgreSQL ORM implementation?
@@ -32,14 +32,14 @@ to your application's settings file, typically ``<your_app>/config/development.p
 Models
 ======
 
-In order to create simple Models, simply create classes that inherit from Flask-Philo's ``BaseModel`` class:
+In order to create Flask-Philo Models, simply create classes that inherit from Flask-Philo's ``BaseModel`` class:
 
 ``flask_philo.db.postgresql.orm.BaseModel``
 
 ``BaseModel`` exposes a number of useful methods for retrieving and manipulating data:
 
-* **update** - method description
-* **add** - method description
+* **add** - create a new Flask-Philo class instance (ORM object)
+* **update** - modify an existing ORM object
 * **delete** - method description
 * **objects.get** - method description
 * **objects.filter_by** - method description
@@ -48,7 +48,7 @@ In order to create simple Models, simply create classes that inherit from Flask-
 
 
 
-Quick example
+Example Models
 -------------
 
 Here are 3 examples of models with some simple properties and examples of how you can use them in
