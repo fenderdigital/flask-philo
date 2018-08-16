@@ -46,6 +46,7 @@ In order to create Flask-Philo Models, simply create classes that inherit from F
 * **objects.count()** - count all object instances of a Flask-Philo class
 * **objects.raw_sql(sql_query_string)** - run direct SQL queries on your application's database
 
+...examples for each of these methods are included in the **Data Manipulation Examples** section below
 
 
 Example Models
@@ -239,6 +240,112 @@ Data Manipulation Examples
 ------------------
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+* **update()** - modify an existing ORM object
+* **delete()** - delete an ORM object
+* **objects.get(key=value)** - retrieve an ORM object by a specified key
+* **objects.filter_by(key=value)** - retrieve a collection of filtered objects by a specified key/keys
+* **objects.count()** - count all object instances of a Flask-Philo class
+* **objects.raw_sql(sql_query_string)** - run direct SQL queries on your application's database
+
+
+
+
+Adding a record
+^^^^^^^^^^^^^^^
+
+In this example, we create a new **Genre** using the same model defined in the **Example Models** section:
+
+::
+
+    pool = get_pool()
+    rock = Genre(name='Rock', description='Rock and Roll')
+    rock.add()
+
+
+At this point, we have added a new instance of the **Genre** model to our DB session, but we still need to either ``commit()`` or ``rollback()`` the insert operation
+
+To commit the operation and create a new record:
+
+::
+
+    pool.commit()
+
+
+...alternatively, if the record is not needed the transaction can be rolled-back, and nothing will be changed in the PostgreSQL database:
+
+::
+
+    pool.rollback()
+
+
+
+Retrieving a specific record
+^^^^^^^^^^^^^^^^^^
+
+Now that we've created and committed our new 'Rock' genre, we can retrieve the record directly from the database by using the ``objects.get()`` function:
+
+::
+
+    genre_obj = Genre.objects.get(name="Rock")
+    genre_name = genre_obj.name
+    genre_id = genre_obj.id
+    print("Genre", genre_id, ":", genre_name)
+
+...we can also retrieve a record that matches *multiple* field values:
+
+::
+
+    genre_obj = Genre.objects.get(id=13, name="Rock")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Adding a record
 ^^^^^^^^^^^^^^^
 
@@ -246,9 +353,9 @@ In this example, we create a new **Genre** using the same model defined above:
 
 ::
 
-    pool = get_pool()   # open a DB session
-    rock = Genre(name='Rock', description='Rock and Roll')  # create a new Genre object
-    rock.add()  # Add the new Genre object to our session
+    pool = get_pool()
+    rock = Genre(name='Rock', description='Rock and Roll')
+    rock.add()
 
 
 At this point, we have added a new instance of the **Genre** model to our DB session, but we still need to either ``commit()`` or ``rollback()`` the insert operation
@@ -267,9 +374,7 @@ If the record is not needed, the transaction can be rolled-back, and nothing wil
     pool.rollback()
 
 
-Let's suppose you've created and committed the new genre.
-
-Now you can retrieve the record from the database by using the filter_by function:
+Now that we've created and committed our new 'Rock' genre, we can retrieve the record from the database by using the ``filter_by()`` function:
 
 ::
 
