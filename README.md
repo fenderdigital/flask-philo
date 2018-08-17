@@ -1,6 +1,6 @@
 # Flask-Philo
 
-Small and very opinionated framework to build flask based microservices.
+Flask-Philo is a small and very opinionated framework to build Flask-based microservices.
 
 You can check the official documentation [here](http://flask-philo.readthedocs.io/en/latest/)
 
