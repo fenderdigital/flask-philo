@@ -386,21 +386,30 @@ related models, **Album** and **Artist**, as defined in the *Example Models* sec
         # Create and commit an artist record
         floyd_artist_obj = Artist(name='Pink Floyd')
         floyd_artist_obj.commit()
+        pink_floyd_id = floyd_artist_obj.id
         pool.commit()
 
         # Create and commit a related album
         dark_album_obj = Album(
-            artist_id=floyd_artist_obj.id, name='Dark side of the moon')
+            artist_id=pink_floyd_id, name='Dark side of the moon')
         dark_album_obj.add()
         pool.commit()
 
         # Create and commit another related album by the same artist
         wall = Album(
-            artist_id=floyd_artist_obj.id, name='The Wall',
+            artist_id=pink_floyd_id, name='The Wall',
             description='Interesting')
         wall.add()
         pool.commit()
 
+        # Retrieve all albums by Pink Floyd
+        album_results = Album.objects.filter_by(artist_id=pink_floyd_id)
+        for album_obj in album_results:
+            print("Pink Floyd album :", album_obj.name)
+
+        # Will print:
+        # Pink Floyd album : Dark side of the moon
+        # Pink Floyd album : The Wall
 
 
 Using multiple Postgresql databases
