@@ -63,13 +63,7 @@ To quickly generate a new Flask-Philo project, navigate to the directory in whic
     $ flask-philo-admin startproject <project_name>
 
 
-This will create a folder called <project_name> which will contain the basic structure of a Flask-Philo application.
-
-Example:
-
-::
-
-    $ flask-philo-admin startproject flask-philo-example
+This will create a folder called <project_name> which will contain the basic structure of a Flask-Philo application, basic unit tests and configuration.
 
 
 Folder structure
@@ -100,7 +94,7 @@ The following folder structure is created for the new project:
         * base.txt
         * dev.txt
 
-Running the server for the new project_name
+Running the server for your new project
 ###########################################
 
 To run the listening server for your new Flask-Philo project, navigate to the project's ``src/`` directory and issue the ``runserver`` command :
