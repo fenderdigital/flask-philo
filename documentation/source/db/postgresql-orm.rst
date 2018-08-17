@@ -262,9 +262,6 @@ Data Manipulation Examples
 
 
 
-
-.. * **delete()** - delete an ORM object
-.. * **objects.count()** - count all object instances of a Flask-Philo class
 .. * **objects.raw_sql(sql_query_string)** - run direct SQL queries on your application's database
 
 
@@ -371,6 +368,17 @@ In the same way we've added and updated a record, we can also delete it:
     genre_obj = Genre.objects.filter_by(name="Metal").first()   # genre_obj == None
 
 ..once we have committed the ``delete()`` operation, this record no longer exists in our PostgreSQL DB.
+
+
+Counting records
+^^^^^^^^^^^^^^^^
+
+To count the number of instances of a given Model, we can use the ``objects.count()`` method.
+
+::
+
+    genre_count = Genre.objects.count()
+    print(genre_count, "Genres present")  # Will print "13 Genres present"
 
 
 Querying using Raw SQL
