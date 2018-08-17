@@ -65,7 +65,7 @@ your application:
 
     class Artist(BaseModel):
         __tablename__ = 'artist'
-        name = Column(String(256))
+        name = Column(String(256), nullable=False)
         description = Column(String(256))
         albums = relationship('Album', backref='artist')
         is_famous = Column(Boolean, default=False)
@@ -74,14 +74,14 @@ your application:
 
     class Album(BaseModel):
         __tablename__ = 'album'
-        name = Column(String(256))
+        name = Column(String(256), nullable=False)
         description = Column(String(256))
         artist_id = Column(Integer, ForeignKey('artist.id'))
 
 
     class Genre(BaseModel):
         __tablename__ = 'genre'
-        name = Column(String(256))
+        name = Column(String(256), nullable=False)
         description = Column(String(256))
 
 
@@ -375,32 +375,28 @@ Modifying data by raw SQL:
 
 
 
-Examples using relations
-------------------------
+Data manipulation with Relationships
+^^^^^^^^^^^^^^^^^^^^^^^
+
+The following example demonstrates the creation and retrieval of objects for two
+related models, **Album** and **Artist**, as defined in the *Example Models* section above
 
 ::
 
-        dark = Album(
-            artist_id=pink.id, name='Dark side of the moon',
-            description='Interesting')
-        dark.add()
-        pool.commit()
-        rolling = Artist(
-            genre_id=rock.id, name='Rolling Stones',
-            description='Acceptable')
-
-        rolling.add()
+        # Create and commit an artist record
+        floyd_artist_obj = Artist(name='Pink Floyd')
+        floyd_artist_obj.commit()
         pool.commit()
 
-        hits = Album(
-            artist_id=rolling.id, name='Greatest hits',
-            description='Interesting')
-        hits.add()
+        # Create and commit a related album
+        dark_album_obj = Album(
+            artist_id=floyd_artist_obj.id, name='Dark side of the moon')
+        dark_album_obj.add()
         pool.commit()
-        assert 2 == Album.objects.count()
 
+        # Create and commit another related album by the same artist
         wall = Album(
-            artist_id=pink.id, name='The Wall',
+            artist_id=floyd_artist_obj.id, name='The Wall',
             description='Interesting')
         wall.add()
         pool.commit()
