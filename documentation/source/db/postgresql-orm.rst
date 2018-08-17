@@ -239,41 +239,6 @@ The following examples demonstrate each of the core ORM operations you will comm
 Data Manipulation Examples
 ------------------
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.. * **objects.raw_sql(sql_query_string)** - run direct SQL queries on your application's database
-
-
-
-
-
-
-
-
-
-
-
 Adding a new record
 ^^^^^^^^^^^^^^^
 
@@ -384,28 +349,30 @@ To count the number of instances of a given Model, we can use the ``objects.coun
 Querying using Raw SQL
 ^^^^^^^^^^^^^^^
 
-You can use the ``raw_sql`` command to run queries also, like the following example:
+While the use of SQLAlchemy ORM will automatically translate Flask-Philo method
+calls to their corresponding PostgreSQL queries, we also provide a means of
+directly querying our underlying PostgreSQL database with a raw SQL query.
+
+By passing a valid SQL query-string to the ``objects.raw_sql()`` method, we can
+retrieve or update data explicitly, as is the case in the following examples:
+
+``Retrieving data by raw SQL``
+::
+
+    raw_sql_genre_result = Genre.objects.raw_sql("SELECT description FROM genre WHERE name='Rock';").fetchone()
+    genre_description = raw_sql_genre_result.description
+    genre_name = raw_sql_genre_result.name
+    print(genre_name, "genre description :", genre_description) # Will print "Rock genres description : Rock and Roll"
+
+
+``Modifying data by raw SQL``
 
 ::
 
-    raw_sql_genre = Genre.objects.raw_sql("SELECT description FROM genre WHERE name='Jazz';").fetchone()
-    genre_description = raw_sql_genre.description
+    query_string = "UPDATE genre SET name='Indie' WHERE id = 13"
+    Genre.objects.raw_sql(query_string)
 
 
-Another example using raw sql:
-
-::
-
-    count = Genre.objects.raw_sql("SELECT count(*) FROM genre;").fetchone()[0]
-
-
-The variable ``count`` will return the number of lines in genre table.
-
-An easy way to count records in a table is to use the following syntax:
-
-::
-
-    count = Genre.objects.count()
 
 
 Examples using relations
