@@ -85,8 +85,29 @@ The following folder structure is created for the new project:
         * dev.txt
 
 
+## Running the server for your new project
 
-## Executing test
+To run the listening server for your new Flask-Philo project, navigate to the project's ``src/`` directory and issue the ``runserver`` command :
+
+::
+
+    $ cd <your-project-dir>/src
+    $ python3 manage.py runserver
+
+The response from this command will be something like this:
+
+::
+
+    * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
+    * Restarting with stat
+    * Debugger is active!
+    * Debugger PIN: 147-416-135
+
+Access to the server's URL routes is controlled in two places: URL and View files.
+
+
+
+## Executing Unit Tests
 
 In order to run test a vagrant instance is required, below steps required to execute unit tests:
 
