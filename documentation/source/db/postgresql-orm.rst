@@ -436,6 +436,7 @@ Here's an example of a typical configuration file:
 ...with this in place, we can now access a specific database while using ``flask_philo.db.postgresql.connection.get_pool)()``:
 
 ::
+
     from flask_philo.db.postgresql.connection import get_pool
     pool = get_pool()
 
