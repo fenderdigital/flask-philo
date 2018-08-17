@@ -103,21 +103,83 @@ The response from this command will be something like this:
     * Debugger PIN: 147-416-135
 ```
 
-Access to the server's URL routes is controlled in two places: URL and View files.
+
+## Accessing the new Flask-Philo app
+
+If you haven't already done so, run the following terminal command to create your Flask-Philo application:
+
+```
+    $ python3 manage.py runserver
+```
+
+
+Now, with the application running and with a route defined, the following URL address will be accessible in the browser of your choice, and will return a JSON response:
+
+http://localhost:8080/example
+
+Note that the port number (in this case ``8080``) should match the port number displayed when you start the application:
+
+```
+    # Port 8080 in this case
+    * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
+    ...
+```
+
+Your browser will display a JSON response, as defined in the **ExampleView** class :
+
+```
+    {"some_data": "yes"}
+```
+
+
+Alternatively, you can test this example URL route with a direct HTTP request using the CURL command-line tool:
+
+```
+  $ curl http://localhost:8080/example
+  {"some_data": "yes"}
+```
+
+
+All incoming request to your Flask-Philo application and their corresponding HTTP status codes may be viewed in the same console session you used to start the application:
+
+```
+    * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
+    * Restarting with stat
+    * Debugger is active!
+    * Debugger PIN: 147-416-135
+    127.0.0.1 - - [05/Dec/2017 00:06:01] "GET /example HTTP/1.1" 200 -
+```
 
 
 
 ## Executing Unit Tests
 
-In order to run test a vagrant instance is required, below steps required to execute unit tests:
+Flask-Philo simplifies Unit Test coverage by providing a single console command for running and managing all test. All test code should be written in the dedicated directory location : ``src/app/tests``. Within this directory, all Python source files begining with ``test_`` will be executed as part of a suite of Unit Tests.
+
+To run all Unit Tests for your new Flask-Philo app, use the following console command:
 
 ```
-   $ cd test
-   $ vagrant up
-   $ vagrant ssh
-   $ cd /src/test
-   $ python3 manage.py test
+    $ python3 manage.py test
 ```
+
+
+The return of the tests will be something like the print below:
+
+
+```
+    ===================================== test session starts ======================================
+    platform darwin -- Python 3.5.1, pytest-3.3.0, py-1.5.2, pluggy-0.6.0
+    rootdir: <where_your_project_is>/flask-philo-example/src, inifile:
+    collected 1 item
+
+    tests/test_views.py .                                                                    [100%]
+
+    =================================== 1 passed in 0.02 seconds ===================================
+```
+
+
+In this example, the automatically-generated example Unit Test class **TestExampleEndpoints** is executed, as defined in ``src/tests/test_views.py``
+
 
 
 
