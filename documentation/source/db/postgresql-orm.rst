@@ -415,13 +415,13 @@ related models, **Album** and **Artist**, as defined in the *Example Models* sec
 Using multiple Postgresql databases
 -------------------------------------
 
-Flask-Philo allows you to connect to multiple postgresql database instances in the same
+Flask-Philo allows you to connect to multiple PostgreSQL database instances from the same
 application.
 
 To take advantage of this feature, simply add a ``DATABASES`` block in an application
 configuration file in ``src/config``.
 
-Here's an example of a configuration  that we use in some applications:
+Here's an example of a typical configuration file:
 
 ::
 
@@ -433,10 +433,15 @@ Here's an example of a configuration  that we use in some applications:
  }
 
 
-Now you can access to the specific database using ``flask_philo.db.postgresql.connection.get_pool``:
+...with this in place, we can now access a specific database while using ``flask_philo.db.postgresql.connection.get_pool)()``:
 
 ::
+    from flask_philo.db.postgresql.connection import get_pool
+    pool = get_pool()
 
-        blues = Genre(name='Blues', description='Still got the blues')
-        blues.add()
-        pool.commit(connection_name='MUSIC_CATALOG'))
+    # Add a Genre object to our session
+    blues_obj = Genre(name='Blues', description='Still got the blues')
+    blues_obj.add()
+
+    # Commit changes to the MUSIC_CATALOG database
+    pool.commit(connection_name='MUSIC_CATALOG'))
