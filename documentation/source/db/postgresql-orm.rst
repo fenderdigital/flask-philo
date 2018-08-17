@@ -433,7 +433,7 @@ Here's an example of a typical configuration file:
  }
 
 
-...with this in place, we can now access a specific database while using ``flask_philo.db.postgresql.connection.get_pool)()``:
+...with this in place, we can now access a specific database while using Flask-Philo's ``get_pool)()`` method:
 
 ::
 
