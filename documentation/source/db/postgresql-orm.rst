@@ -356,7 +356,7 @@ directly querying our underlying PostgreSQL database with a raw SQL query.
 By passing a valid SQL query-string to the ``objects.raw_sql()`` method, we can
 retrieve or update data explicitly, as is the case in the following examples:
 
-``Retrieving data by raw SQL``
+Retrieving data by raw SQL:
 ::
 
     raw_sql_genre_result = Genre.objects.raw_sql("SELECT description FROM genre WHERE name='Rock';").fetchone()
@@ -365,7 +365,7 @@ retrieve or update data explicitly, as is the case in the following examples:
     print(genre_name, "genre description :", genre_description) # Will print "Rock genres description : Rock and Roll"
 
 
-``Modifying data by raw SQL``
+Modifying data by raw SQL:
 
 ::
 
