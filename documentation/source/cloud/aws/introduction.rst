@@ -2,7 +2,7 @@ AWS Integration
 =======================
 
 Flask-Philo supports basic `AWS <https://aws.amazon.com/>`_ integration
-using `boto3 <https://pypi.python.org/pypi/boto3>`-
+using `boto3 <https://pypi.python.org/pypi/boto3>`_
 
 
 
