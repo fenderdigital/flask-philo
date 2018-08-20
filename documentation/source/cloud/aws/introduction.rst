@@ -17,8 +17,8 @@ Flask-philo supports two means of authentication for AWS. Firstly, via environme
 
 ::
 
-    export AWS_SECRET_ACCESS_KEY=secret_access
-    export AWS_ACCESS_KEY_ID=key_id
+    $ export AWS_SECRET_ACCESS_KEY=your_secret_key
+    $ export AWS_ACCESS_KEY_ID=your_access_key
 
 
 ...or via configuration in the settings file:
@@ -29,8 +29,8 @@ Flask-philo supports two means of authentication for AWS. Firstly, via environme
 
     AWS = {
         'credentials': {
-            'aws_access_key_id': 'acces_key',
-            'aws_secret_access_key': 'secret_key'
+            'aws_access_key_id': 'your_access_key',
+            'aws_secret_access_key': 'your_secret_key'
         }
     }
 
@@ -39,6 +39,46 @@ Amazon S3 Bucket support
 -----------------
 
 Flask-Philo supports the use of Amazon's S3 file storage buckets, and provides a number of useful methods for storing and retrieving data
+
+Listing available S3 Buckets
+############################
+
+::
+
+    from flask_philo.cloud.aws.s3 import list_objects_v2
+
+    bucket_content = list_objects_v2('bdd-reports','us-west-2')
+    print(bucket_content['Name'])
+
+
+Downloading a file from a S3 Bucket
+###################################
+
+::
+
+    from flask_philo.cloud.aws.s3 import download_file
+
+    upload_file('test.log', 'bdd-reports', 'test_dir/test.log', 'us-west-2')
+
+
+Uploading a file to a S3 Bucket
+###############################
+
+::
+
+    from flask_philo.cloud.aws.s3 import upload_file
+
+    download_file('test.log', 'bdd-reports', 'test_dir/test.log', 'us-west-2')
+
+
+Uploading a folder to a S3 Bucket
+#################################
+
+::
+
+    from flask_philo.cloud.aws.s3 import upload_dir
+    upload_dir('test_dir', 'bdd_reports', 'us-west-2')
+
 
 * **add()** - create a new Flask-Philo class instance (ORM object)
 * **update()** - modify an existing ORM object
