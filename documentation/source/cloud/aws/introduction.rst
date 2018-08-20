@@ -4,6 +4,10 @@ AWS Integration
 Flask-Philo supports basic `Amazon Web Service (AWS) <https://aws.amazon.com/>`_ integration
 using Amazon's `boto3 <https://pypi.python.org/pypi/boto3>`_ AWS SDK.
 
+More specifically, Flask-Philo provides methods for integration with two main services within Amazon's AWS family:
+
+* **S3 Storage** - Integration with Amazon's S3 file storage buckets, providing a number of useful methods for storing and retrieving data
+* **SQS Queuing** - Integration with Amazon's Simple Queuing Service (SQS), with a number of methods for creating and managing queuing systems
 
 
 Settings AWS Credentials
