@@ -1,7 +1,7 @@
 AWS Integration
 =======================
 
-Flask-Philo supports basic `Amazon Web Service (AWS)<https://aws.amazon.com/>`_ integration
+Flask-Philo supports basic `Amazon Web Service (AWS) <https://aws.amazon.com/>`_ integration
 using Amazon's `boto3 <https://pypi.python.org/pypi/boto3>`_ AWS SDK.
 
 
