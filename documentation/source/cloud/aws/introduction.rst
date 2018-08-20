@@ -13,8 +13,7 @@ More specifically, Flask-Philo provides methods for integration with two main se
 Settings AWS Credentials
 -----------------------------------
 
-Flask-philo supports two mechanisms for setting AWS. The
-first one is via environment variables:
+Flask-philo supports two means of authentication for AWS. Firstly, via environment variables:
 
 ::
 
@@ -22,8 +21,10 @@ first one is via environment variables:
     export AWS_ACCESS_KEY_ID=key_id
 
 
-The second one is via configuration in the settings file:
+...or via configuration in the settings file:
 
+
+``<your_app>/config/development.py``
 ::
 
     AWS = {
