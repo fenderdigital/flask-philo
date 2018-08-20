@@ -49,7 +49,7 @@ Flask-Philo supports the use of Amazon's S3 file storage buckets, and provides a
 
 
 
-include:: ./code_integration.rst
+.. include:: ./code_integration.rst
 
 
 External Resources
