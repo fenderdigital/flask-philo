@@ -57,6 +57,8 @@ For example:
     bucket_name = 'bdd_reports'
     region_name = 'us-west-2'
     bucket_content = list_objects_v2(bucket_name, bucket_region)['Contents']
+
+    # Print out all bucket items
     for bucket_item in bucket_content:
         print(bucket_item['Key'])
 
