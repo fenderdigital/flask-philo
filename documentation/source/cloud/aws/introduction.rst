@@ -204,40 +204,62 @@ Example Python code :
     url = 'https://us-west-2.queue.amazonaws.com/523525905522/new_test_queue'
     region = 'us-west-2'
     message_batch = [
-        {"Id": "1", "MessageBody": "[message one]"},
-        {"Id": "2", "MessageBody": "[message two]"}
+        {"Id": "1", "MessageBody": "Test Message One"},
+        {"Id": "2", "MessageBody": "Test Message Two"}
     ]
 
     data = send_message_batch(queue_url=url, entries=message_batch, region=region)
 
 
-Receive Messages
+Retrieving Messages
 #################
 
-To receive one message from the queue:
+To retrieve a single message from a queue, use the *receive_message* method
+
+``receive_message(queue_url, max_number_of_messages, region)``
+
+* **queue_url** : URL for SQS queue
+* **max_number_of_messages** : *Optional* Specify number of message to be retrieved
+* **region** : Name of Amazon S3 Region
+
+Example Python code :
 
 ::
 
-    ...
     from flask_philo.cloud.aws.sqs import receive_message
-    data = receive_message(queue_url="https://us-west-2.queue.amazonaws.com/523525905522/new_test_queue", region="us-west-2")
 
-    return self.json_response(
-        status=200, data=data['Messages'][0]['Body'])
+    url = 'https://us-west-2.queue.amazonaws.com/523525905522/new_test_queue'
+    region_name = 'us-west-2'
+
+    retrieved_messages = receive_message(queue_url=url, region=region_name)
+    print("Body of message retrieved :", retrieved_messages[0]['Body'])
+
+    ##########################
+    This code yields the following printed output :
+    Body of message retrieved : My new test message
 
 
-In the example above, it returned the body of the message received.
-
-To receive more than one message from the queue we can specify the attribute `` when calling the function. Like the example below:
+Optionally, we may retrieve more than one message at a time using the ``max_number_of_messages`` attribute
 
 ::
 
-    ...
     from flask_philo.cloud.aws.sqs import receive_message
-    messages = receive_message(queue_url="https://us-west-2.queue.amazonaws.com/523525905522/new_test_queue", region="us-west-2", max_number_of_messages=2)
 
-    return self.json_response(
-        status=200, data=messages)
+    url = 'https://us-west-2.queue.amazonaws.com/523525905522/new_test_queue'
+    region_name = 'us-west-2'
+
+    retrieved_messages = receive_message(queue_url=url, region=region_name, max_number_of_messages=2)
+
+    # Print all retrieved messages
+    print("Messages : ")
+    for message in retrieved_messages:
+        print("Message :", message['Body'])
+
+    ##########################
+    This code yields the following printed output :
+    Messages :
+    Test Message One
+    Test Message Two
 
 
 
