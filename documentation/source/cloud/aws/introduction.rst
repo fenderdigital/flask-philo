@@ -45,9 +45,6 @@ Listing available Bucket contents
 
 ``list_objects_v2(bucket_name, region_name)``
 
-Parameters
-^^^^^^^^^^
-
 * **bucket_name** : Name of Amazon S3 Bucket
 * **region_name** : Name of Amazon S3 Region
 
