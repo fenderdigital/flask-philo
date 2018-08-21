@@ -40,8 +40,15 @@ Amazon S3 Bucket
 
 Flask-Philo supports the use of Amazon's S3 file storage buckets, and provides a number of useful methods for storing and retrieving data
 
-Listing available S3 Buckets
+Listing available Bucket contents
 ############################
+
+``list_objects_v2(bucket_name, region_name)``
+
+Parameters
+----------
+* **bucket_name** : Name of Amazon S3 Bucket
+* **region_name** : Name of Amazon S3 Region
 
 ::
 
