@@ -64,8 +64,8 @@ For example:
     for bucket_item in bucket_content:
         print(bucket_item['Key'])
 
-Printed output :
-::
+    ##########################
+    Yields the following printed output :
     Bucket contents :
     readme.txt
     13167621.mp3
