@@ -198,6 +198,7 @@ Send multiple messages to a queue using the *send_message_batch* method
 Example Python code :
 
 ::
+
     from flask_philo.cloud.aws.sqs import send_message_batch
 
     url = 'https://us-west-2.queue.amazonaws.com/523525905522/new_test_queue'
