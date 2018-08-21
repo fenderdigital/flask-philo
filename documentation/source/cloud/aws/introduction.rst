@@ -50,7 +50,7 @@ To list all available items within a specified S3 Bucket, we use the *list_objec
 * **bucket_name** : Name of Amazon S3 Bucket
 * **region_name** : Name of Amazon S3 Region
 
-For example:
+Example Python calling code :
 
 ::
 
@@ -77,7 +77,7 @@ For example:
 Downloading a file from an S3 Bucket
 ###################################
 
-Individual data items may be retrieved using the *download_file* method
+Individual S3 data items may be retrieved using the *download_file* method
 
 ``download_file(destination_filename, bucket_name, source_key, bucket_region)``
 
@@ -86,7 +86,7 @@ Individual data items may be retrieved using the *download_file* method
 * **source_key** : Amazon S3 key for the desired bucket item
 * **region_name** : Name of Amazon S3 Region
 
-For Example:
+Example Python calling code :
 
 ::
 
