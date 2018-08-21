@@ -170,44 +170,44 @@ Send a single message to a queue using the *send_message* method
 
 * **queue_url** : URL for SQS queue
 * **message_body** : Body of queue message
-* **region_name** : Name of Amazon S3 Region
+* **region** : Name of Amazon S3 Region
 
 Example Python code :
 
 ::
 
     from flask_philo.cloud.aws.sqs import send_message
-    data = send_message(
-        queue_url="https://us-west-2.queue.amazonaws.com/523525905522/new_test_queue",
-        message_body="My new test message",
-        region="us-west-2")
 
-    return self.json_response(
-        status=200, data=data['MessageId'])
-
-
-It will print the id four our brand new message.
-
+    queue_url = 'https://us-west-2.queue.amazonaws.com/523525905522/new_test_queue'
+    message_body = 'My new test message'
+    region = 'us-west-2'
+    data = send_message(queue_url, message_body, region)
 
 
 Sending a Message Batch
 #######################
 
-To send more than one message to a queue, we can a piece of code like the one below:
+Send multiple messages to a queue using the *send_message_batch* method
+
+``send_message_batch(queue_url, entries, region)``
+
+* **queue_url** : URL for SQS queue
+* **entries** : List of message objects, in dictionary form
+* **region** : Name of Amazon S3 Region
+
+Example Python code :
 
 ::
-
-    ...
     from flask_philo.cloud.aws.sqs import send_message_batch
-    data = send_message_batch(queue_url="https://us-west-2.queue.amazonaws.com/523525905522/new_test_queue",
-        entries=[{"Id":"1","MessageBody":"[message one]"},{"Id":"2","MessageBody":"[message two]"}],
-        region="us-west-2")
 
-    return self.json_response(
-        status=200, data=data)
+    url = 'https://us-west-2.queue.amazonaws.com/523525905522/new_test_queue'
+    region = 'us-west-2'
+    message_batch = [
+        {"Id": "1", "MessageBody": "[message one]"},
+        {"Id": "2", "MessageBody": "[message two]"}
+    ]
 
-
-It will return a json string coitaining the id for every message sent.
+    data = send_message_batch(queue_url=url, entries=message_batch, region=region)
 
 
 Receive Messages
