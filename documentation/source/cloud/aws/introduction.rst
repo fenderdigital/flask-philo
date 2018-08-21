@@ -101,7 +101,7 @@ Example Python calling code :
     download_file('dest/my_new_local_file.txt', bucket_name, bucket_item['Key'], region_name)
 
 
-Uploading a file to a S3 Bucket
+Uploading a file to an S3 Bucket
 ###############################
 
 Individual files may be uploaded to an S3 bucket using the *upload_file* method
@@ -129,11 +129,24 @@ Example Python calling code :
 Uploading a folder to a S3 Bucket
 #################################
 
+Bulk uploads of an entire directory's contents is possible using the *upload_dir* method
+
+``upload_dir(source_dir, bucket_name, region_name)``
+
+* **source_dir** : Local, readable directory containing all files for upload
+* **bucket_name** : Name of Amazon S3 Bucket
+* **region_name** : Name of Amazon S3 Region
+
+Example Python code :
+
 ::
 
     from flask_philo.cloud.aws.s3 import upload_dir
-    upload_dir('test_dir', 'bdd_reports', 'us-west-2')
 
+    bucket_name = 'my_data_bucket'
+    region_name = 'us-west-2'
+    source_dir = './my_files/for_upload'
+    upload_dir(source_dir, bucket_name, region_name)
 
 
 ------------
