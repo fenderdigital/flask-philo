@@ -104,11 +104,26 @@ Example Python calling code :
 Uploading a file to a S3 Bucket
 ###############################
 
+Individual files may be uploaded to an S3 bucket using the *upload_file* method
+
+``upload_file(source_filename, bucket_name, destination_key, bucket_region)``
+
+* **source_filename** : Local, readable file location as source of upload
+* **bucket_name** : Name of Amazon S3 Bucket
+* **destination_key** : New Amazon S3 key for the uploaded bucket item
+* **region_name** : Name of Amazon S3 Region
+
+Example Python calling code :
+
 ::
 
-    from flask_philo.cloud.aws.s3 import upload_file
+    from flask_philo.cloud.aws.s3 import upload_file, list_objects_v2
 
-    download_file('test.log', 'bdd-reports', 'test_dir/test.log', 'us-west-2')
+    bucket_name = 'my_data_bucket'
+    region_name = 'us-west-2'
+
+    # Upload new file to S3 Bucket using Key 'My_New_File_Key'
+    upload_file('dest/my_new_local_file.txt', bucket_name, 'My_New_File_key', region_name)
 
 
 Uploading a folder to a S3 Bucket
