@@ -156,9 +156,9 @@ Example Python code :
 Amazon Simple Queuing Service (SQS)
 ------------------------------
 
-To facilitate task queueing between software components (e.g. between multiple decoupled microservices), Flask-Philo Integrates with Amazon's Simple Queuing Service (SQS), with a number of methods for creating and managing queuing systems.
+To facilitate task queueing between software components (e.g. between multiple decoupled microservices), Flask-Philo Integrates with Amazon's Simple Queuing Service (SQS), with a number of methods for creating and managing message queuing systems.
 
-For more detail on message queuing, visit the `SQS Introduction <https://aws.amazon.com/sqs/>`_
+For more detail on SQS message queuing, visit the `SQS Introduction <https://aws.amazon.com/sqs/>`_
 
 
 Sending a Message
@@ -166,11 +166,23 @@ Sending a Message
 
 To send a message to a queue:
 
+Send a single message to a queue using the *send_message* method
+
+``send_message(queue_url, message_body, region_name)``
+
+* **queue_url** : URL for SQS queue
+* **message_body** : Body of queue message
+* **region_name** : Name of Amazon S3 Region
+
+Example Python code :
+
 ::
 
-    ...
     from flask_philo.cloud.aws.sqs import send_message
-    data = send_message(queue_url="https://us-west-2.queue.amazonaws.com/523525905522/new_test_queue", message_body="My new test message", region="us-west-2")
+    data = send_message(
+        queue_url="https://us-west-2.queue.amazonaws.com/523525905522/new_test_queue",
+        message_body="My new test message",
+        region="us-west-2")
 
     return self.json_response(
         status=200, data=data['MessageId'])
