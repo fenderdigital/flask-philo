@@ -74,7 +74,7 @@ For example:
     18776371.mp3
 
 
-Downloading a file from a S3 Bucket
+Downloading a file from an S3 Bucket
 ###################################
 
 Individual data items may be retrieved using the *download_file* method
@@ -88,9 +88,15 @@ Individual data items may be retrieved using the *download_file* method
 
 ::
 
-    from flask_philo.cloud.aws.s3 import download_file
+    from flask_philo.cloud.aws.s3 import download_file, list_objects_v2
 
-    upload_file('test.log', 'bdd-reports', 'test_dir/test.log', 'us-west-2')
+    # Retrieve first bucket item
+    bucket_name = 'my_data_bucket'
+    region_name = 'us-west-2'
+    bucket_item = list_objects_v2(bucket_name, region_name)['Contents'][0]
+
+    # Download bucket item to new file location "dest/my_new_local_file.txt"
+    download_file('dest/my_new_local_file.txt', bucket_name, bucket_item['Key'], region_name)
 
 
 Uploading a file to a S3 Bucket
