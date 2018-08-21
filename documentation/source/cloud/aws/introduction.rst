@@ -164,8 +164,6 @@ For more detail on SQS message queuing, visit the `SQS Introduction <https://aws
 Sending a Message
 #################
 
-To send a message to a queue:
-
 Send a single message to a queue using the *send_message* method
 
 ``send_message(queue_url, message_body, region_name)``
