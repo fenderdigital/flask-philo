@@ -40,20 +40,25 @@ Amazon S3 Bucket
 
 Flask-Philo supports the use of Amazon's S3 file storage buckets, and provides a number of useful methods for storing and retrieving data
 
-Listing available Bucket contents
+Retrieving available Bucket contents
 ############################
 
-``list_objects_v2(bucket_name, region_name)``
+To list all available items within a specified S3 Bucket, we use the ``list_objects_v2(bucket_name, region_name)`` method:
 
 * **bucket_name** : Name of Amazon S3 Bucket
 * **region_name** : Name of Amazon S3 Region
+
+For example:
 
 ::
 
     from flask_philo.cloud.aws.s3 import list_objects_v2
 
-    bucket_content = list_objects_v2('bdd-reports','us-west-2')
-    print(bucket_content['Name'])
+    bucket_name = 'bdd_reports'
+    region_name = 'us-west-2'
+    bucket_content = list_objects_v2(bucket_name, bucket_region)['Contents']
+    for bucket_item in bucket_content:
+        print(bucket_item['Key'])
 
 
 Downloading a file from a S3 Bucket
