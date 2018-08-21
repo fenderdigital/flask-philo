@@ -65,14 +65,22 @@ For example:
         print(bucket_item['Key'])
 
     ##########################
-    Yields the following printed output :
+    This code yields the following printed output :
     Bucket contents :
     readme.txt
     13167621.mp3
     18776371.mp3
 
+
 Downloading a file from a S3 Bucket
 ###################################
+
+Individual data items may be retrieved using ``download_file(destination_filename, bucket_name, source_key, bucket_region)``
+
+* **destination_filename** : Local, writable file location for downloaded file
+* **bucket_name** : Name of Amazon S3 Bucket
+* **source_key** : Amazon S3 key for the desired bucket item
+* **region_name** : Name of Amazon S3 Region
 
 ::
 
