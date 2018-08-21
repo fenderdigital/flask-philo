@@ -54,14 +54,22 @@ For example:
 
     from flask_philo.cloud.aws.s3 import list_objects_v2
 
-    bucket_name = 'bdd_reports'
+    # Retrieve bucket content
+    bucket_name = 'my_data_bucket'
     region_name = 'us-west-2'
     bucket_content = list_objects_v2(bucket_name, bucket_region)['Contents']
 
-    # Print out all bucket items
+    # Print all bucket items
+    print("Bucket contents : ")
     for bucket_item in bucket_content:
         print(bucket_item['Key'])
 
+Printed output :
+::
+    Bucket contents :
+    readme.txt
+    13167621.mp3
+    18776371.mp3
 
 Downloading a file from a S3 Bucket
 ###################################
