@@ -86,6 +86,8 @@ Individual data items may be retrieved using the *download_file* method
 * **source_key** : Amazon S3 key for the desired bucket item
 * **region_name** : Name of Amazon S3 Region
 
+For Example:
+
 ::
 
     from flask_philo.cloud.aws.s3 import download_file, list_objects_v2
