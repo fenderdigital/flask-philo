@@ -153,10 +153,13 @@ Example Python code :
 
 
 
-Amazon SQS
+Amazon Simple Queuing Service (SQS)
 ------------------------------
 
-To facilitate managed process queueing across multiple microservices, Flask-Philo Integrates with Amazon's Simple Queuing Service (SQS), with a number of methods for creating and managing queuing systems
+To facilitate task queueing between software components (e.g. between multiple decoupled microservices), Flask-Philo Integrates with Amazon's Simple Queuing Service (SQS), with a number of methods for creating and managing queuing systems.
+
+For more detail on message queuing, visit the `SQS Introduction <https://aws.amazon.com/sqs/>`_
+
 
 Sending a Message
 #################
