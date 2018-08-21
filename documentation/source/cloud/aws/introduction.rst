@@ -126,7 +126,7 @@ Example Python calling code :
     upload_file('dest/my_new_local_file.txt', bucket_name, 'My_New_File_key', region_name)
 
 
-Uploading a folder to a S3 Bucket
+Uploading a folder to an S3 Bucket
 #################################
 
 Bulk uploads of an entire directory's contents is possible using the *upload_dir* method
@@ -156,6 +156,7 @@ Example Python code :
 Amazon SQS
 ------------------------------
 
+To facilitate managed process queueing across multiple microservices, Flask-Philo Integrates with Amazon's Simple Queuing Service (SQS), with a number of methods for creating and managing queuing systems
 
 Sending a Message
 #################
