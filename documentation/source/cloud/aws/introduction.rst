@@ -233,6 +233,12 @@ Example Python code :
     region = 'us-west-2'
     data = send_message(queue_url, message_body, region)
 
+This method may also be directly invoked from the command line as follows:
+
+::
+
+    $ python3 manage.py aws sqs send_message --queue_url https://us-west-2.queue.amazonaws.com/523525905522/new_test_queue --message_body "New Queue Message" --region us-west-2
+
 
 Sending a Message Batch
 #######################
@@ -340,6 +346,20 @@ Example Python code :
     https://us-west-2.queue.amazonaws.com/523525905522/test_queue
     https://us-west-2.queue.amazonaws.com/523525905522/new_test_queue
     https://us-west-2.queue.amazonaws.com/523525905522/my-priority-list
+
+
+This method may also be directly invoked from the command line as follows:
+
+::
+
+    $ python3 manage.py aws sqs list_queues
+    +-----------------------------------------------------------------------------+-----------+
+    |                                    Queue Url                                |   Region  |
+    +-----------------------------------------------------------------------------+-----------+
+    |         https://us-west-2.queue.amazonaws.com/523522205522/test_queue       | us-west-2 |
+    |        https://us-west-2.queue.amazonaws.com/523525905522/new_test_queue    | us-west-2 |
+    |         https://us-west-2.queue.amazonaws.com/523525905522/my-priority-list | us-west-2 |
+    +-----------------------------------------------------------------------------+-----------+
 
 
 Create a New Queue
