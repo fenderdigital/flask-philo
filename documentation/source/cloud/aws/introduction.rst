@@ -284,6 +284,42 @@ Example Python code :
 
     data = send_message_batch(queue_url=url, entries=message_batch, region=region)
 
+This method may also be directly invoked from the command line as follows:
+
+::
+
+    $ python3 manage.py aws sqs send_message_batch --queue_url https://us-west-2.queue.amazonaws.com/523525905522/cp_test_queue --region us-west-2 --entries "[{\"Id\":\"1\",\"MessageBody\":\"[message one]\"},{\"Id\":\"2\",\"MessageBody\":\"[message two]\"}]"
+
+    execute_command :  aws
+    {
+      'ResponseMetadata': {
+        'RetryAttempts': 0,
+        'RequestId': '9066cfe7-4504-5e4a-ac68-9c10dfa212cb',
+        'HTTPHeaders': {
+          'connection': 'keep-alive',
+          'server': 'Server',
+          'x-amzn-requestid': '9066cfe7-4504-5e4a-ac68-9c10dfa212cb',
+          'date': 'Wed, 22 Aug 2018 17:07:50 GMT',
+          'content-type': 'text/xml',
+          'content-length': '734'
+        },
+        'HTTPStatusCode': 200
+      },
+      'Successful': [
+        {
+          'Id': '30b7b2c9-ac68-4541-af5b-64b24935c4c4',
+          'MD5OfMessageBody': 'abd51c84e005843b6bffeb7a2d6526c7',
+          'MessageId': 'a26c01a4-39d3-4381-91e4-17b4e3f04177'
+        },
+        {
+          'Id': '1caac440-f795-4294-979b-ea9759ae6a47',
+          'MD5OfMessageBody':
+          'f0ca119551cf7532da54a23477fd39ff',
+          'MessageId': '8c5cd9d4-6fae-4a2c-a5de-05fc4a6334a6'
+        }
+      ]
+    }
+
 
 Retrieving Messages
 #################
