@@ -86,7 +86,7 @@ The method may also be directly invoked from the command line as follows:
 
 ::
 
-    $ python3 manage.py aws s3 list_objects_v2 --bucket rf_7d_mp3 --region us-west-2
+    $ python3 manage.py aws s3 list_objects_v2 --bucket my_data_bucket --region us-west-2
     +----+--------------+---------------------------+---------------+---------------+
     |    |     Key      |       Last Modified       | Size (bytes)  | Storage Class |
     +----+--------------+---------------------------+---------------+---------------+
@@ -122,6 +122,13 @@ Example Python calling code :
 
     # Download bucket item to new file location "dest/my_new_local_file.txt"
     download_file('dest/my_new_local_file.txt', bucket_name, bucket_item['Key'], region_name)
+
+
+The method may also be directly invoked from the command line as follows:
+
+::
+
+    $ python3 manage.py aws s3 download_file --bucket my_data_bucket --region us-west-2 --fname my_new_local_file.txt --key my_bucket_file.txt
 
 
 Uploading a file to an S3 Bucket
