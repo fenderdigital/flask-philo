@@ -329,7 +329,7 @@ To purge an SQS queue of all messages, use the *purge_queue* method
 
     from flask_philo.cloud.aws.sqs import purge_queue
 
-    # Create new SQS queue
+    # Purge the SQS queue
     sqs_url = 'https://us-west-2.queue.amazonaws.com/523525901222/existing_sqs_queue'
     region_name = 'us-west-2'
     purge_queue(queue_url=sqs_url, region=region_name)
@@ -338,15 +338,21 @@ To purge an SQS queue of all messages, use the *purge_queue* method
 Delete Queue
 ############
 
-We can also delete a queue by using the following piece of code:
+To entirely delete an SQS queue and its messages, use the *delete_queue* method.
+
+``delete_queue(queue_url, region)``
+
+* **queue_url** : URL of an existing SQS queue for deletion
+* **region** : Name of Amazon S3 Region
 
 ::
 
     from flask_philo.cloud.aws.sqs import delete_queue
-    delete_queue(queue_url="https://us-west-2.queue.amazonaws.com/523525905522/new_test_queue")
 
-
-After that, we won't see the queue when we list all the queues available.
+    # Delete the SQS queue
+    sqs_url = 'https://us-west-2.queue.amazonaws.com/523525901222/existing_sqs_queue'
+    region_name = 'us-west-2'
+    delete_queue(queue_url=sqs_url, region=region_name)
 
 
 External Resources
