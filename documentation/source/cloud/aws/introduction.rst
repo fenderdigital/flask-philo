@@ -556,6 +556,28 @@ To entirely delete an SQS queue and its messages, use the *delete_queue* method.
     region_name = 'us-west-2'
     delete_queue(queue_url=sqs_url, region=region_name)
 
+This method may also be directly invoked from the command line as follows:
+
+::
+
+    $ python3 manage.py aws sqs delete_queue --region us-west-2 --queue_url https://us-west-2.queue.amazonaws.com/523525905522/my-new-sqs-queue
+    execute_command :  aws
+    {
+      "ResponseMetadata": {
+        "RetryAttempts": 0,
+        "HTTPHeaders": {
+          "connection": "keep-alive",
+          "date": "Wed, 22 Aug 2018 17:20:35 GMT",
+          "server": "Server",
+          "content-length": "211",
+          "x-amzn-requestid": "947d5da5-6995-5cb0-b828-0e52f4368c8a",
+          "content-type": "text/xml"
+        },
+        "HTTPStatusCode": 200,
+        "RequestId": "947d5da5-6995-5cb0-b828-0e52f4368c8a"
+      }
+    }
+    
 
 External Resources
 -----------------------
