@@ -186,6 +186,12 @@ Example Python code :
     source_dir = './my_files/for_upload'
     upload_dir(source_dir, bucket_name, region_name)
 
+This method may also be directly invoked from the command line as follows:
+
+::
+
+    $ python3 manage.py aws s3 upload_dir --bucket my_data_bucket --region us-west-2 --root_folder ./my_files/for_upload
+
 
 ------------
 
