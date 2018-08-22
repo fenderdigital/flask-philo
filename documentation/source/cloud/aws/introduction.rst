@@ -403,10 +403,6 @@ This method may also be directly invoked from the command line as follows:
     }
 
 
-
-
-
-
 Listing Available Queues
 #########################
 
@@ -472,6 +468,31 @@ To create new SQS queue, use the *create_queue* method
     # Send a message to the new queue
     data = send_message(sqs_url, 'Queue_item 1', region_name)
 
+This method may also be directly invoked from the command line as follows:
+
+::
+
+    $ python3 manage.py aws sqs create_queue --region us-west-2 --queue_name my-new-sqs-queue
+
+    execute_command :  aws
+    {
+      "ResponseMetadata": {
+        "RequestId": "426395bd-9e0d-5aee-b0f9-c64a02dd38ed",
+        "RetryAttempts": 0,
+        "HTTPHeaders": {
+          "connection": "keep-alive",
+          "content-type": "text/xml",
+          "server": "Server",
+          "date": "Wed, 22 Aug 2018 17:17:04 GMT",
+          "x-amzn-requestid": "426395bd-9e0d-5aee-b0f9-c64a02dd38ed",
+          "content-length": "338"
+        },
+        "HTTPStatusCode": 200
+      },
+      "QueueUrl": "https://us-west-2.queue.amazonaws.com/523525905522/my-new-sqs-queue"
+    }
+
+
 
 Purge Queue
 ############
@@ -491,6 +512,29 @@ To purge an SQS queue of all messages, use the *purge_queue* method
     sqs_url = 'https://us-west-2.queue.amazonaws.com/523525901222/existing_sqs_queue'
     region_name = 'us-west-2'
     purge_queue(queue_url=sqs_url, region=region_name)
+
+This method may also be directly invoked from the command line as follows:
+
+::
+
+    $ python3 manage.py aws sqs purge_queue --region us-west-2 --queue_url https://us-west-2.queue.amazonaws.com/523525905522/my-new-sqs-queue
+
+    execute_command :  aws
+    {
+      "ResponseMetadata": {
+        "RetryAttempts": 0,
+        "HTTPStatusCode": 200,
+        "RequestId": "b3f869d0-cab1-54c9-9f76-3a2757f6d6ba",
+        "HTTPHeaders": {
+          "content-length": "209",
+          "x-amzn-requestid": "b3f869d0-cab1-54c9-9f76-3a2757f6d6ba",
+          "server": "Server",
+          "connection": "keep-alive",
+          "content-type": "text/xml",
+          "date": "Wed, 22 Aug 2018 17:19:04 GMT"
+        }
+      }
+    }
 
 
 Delete Queue
