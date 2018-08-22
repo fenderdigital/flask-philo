@@ -494,7 +494,7 @@ This method may also be directly invoked from the command line as follows:
 
 
 
-Purge Queue
+Purge a Queue of all Messages
 ############
 
 To purge an SQS queue of all messages, use the *purge_queue* method
@@ -537,7 +537,7 @@ This method may also be directly invoked from the command line as follows:
     }
 
 
-Delete Queue
+Delete a Queue
 ############
 
 To entirely delete an SQS queue and its messages, use the *delete_queue* method.
@@ -577,7 +577,7 @@ This method may also be directly invoked from the command line as follows:
         "RequestId": "947d5da5-6995-5cb0-b828-0e52f4368c8a"
       }
     }
-    
+
 
 External Resources
 -----------------------
