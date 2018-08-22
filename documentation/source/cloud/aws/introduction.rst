@@ -86,7 +86,15 @@ The method may also be directly invoked from the command line as follows:
 
 ::
 
-    python3 manage.py aws s3 list_objects_v2 --bucket rf_7d_mp3 --region us-west-2
+    $ python3 manage.py aws s3 list_objects_v2 --bucket rf_7d_mp3 --region us-west-2
+    +----+--------------+---------------------------+---------------+---------------+
+    |    |     Key      |       Last Modified       | Size (bytes)  | Storage Class |
+    +----+--------------+---------------------------+---------------+---------------+
+    | 1  | readme.txt   | 2018-04-11 15:56:52+00:00 |    1238522    |    STANDARD   |
+    | 2  | 13167621.mp3 | 2018-04-11 15:56:52+00:00 |    7110629    |    STANDARD   |
+    | 3  | 18776371.mp3 | 2018-04-11 15:57:07+00:00 |    8877935    |    STANDARD   |
+    +----+--------------+---------------------------+---------------+---------------+
+
 
 
 Downloading a file from an S3 Bucket
