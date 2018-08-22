@@ -238,6 +238,7 @@ This method may also be directly invoked from the command line as follows:
 ::
 
     $ python3 manage.py aws sqs send_message --queue_url https://us-west-2.queue.amazonaws.com/523525905522/new_test_queue --message_body "New Queue Message" --region us-west-2
+
     execute_command :  aws
     {
       'MD5OfMessageBody': '0ff14a859b7243d32b52126afe82eb68',
