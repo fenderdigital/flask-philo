@@ -288,7 +288,7 @@ This method may also be directly invoked from the command line as follows:
 
 ::
 
-    $ python3 manage.py aws sqs send_message_batch --queue_url https://us-west-2.queue.amazonaws.com/523525905522/cp_test_queue --region us-west-2 --entries "[{\"Id\":\"1\",\"MessageBody\":\"[message one]\"},{\"Id\":\"2\",\"MessageBody\":\"[message two]\"}]"
+    $ python3 manage.py aws sqs send_message_batch --queue_url https://us-west-2.queue.amazonaws.com/523525905522/new_test_queue --region us-west-2 --entries "[{\"Id\":\"1\",\"MessageBody\":\"[message one]\"},{\"Id\":\"2\",\"MessageBody\":\"[message two]\"}]"
 
     execute_command :  aws
     {
