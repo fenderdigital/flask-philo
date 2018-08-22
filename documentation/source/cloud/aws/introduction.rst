@@ -292,39 +292,27 @@ Example Python code :
     https://us-west-2.queue.amazonaws.com/523525905522/my-priority-list
 
 
-
-
-
-
-
-
-
-
-::
-
-    ...
-    from flask_philo.cloud.aws.sqs import list_queues
-    data = list_queues()
-
-    return self.json_response(
-        status=200, data=data)
-
-
 Create a New Queue
 ##################
 
-To create new queue via code:
+To create new SQS queue, use the *create_queue* method
+
+``create_queue(queue_name, region)``
+
+* **queue_name** : Name for new SQS queue
+* **region** : Name of Amazon S3 Region
 
 ::
 
-    ...
     from flask_philo.cloud.aws.sqs import create_queue
-    data = create_queue("new_test_queue", "us-west-2")
 
-    return self.json_response(status=200, data=data['QueueUrl'])
+    # Create new SQS queue
+    region_name = 'us-west-2'
+    new_queue = create_queue("my_test_queue", region_name)
+    sqs_url = new_queue['QueueUrl']
 
-
-It will return the new queue URL.
+    # Send a message to the new queue
+    data = send_message(sqs_url, 'Queue_item 1', region_name)
 
 
 Purge Queue
