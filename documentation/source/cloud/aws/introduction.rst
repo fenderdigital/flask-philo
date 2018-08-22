@@ -40,7 +40,7 @@ Amazon S3 Bucket
 
 Flask-Philo supports the use of Amazon's S3 file storage buckets, and provides a number of useful methods for storing and retrieving data.
 
-These methods may be called in two ways:
+Each S3 method may be called in two ways:
 
 * Imported and called as a standard Python function
 * Invoked from the command line using ``manage.py``
@@ -169,6 +169,12 @@ To facilitate task queueing between software components (e.g. between multiple d
 
 For more detail on SQS message queuing, visit the `SQS Introduction <https://aws.amazon.com/sqs/>`_
 
+Each SQS methods may be called in two ways:
+
+* Imported and called as a standard Python function
+* Invoked from the command line using ``manage.py``
+
+...examples for both are included for every method documented below
 
 Sending a Message
 #################
