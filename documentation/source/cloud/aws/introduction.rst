@@ -232,7 +232,7 @@ Example Python code :
     region_name = 'us-west-2'
 
     retrieved_messages = receive_message(queue_url=url, region=region_name)
-    print("Body of message retrieved :", retrieved_messages[0]['Body'])
+    print("Body of message retrieved :", retrieved_messages['Messages'][0]['Body'])
 
     ##########################
     This code yields the following printed output :
@@ -252,8 +252,8 @@ Optionally, we may retrieve more than one message at a time using the ``max_numb
 
     # Print all retrieved messages
     print("Messages : ")
-    for message in retrieved_messages:
-        print("Message :", message['Body'])
+    for message in retrieved_messages['Messages']:
+        print(message['Body'])
 
     ##########################
     This code yields the following printed output :
@@ -265,6 +265,40 @@ Optionally, we may retrieve more than one message at a time using the ``max_numb
 
 Listing Available Queues
 #########################
+
+To obtain a list of all available SQS queues grouped by region, use the *list_queues* method.
+Note that this method may take some time to return, given that it must iteratively poll all accessible Amazon SQS regions
+
+``list_queues()``
+
+Example Python code :
+
+::
+
+    from flask_philo.cloud.aws.sqs import list_queues
+
+    queues_by_region = list_queues()
+    queue_url_list = queues_by_region['us-west-2']['QueueUrls']
+
+    print("Queue URLs :")
+    for queue_url in queue_url_list:
+        print(queue_url)
+
+    ##########################
+    This code yields the following printed output :
+    Queue URLs :
+    https://us-west-2.queue.amazonaws.com/523525905522/test_queue
+    https://us-west-2.queue.amazonaws.com/523525905522/new_test_queue
+    https://us-west-2.queue.amazonaws.com/523525905522/my-priority-list
+
+
+
+
+
+
+
+
+
 
 ::
 
