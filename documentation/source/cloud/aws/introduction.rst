@@ -371,6 +371,40 @@ Optionally, we may retrieve more than one message at a time using the ``max_numb
     Test Message One
     Test Message Two
 
+This method may also be directly invoked from the command line as follows:
+
+::
+
+    $ python3 manage.py aws sqs receive_message --queue_url https://us-west-2.queue.amazonaws.com/523525905522/new_test_queue --region us-west-2
+
+    execute_command :  aws
+    {
+      "ResponseMetadata": {
+        "RetryAttempts": 0,
+        "HTTPHeaders": {
+          "date": "Wed, 22 Aug 2018 17:13:05 GMT",
+          "connection": "keep-alive",
+          "content-length": "863",
+          "x-amzn-requestid": "45dbb41c-3cb1-599f-bc19-e7eba750f0e2",
+          "server": "Server",
+          "content-type": "text/xml"
+        },
+        "RequestId": "45dbb41c-3cb1-599f-bc19-e7eba750f0e2",
+        "HTTPStatusCode": 200
+      },
+      "Messages": [
+        {
+          "ReceiptHandle": "AQEBptTr8Wns1LqPFVicLxUwobj2Nlk8nheH7r/f4H47KsP61iL7pwB6B1za9iCvHMooFB/JqX1dXEjd+JlGE9NYTGWhKz9dL8GqSrdmpJfLQmCxtprX83pNO3Xxrei8q81kQAhp0813/X8bxkxCboU/+c9xp83cJ/29fiQfP5nQTURHPMShysSoZ6UmEyvF5tAlrE28mr7WhpVGLs7birZPGEJFLB9cfESTXqqSAWNIbw+xDIXKS6E53hj37XktQ6juL+xKFUpEnIWympGCrFW09pigrotiA2Ysri3pjsc2ra4VY5UTk/L7EkTd0CymiyLdKcDVrYfW9bBYea9Jy2zCmi2tv7Bm/lpO1/ZLOdl/lU8X5uN7APGCMW0a5ba3RNHV/zbUWUmXpyqA6X3jaZvvGw==",
+          "MessageId": "619b1306-fe8b-4289-9ef4-aa07577b407a",
+          "Body": "Queue_item 1",
+          "MD5OfBody": "4b83caab69a87b19e2566f1c4d0710d5"
+        }
+      ]
+    }
+
+
+
+
 
 
 Listing Available Queues
