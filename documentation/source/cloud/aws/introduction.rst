@@ -238,7 +238,24 @@ This method may also be directly invoked from the command line as follows:
 ::
 
     $ python3 manage.py aws sqs send_message --queue_url https://us-west-2.queue.amazonaws.com/523525905522/new_test_queue --message_body "New Queue Message" --region us-west-2
-
+    execute_command :  aws
+    {
+      'MD5OfMessageBody': '0ff14a859b7243d32b52126afe82eb68',
+      'MessageId': '83dcc0b9-81bf-488d-a8a8-0941228dcec6',
+      'ResponseMetadata': {
+        'HTTPStatusCode': 200,
+        'RetryAttempts': 0,
+        'RequestId': '5a78a04b-e4b1-51e1-afa4-f3bc7dd7ac9e',
+        'HTTPHeaders': {
+          'x-amzn-requestid': '5a78a04b-e4b1-51e1-afa4-f3bc7dd7ac9e',
+          'server': 'Server',
+          'connection': 'keep-alive',
+          'content-type': 'text/xml',
+          'date': 'Wed, 22 Aug 2018 17:02:30 GMT',
+          'content-length': '378'
+        }
+      }
+    }
 
 Sending a Message Batch
 #######################
