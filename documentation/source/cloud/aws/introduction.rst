@@ -318,15 +318,21 @@ To create new SQS queue, use the *create_queue* method
 Purge Queue
 ############
 
-To purge the queue we can use the following piece of code:
+To purge an SQS queue of all messages, use the *purge_queue* method
+
+``purge_queue(queue_url, region)``
+
+* **queue_url** : URL of an existing SQS queue
+* **region** : Name of Amazon S3 Region
 
 ::
 
     from flask_philo.cloud.aws.sqs import purge_queue
-    purge_queue(queue_url="https://us-west-2.queue.amazonaws.com/523525905522/new_test_queue")
 
-
-No messages will be in the queue after that.
+    # Create new SQS queue
+    sqs_url = 'https://us-west-2.queue.amazonaws.com/523525901222/existing_sqs_queue'
+    region_name = 'us-west-2'
+    purge_queue(queue_url=sqs_url, region=region_name)
 
 
 Delete Queue
