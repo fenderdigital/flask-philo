@@ -38,7 +38,15 @@ Flask-philo supports two means of authentication for AWS. Firstly, via environme
 Amazon S3 Bucket
 -----------------
 
-Flask-Philo supports the use of Amazon's S3 file storage buckets, and provides a number of useful methods for storing and retrieving data
+Flask-Philo supports the use of Amazon's S3 file storage buckets, and provides a number of useful methods for storing and retrieving data.
+
+These methods may be called in two ways:
+
+* Imported and called as a standard Python function
+* Invoked from the command line using ``manage.py``
+
+...examples for both are included for every method documented below
+
 
 Retrieving available Bucket contents
 ############################
@@ -72,6 +80,7 @@ Example Python calling code :
     readme.txt
     13167621.mp3
     18776371.mp3
+
 
 
 Downloading a file from an S3 Bucket
