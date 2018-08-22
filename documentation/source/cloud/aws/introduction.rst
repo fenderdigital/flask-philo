@@ -82,6 +82,12 @@ Example Python calling code :
     18776371.mp3
 
 
+The method may also be directly invoked from the command line as follows:
+
+::
+
+    python3 manage.py aws s3 list_objects_v2 --bucket rf_7d_mp3 --region us-west-2
+
 
 Downloading a file from an S3 Bucket
 ###################################
