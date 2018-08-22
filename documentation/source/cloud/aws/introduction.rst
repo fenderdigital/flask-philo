@@ -82,7 +82,7 @@ Example Python calling code :
     18776371.mp3
 
 
-The method may also be directly invoked from the command line as follows:
+This method may also be directly invoked from the command line as follows:
 
 ::
 
@@ -124,7 +124,7 @@ Example Python calling code :
     download_file('dest/my_new_local_file.txt', bucket_name, bucket_item['Key'], region_name)
 
 
-The method may also be directly invoked from the command line as follows:
+This method may also be directly invoked from the command line as follows:
 
 ::
 
@@ -154,6 +154,14 @@ Example Python calling code :
 
     # Upload new file to S3 Bucket using Key 'My_New_File_Key'
     upload_file('dest/my_new_local_file.txt', bucket_name, 'My_New_File_key', region_name)
+
+
+This method may also be directly invoked from the command line as follows:
+
+::
+
+    $ python3 manage.py aws s3 upload_file --bucket my_data_bucket --region us-west-2 --fname my_local_file.txt --key My_New_File_key.txt
+
 
 
 Uploading a folder to an S3 Bucket
