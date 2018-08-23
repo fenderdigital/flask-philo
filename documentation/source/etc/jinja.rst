@@ -20,6 +20,8 @@ Creates an instance of Flask-Philo's TemplatesManager class, facilitating multip
 
 ``get_manager()``
 
+Example Python calling code :
+
 ::
 
     from flask_philo.jinja2 import get_manager
@@ -28,7 +30,7 @@ Creates an instance of Flask-Philo's TemplatesManager class, facilitating multip
     manager = get_manager()
     env = manager.environments['DEFAULT']
     template = env.get_template('home.html')
-    txt = template.render()
+    output_html = template.render()
 
 
 
