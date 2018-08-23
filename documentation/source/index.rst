@@ -30,6 +30,8 @@ Welcome to Flask-Philo's documentation!
 
    etc/flask_app_deploy
 
+   etc/jinja
+
    cloud/aws/introduction
 
    cloud/aws/sqs
