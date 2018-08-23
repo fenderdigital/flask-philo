@@ -1,56 +1,19 @@
 Jinja Integration
 =======================
 
-`Jinja <http://jinja.pocoo.org/>`_ is one of the most popular template engines for Python. 
+`Jinja2 <http://jinja.pocoo.org/>`_ is one of the most popular templating engines for Python. Flask-Philo provides a number of additional methods to facilitate common calls to the Jinja2 engine
 
-Flask-Philo supports basic `Amazon Web Service (AWS) <https://aws.amazon.com/>`_ integration
-using Amazon's `boto3 <https://pypi.python.org/pypi/boto3>`_ AWS SDK.
-
-More specifically, Flask-Philo provides methods for integration with two main services within Amazon's AWS family:
-
-* **S3 Storage** - Integration with Amazon's S3 file storage buckets, providing a number of useful methods for storing and retrieving data
-* **SQS Queuing** - Integration with Amazon's Simple Queuing Service (SQS), with a number of methods for creating and managing queuing systems
-
-
-Settings AWS Credentials
------------------------------------
-
-Flask-philo supports two means of authentication for AWS. Firstly, via environment variables:
-
-::
-
-    $ export AWS_SECRET_ACCESS_KEY=your_secret_key
-    $ export AWS_ACCESS_KEY_ID=your_access_key
+* **set_request()** - method description here
+* **render()** - Method description here
+* **get_manager()** - Method description here
+* **get_autoescaping_params()** - Method description here
+* **load_extensions_from_config()** - Method description here
+* **init_filesystem_loader()** - Method description here
+* **init_loader()** - Method description here
+* **init_jinja2()** - Method description here
 
 
-...or via configuration in the settings file:
-
-
-``<your_app>/config/development.py``
-::
-
-    AWS = {
-        'credentials': {
-            'aws_access_key_id': 'your_access_key',
-            'aws_secret_access_key': 'your_secret_key'
-        }
-    }
-
-
-Amazon S3 Bucket
------------------
-
-Flask-Philo supports the use of Amazon's S3 file storage buckets, and provides a number of useful methods for storing and retrieving data.
-
-Each S3 method may be called in two ways:
-
-* Imported and called as a standard Python function
-* Invoked from the command line using ``manage.py``
-
-...examples for both are included for every method documented below
-
-
-Retrieving available Bucket contents
+init_jinja2
 ############################
 
 To list all available items within a specified S3 Bucket, we use the *list_objects_v2* method
