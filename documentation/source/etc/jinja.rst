@@ -1,5 +1,7 @@
-AWS Integration
+Jinja Integration
 =======================
+
+`Jinja <http://jinja.pocoo.org/>`_ is one of the most popular template engines for Python. 
 
 Flask-Philo supports basic `Amazon Web Service (AWS) <https://aws.amazon.com/>`_ integration
 using Amazon's `boto3 <https://pypi.python.org/pypi/boto3>`_ AWS SDK.
