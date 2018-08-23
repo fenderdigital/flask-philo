@@ -1,7 +1,7 @@
 Jinja Integration
 =======================
 
-`Jinja2 <http://jinja.pocoo.org/>`_ is one of the most popular templating engines for Python. Flask-Philo provides a number of additional methods to facilitate common calls to the Jinja2 engine
+`Jinja2 <http://jinja.pocoo.org/>`_ is one of the most popular templating engines for Python, and is packaged with Flask. Flask-Philo provides a number of additional methods to facilitate common calls to the Jinja2 engine
 
 * **set_request()** - method description here
 * **render()** - Method description here
