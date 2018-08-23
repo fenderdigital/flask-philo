@@ -3,9 +3,9 @@ Jinja Integration
 
 `Jinja2 <http://jinja.pocoo.org/>`_ is one of the most popular templating engines for Python, and is packaged with Flask. Flask-Philo provides a number of additional methods to facilitate common calls to the Jinja2 engine
 
+* **get_manager()** - Creates an instance of Flask-Philo's TemplatesManage class, facilitating multiple template loaders
 * **set_request()** - method description here
 * **render()** - Method description here
-* **get_manager()** - Method description here
 * **get_autoescaping_params()** - Method description here
 * **load_extensions_from_config()** - Method description here
 * **init_filesystem_loader()** - Method description here
