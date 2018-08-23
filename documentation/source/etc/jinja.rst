@@ -13,6 +13,25 @@ Jinja Integration
 * **init_jinja2()** - Method description here
 
 
+get_manager
+###########
+
+Creates an instance of Flask-Philo's TemplatesManager class, facilitating multiple template loaders
+
+``get_manager()``
+
+::
+
+    from flask_philo.jinja2 import get_manager
+
+    # instantiate manager, and render html from template
+    manager = get_manager()
+    env = manager.environments['DEFAULT']
+    template = env.get_template('home.html')
+    txt = template.render()
+
+
+
 init_jinja2
 ############################
 
