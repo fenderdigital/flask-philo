@@ -33,8 +33,31 @@ Example Python calling code :
     output_html = template.render()
 
 
+set_request
+###########
 
-init_jinja2
+Jinja2 uses a central object called the template *Environment*. Instances of this class are used to store the configuration and
+global objects, and are used to load templates from the file system or other locations.
+
+To append a request object to an Environment's global objects, use the `set_request()` method
+
+Example Python calling code :
+::
+
+    from flask_philo import app
+    from flask_philo.jinja2 import get_manager
+
+    manager = get_manager()
+    ctx = app.test_request_context('/hello-template')
+    manager.set_request(ctx.request)
+    env = manager.environments['DEFAULT']
+
+
+render
+######
+
+
+init_filesystem_loader
 ############################
 
 To list all available items within a specified S3 Bucket, we use the *list_objects_v2* method
