@@ -64,14 +64,12 @@ These AutoEscaping rules may then used as part of our Environment instance
 ::
     JINJA2_TEMPLATES = {
         'DEFAULT': {
-            ...
             'AUTOESCAPING': {
                 'enabled_extensions': ('html', 'htm', 'xml'),
                 'disabled_extensions': [],
                 'default_for_string': True,
                 'default': False
-            },
-            ...
+            }
         }
     }
 
