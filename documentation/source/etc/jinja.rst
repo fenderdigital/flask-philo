@@ -62,6 +62,7 @@ These AutoEscaping rules may then used as part of our Environment instance
 *config/development.py* :
 
 ::
+
     JINJA2_TEMPLATES = {
         'DEFAULT': {
             'AUTOESCAPING': {
@@ -76,6 +77,7 @@ These AutoEscaping rules may then used as part of our Environment instance
 Example Python code :
 
 ::
+
     from flask_philo.jinja2 import get_autoescaping_params
     from jinja2 import Environment
 
