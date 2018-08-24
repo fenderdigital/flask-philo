@@ -39,7 +39,7 @@ set_request
 Jinja2 uses a central object called the template *Environment*. Instances of this class are used to store the configuration and
 global objects, and are used to load templates from the file system or other locations.
 
-To append a request object to an Environment's global objects, use the `set_request()` method
+To append a request object to an Environment's global objects, use the ``set_request()`` method
 
 Example Python calling code :
 ::
@@ -53,8 +53,39 @@ Example Python calling code :
     env = manager.environments['DEFAULT']
 
 
-render
-######
+get_autoescaping_params
+#################
+
+Flask-Philo allows us to specify a custom set of AutoEscaping rules in our application's configuration file (e.g. ``/src/config/development.py``).
+These AutoEscaping rules may then used as part of our Environment instance
+
+*config/development.py* :
+
+::
+    JINJA2_TEMPLATES = {
+        'DEFAULT': {
+            ...
+            'AUTOESCAPING': {
+                'enabled_extensions': ('html', 'htm', 'xml'),
+                'disabled_extensions': [],
+                'default_for_string': True,
+                'default': False
+            },
+            ...
+        }
+    }
+
+Example Python code :
+
+::
+    from flask_philo.jinja2 import get_autoescaping_params
+    from jinja2 import Environment
+
+    params = get_autoescaping_params()
+    env = Environment(
+        autoescape=select_autoescape(**params),
+    )
+
 
 
 init_filesystem_loader
