@@ -1,5 +1,5 @@
 from flask_philo import app
-from flask import abort, json, render_template, make_response, Response, g
+from flask import abort, json, jsonify, render_template, make_response, Response, g
 from flask.views import MethodView
 
 
@@ -23,17 +23,17 @@ class BaseView(MethodView):
         super(BaseView, self).__init__(*args, **kwargs)
 
     def json_response(self, status=200, data={}, headers={}):
-        mimetype = 'application/json'
 
         header_dict = {}
         for k, v in headers.items():
             header_dict[k] = v
 
-        return Response(
-            json.dumps(data),
-            status=status,
-            mimetype=mimetype,
-            headers=header_dict)
+        return jsonify(
+            'body': json.dumps(data),
+            'StatusCode'=status,
+            'headers': header_dict
+        )
+        
 
     def render_template(self, template_name, engine_name='DEFAULT', **values):
         if not hasattr(self, 'jinja2_template_manager'):
