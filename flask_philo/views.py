@@ -30,7 +30,7 @@ class BaseView(MethodView):
 
         return jsonify(
             'body': json.dumps(data),
-            'StatusCode'=status,
+            'StatusCode': status,
             'headers': header_dict
         )
         
