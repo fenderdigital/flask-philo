@@ -29,7 +29,7 @@ class BaseView(MethodView):
             header_dict[k] = v
 
         return jsonify({
-            'body': json.dumps(data),
+            'body': data,
             'statusCode': status,
             'headers': header_dict
         })
