@@ -28,11 +28,11 @@ class BaseView(MethodView):
         for k, v in headers.items():
             header_dict[k] = v
 
-        return jsonify(
+        return jsonify({
             'body': json.dumps(data),
             'StatusCode': status,
             'headers': header_dict
-        )
+        })
         
 
     def render_template(self, template_name, engine_name='DEFAULT', **values):
