@@ -79,7 +79,6 @@ Example Python code :
 ::
 
     from flask_philo.jinja2 import get_autoescaping_params
-    from jinja2 import Environment
 
     params = get_autoescaping_params()
     env = Environment(
@@ -94,6 +93,28 @@ Flask-Philo allows us to specify a custom set of Jinja2 extensions in our applic
 These extensions are then used in the instantiation of our Environment instance
 
 For more detail on Jinja2 extensions, refer to `the extensions documentation <http://jinja.pocoo.org/docs/2.10/extensions/#jinja-extensions>`_
+
+*config/development.py* :
+
+::
+
+    JINJA2_TEMPLATES = {
+        'DEFAULT': {
+            'EXTENSIONS': (
+                    'tests.test_app.templatetags.TestExtension',
+                )
+        }
+    }
+
+Example Python code :
+
+::
+    from flask_philo import app
+
+    env_extensions = load_extensions_from_config(app.config)
+    env = Environment(
+        extensions=load_extensions_from_config(**env_extensions)
+    )
 
 
 
