@@ -80,7 +80,7 @@ Example Python code :
 
     from flask_philo.jinja2 import get_autoescaping_params
 
-    params = get_autoescaping_params()
+    params = get_autoescaping_params(**app.config)
     env = Environment(
         autoescape=select_autoescape(**params),
     )
