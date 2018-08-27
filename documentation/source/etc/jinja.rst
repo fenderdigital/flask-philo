@@ -169,32 +169,22 @@ Example Python code :
 init_filesystem_loader
 ############################
 
-To list all available items within a specified S3 Bucket, we use the *list_objects_v2* method
+Configures the Jinja2 FileSystemLoader (`docs here <http://jinja.pocoo.org/docs/2.10/api/>`_) with paths and parameters specified in our Flask-Philo configuration file ``/src/config/development.py``
+Also instantiates and returns a Jinja2 Environment with based on this configuration.
 
-``list_objects_v2(bucket_name, region_name)``
-
-* **bucket_name** : Name of Amazon S3 Bucket
-* **region_name** : Name of Amazon S3 Region
-
-Example Python calling code :
+*config/development.py* :
 
 ::
 
-    from flask_philo.cloud.aws.s3 import list_objects_v2
-
-    # Retrieve bucket content
-    bucket_name = 'my_data_bucket'
-    region_name = 'us-west-2'
-    bucket_content = list_objects_v2(bucket_name, bucket_region)['Contents']
-
-    # Print all bucket items
-    print("Bucket contents : ")
-    for bucket_item in bucket_content:
-        print(bucket_item['Key'])
-
-    ##########################
-    This code yields the following printed output :
-    Bucket contents :
-    readme.txt
-    13167621.mp3
-    18776371.mp3
+  JINJA2_TEMPLATES = {
+      'DEFAULT': {
+          'LOADER': 'FileSystemLoader',
+          'PARAMETERS': {
+              'path': (
+                  os.path.join(BASE_DIR, '../', '_templates'),
+              ),
+              'encoding': 'utf-8',
+              'followlinks': False
+          },
+      }
+  }
