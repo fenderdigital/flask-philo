@@ -109,6 +109,7 @@ For more detail on Jinja2 extensions, refer to `the extensions documentation <ht
 Example Python code :
 
 ::
+
     from flask_philo import app
 
     env_extensions = load_extensions_from_config(app.config)
