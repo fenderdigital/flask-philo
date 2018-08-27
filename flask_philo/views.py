@@ -23,17 +23,24 @@ class BaseView(MethodView):
         super(BaseView, self).__init__(*args, **kwargs)
 
     def json_response(self, status=200, data={}, headers={}):
+        '''
+          To set flask to inject specific headers on response request,
+          such as CORS_ORIGIN headers
+        '''
         mimetype = 'application/json'
 
         header_dict = {}
         for k, v in headers.items():
             header_dict[k] = v
 
-        # cors origin return
-        header_dict["Access-Control-Allow-Origin"] = app.config["DOMAIN_CORS"]
-        header_dict["Access-Control-Allow-Methods"] = "GET, POST, DELETE, PUT, PATCH, OPTION"
-        header_dict["Access-Control-Allow-Headers"] = "Accept,Authorization,Cache-Control,Content-Type,DNT,If-Modified-Since,Keep-Alive,Origin,User-Agent,X-Requested-With"
- 
+        # setting custon headers for CORS origin
+        if app.config.get("DOMAIN_CORS", None):
+            header_dict["Access-Control-Allow-Origin"] = app.config["DOMAIN_CORS"]
+        if app.config.get("ALLOW_HEADERS", None):
+            header_dict["Access-Control-Allow-Headers"] = app.config["ALLOW_HEADERS"]
+        if app.config.get("ALLOW_METHODS", None):
+            header_dict["Access-Control-Allow-Methods"] = app.config["ALLOW_METHODS"] 
+
         return Response(
             json.dumps(data),
             status=status,
