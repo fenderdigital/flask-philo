@@ -30,7 +30,7 @@ class BaseView(MethodView):
             header_dict[k] = v
 
         # cors origin return
-        headers_dict["Access-Control-Allow-Origin"] = app.config["DOMAIN_CORS"]
+        header_dict["Access-Control-Allow-Origin"] = app.config["DOMAIN_CORS"]
 
         return Response(
             json.dumps(data),
