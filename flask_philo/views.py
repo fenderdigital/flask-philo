@@ -31,7 +31,9 @@ class BaseView(MethodView):
 
         # cors origin return
         header_dict["Access-Control-Allow-Origin"] = app.config["DOMAIN_CORS"]
-
+        header_dict["Access-Control-Allow-Methods"] = "GET, POST, DELETE, PUT, PATCH, OPTION"
+        header_dict["Access-Control-Allow-Headers"] = "Accept,Authorization,Cache-Control,Content-Type,DNT,If-Modified-Since,Keep-Alive,Origin,User-Agent,X-Requested-With"
+ 
         return Response(
             json.dumps(data),
             status=status,
