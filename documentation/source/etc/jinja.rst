@@ -12,7 +12,7 @@ Jinja Integration
 * **init_filesystem_loader()** - Method description here
 * **init_loader()** - Method description here
 
-init_jinja2()
+init_jinja2
 #############
 
 Single initialisation function that uses Flask-Philo's app configuration file (``/src/config/development.py``) to bootstrap the following Jinja2 components:
