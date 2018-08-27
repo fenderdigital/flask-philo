@@ -3,6 +3,7 @@ Jinja Integration
 
 `Jinja2 <http://jinja.pocoo.org/>`_ is one of the most popular templating engines for Python, and is packaged with Flask. Flask-Philo provides a number of additional methods to facilitate common calls to the Jinja2 engine
 
+* **init_jinja2()** - Method description here
 * **get_manager()** - Creates an instance of Flask-Philo's TemplatesManage class, facilitating multiple template loaders
 * **set_request()** - append a request object to an Environment's global objects
 * **render()** - Method description here
@@ -10,7 +11,55 @@ Jinja Integration
 * **load_extensions_from_config()** - Method description here
 * **init_filesystem_loader()** - Method description here
 * **init_loader()** - Method description here
-* **init_jinja2()** - Method description here
+
+init_jinja2()
+#############
+
+Single initialisation function that uses Flask-Philo's app configuration file (``/src/config/development.py``) to bootstrap the following Jinja2 components:
+
+* Filesystem Loader
+* Template Loader
+* Autoescaping
+* Extensions
+
+*config/development.py* :
+
+::
+
+    JINJA2_TEMPLATES = {
+        'DEFAULT': {
+            'LOADER': 'FileSystemLoader',
+            'PARAMETERS': {
+                'path': (
+                    os.path.join(BASE_DIR, '../', '_templates'),
+                ),
+                'encoding': 'utf-8',
+                'followlinks': False
+            },
+            'AUTOESCAPING': {
+                'enabled_extensions': ('html', 'htm', 'xml'),
+                'disabled_extensions': [],
+                'default_for_string': True,
+                'default': False
+            },
+            'EXTENSIONS': (
+                'tests.test_app.templatetags.TestExtension',
+            )
+        }
+    }
+
+Example Python code :
+
+::
+
+    from flask_philo import app
+    from flask import g
+
+    init_jinja2(g, app)
+    assert hasattr(app, 'jinja_env')
+    assert hasattr(app, 'jinja_options')
+    assert hasattr(app, 'jinja_loader')
+    assert hasattr(app, 'jinja_environment')
 
 
 get_manager
