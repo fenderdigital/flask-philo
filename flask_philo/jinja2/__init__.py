@@ -35,8 +35,8 @@ def get_manager():
 
 
 DEFAULT_AUTOESCAPING = {
-    'enabled_extentions': ('html', 'htm', 'xml'),
-    'disabled_extentions': [],
+    'enabled_extensions': ('html', 'htm', 'xml'),
+    'disabled_extensions': [],
     'default_for_string': True,
     'default': False
 }
