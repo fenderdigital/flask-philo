@@ -90,7 +90,7 @@ load_extensions_from_config
 ###########################
 
 Flask-Philo allows us to specify a custom set of Jinja2 extensions in our application's configuration file (e.g. ``/src/config/development.py``).
-These extensions are then used in the instantiation of our Environment instance
+These extensions are then used to instantiate of our Environment instance
 
 For more detail on Jinja2 extensions, refer to `the extensions documentation <http://jinja.pocoo.org/docs/2.10/extensions/#jinja-extensions>`_
 
