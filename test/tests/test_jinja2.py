@@ -1,17 +1,22 @@
+from flask import g
 from flask_philo import app
 from flask_philo.test import FlaskTestCase
 from jinja2.loaders import FileSystemLoader
+from flask_philo.jinja2 import get_autoescaping_params, init_jinja2
+from jinja2 import Environment, select_autoescape
 
 
 class TestJinja2FileSystemLoader(FlaskTestCase):
     def get_manager(self):
         from flask_philo.jinja2 import get_manager
+        # from jinja2 import get_manager
         return get_manager()
 
     def test_jinja2_filsystem_loader(self):
         """
         Test loader from filesystem
         """
+        print("test_jinja2_filsystem_loader")
         manager = self.get_manager()
         assert 'DEFAULT' in manager.environments
         loader = manager.environments['DEFAULT'].loader
@@ -47,3 +52,31 @@ class TestJinja2FileSystemLoader(FlaskTestCase):
         template = env.get_template('home.html')
         txt = template.render()
         assert 'random_msg hello world!!!' == txt
+
+    def test_init(self):
+        init_jinja2(g, app)
+
+        assert hasattr(app, 'jinja_env')
+        assert hasattr(app, 'jinja_options')
+        assert hasattr(app, 'jinja_loader')
+        assert hasattr(app, 'jinja_environment')
+
+
+    # def test_autoescaping(self):
+        # manager = self.get_manager()
+        # params = get_autoescaping_params(**app.config)
+        # print("params : ", params)
+
+        # env = Environment(
+            # autoescape=select_autoescape(**params),
+        # )
+        # env = manager.environments['DEFAULT']
+        # print("env : ", env)
+
+
+        # import ipdb; ipdb.set_trace()
+
+
+        # template_idx1 = env.get_template('templates_1/index.html')
+        # idx1 = template_idx1.render({'msg_1': 'hello template1'})
+        # assert idx1 == 'hello template1'
