@@ -60,7 +60,8 @@ class TestJinja2FileSystemLoader(FlaskTestCase):
         assert hasattr(app, 'jinja_environment')
 
     def test_init_filesystem_loader(self):
-        env = init_filesystem_loader(**app.config['JINJA2_TEMPLATES']['DEFAULT'])
+        config = app.config['JINJA2_TEMPLATES']['DEFAULT']
+        env = init_filesystem_loader(**config)
         template = env.get_template('home.html')
         txt = template.render()
         assert 'random_msg hello world!!!' == txt
