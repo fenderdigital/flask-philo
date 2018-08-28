@@ -2,8 +2,7 @@ from flask import g
 from flask_philo import app
 from flask_philo.test import FlaskTestCase
 from jinja2.loaders import FileSystemLoader
-from flask_philo.jinja2 import get_autoescaping_params, init_jinja2, init_filesystem_loader
-from jinja2 import Environment, select_autoescape
+from flask_philo.jinja2 import init_jinja2, init_filesystem_loader
 
 
 class TestJinja2FileSystemLoader(FlaskTestCase):
