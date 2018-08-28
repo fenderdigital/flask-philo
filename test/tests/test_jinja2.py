@@ -14,7 +14,6 @@ class TestJinja2FileSystemLoader(FlaskTestCase):
         """
         Test loader from filesystem
         """
-        print("test_jinja2_filsystem_loader")
         manager = self.get_manager()
         assert 'DEFAULT' in manager.environments
         loader = manager.environments['DEFAULT'].loader
