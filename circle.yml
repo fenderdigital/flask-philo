@@ -75,12 +75,12 @@ jobs:
       - checkout
       - run:
           command: |
-            pip install --upgrade setuptools
+            sudo pip3 install --upgrade setuptools
             sed -i "s/USER/$RIFF_USER/g" .pypirc 
             sed -i "s/PASS/$RIFF_PASS/g" .pypirc 
             sed -i "s/GITHUB_TAG/$CIRCLE_TAG/" setup-circle.py 
             cp .pypirc ~
-            python3 setup.py sdist upload -r pypi
+            sudo python3 setup.py sdist upload -r pypi
 
 workflows:
   version: 2
