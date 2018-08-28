@@ -8,7 +8,7 @@ Jinja Integration
 * **set_request()** - append a request object to an Environment's global objects
 * **get_autoescaping_params()** - fetch a custom set of AutoEscaping rules from the Flask-Philo configuration file
 * **load_extensions_from_config()** - Specify a custom set of Jinja2 extensions from our application's configuration file
-* **init_filesystem_loader()** - Method description here
+* **init_filesystem_loader()** - Configures the Jinja2 FileSystemLoader with paths and parameters specified in our Flask-Philo configuration file
 
 init_jinja2
 #############
