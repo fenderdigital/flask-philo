@@ -170,7 +170,7 @@ init_filesystem_loader
 ############################
 
 Configures the Jinja2 FileSystemLoader (`docs here <http://jinja.pocoo.org/docs/2.10/api/>`_) with paths and parameters specified in our Flask-Philo configuration file ``/src/config/development.py``
-Also instantiates and returns a Jinja2 Environment with based on this configuration.
+Also instantiates and returns a Jinja2 Environment based on this configuration.
 
 *config/development.py* :
 
