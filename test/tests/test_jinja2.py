@@ -61,7 +61,6 @@ class TestJinja2FileSystemLoader(FlaskTestCase):
         assert hasattr(app, 'jinja_environment')
 
     def test_init_filesystem_loader(self):
-        manager = self.get_manager()
         env = init_filesystem_loader(**app.config['JINJA2_TEMPLATES']['DEFAULT'])
         template = env.get_template('home.html')
         txt = template.render()
