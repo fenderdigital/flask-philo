@@ -52,10 +52,6 @@ class TestJinja2FileSystemLoader(FlaskTestCase):
 
     def test_init_jinja2(self):
         init_jinja2(g, app)
-        assert hasattr(app, 'jinja_env')
-        assert hasattr(app, 'jinja_options')
-        assert hasattr(app, 'jinja_loader')
-        assert hasattr(app, 'jinja_environment')
 
     def test_init_filesystem_loader(self):
         config = app.config['JINJA2_TEMPLATES']['DEFAULT']
