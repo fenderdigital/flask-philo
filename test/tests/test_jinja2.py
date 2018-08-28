@@ -50,9 +50,6 @@ class TestJinja2FileSystemLoader(FlaskTestCase):
         txt = template.render()
         assert 'random_msg hello world!!!' == txt
 
-    def test_init_jinja2(self):
-        init_jinja2(g, app)
-
     def test_init_filesystem_loader(self):
         config = app.config['JINJA2_TEMPLATES']['DEFAULT']
         env = init_filesystem_loader(**config)
