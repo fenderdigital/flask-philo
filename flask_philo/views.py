@@ -35,9 +35,11 @@ class BaseView(MethodView):
 
         # setting custon headers for CORS origin
         if app.config.get("DOMAIN_CORS", None):
-            header_dict["Access-Control-Allow-Origin"] = app.config["DOMAIN_CORS"]
+            header_dict["Access-Control-Allow-Origin"] = app.config["ALLOW_ORIGIN"]
+
         if app.config.get("ALLOW_HEADERS", None):
             header_dict["Access-Control-Allow-Headers"] = app.config["ALLOW_HEADERS"]
+
         if app.config.get("ALLOW_METHODS", None):
             header_dict["Access-Control-Allow-Methods"] = app.config["ALLOW_METHODS"] 
 
