@@ -80,6 +80,7 @@ jobs:
             sed -i "s/PASS/$RIFF_PASS/g" .pypirc 
             sed -i "s/GITHUB_TAG/$CIRCLE_TAG/" setup-circle.py 
             cp .pypirc ~
+            sed -i "s|version='.*',|version='${CIRCLE_TAG}',|g" setup.py
             python3 setup.py sdist upload -r pypi
 
 workflows:
