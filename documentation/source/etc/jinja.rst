@@ -188,3 +188,15 @@ Also instantiates and returns a Jinja2 Environment based on this configuration.
           },
       }
   }
+
+Example Python code :
+
+::
+
+    from flask_philo import app
+
+    config = app.config['JINJA2_TEMPLATES']['DEFAULT']
+    env = init_filesystem_loader(**config)
+    template = env.get_template('home.html')
+    txt = template.render()
+    assert 'random_msg hello world!!!' == txt
