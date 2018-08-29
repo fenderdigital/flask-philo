@@ -34,9 +34,9 @@ def get_manager():
     return templates_manager
 
 
-DEFAULT_AUTOSCAPING = {
-    'enabled_extentions': ('html', 'htm', 'xml'),
-    'disabled_extentions': [],
+DEFAULT_AUTOESCAPING = {
+    'enabled_extensions': ('html', 'htm', 'xml'),
+    'disabled_extensions': [],
     'default_for_string': True,
     'default': False
 }
@@ -46,7 +46,7 @@ def get_autoescaping_params(**config):
     if 'AUTOESCAPING' in config:
         autoescaping_params = config['AUTOESCAPING']
     else:
-        autoescaping_params = DEFAULT_AUTOSCAPING
+        autoescaping_params = DEFAULT_AUTOESCAPING
     return autoescaping_params
 
 

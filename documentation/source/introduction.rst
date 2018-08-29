@@ -1,9 +1,9 @@
 Flask-Philo
 =============
 
-Utilities to build flask based microservices.
+Utilities to build Flask-based microservices.
 
-What this project is about?
+What is this project?
 ---------------------------
 
 Flask is an awesome web microframework that works great out of the box. Nevertheless,
@@ -12,7 +12,7 @@ order to build complex applications. Here at `Riffstation <https://play.riffstat
 we have several HTTP REST-based microservices and whenever we want to create a new
 microservice we need to bootstrap very similar common code.
 
-This library wants to concentrate all logic related with HTTP, REST, databases in one common place.
+This library concentrates all logic related with HTTP, REST and databases in one common place.
 Feel free to use it and extend it. We are willing to hear about your suggestions and improvements.
 
 
@@ -21,7 +21,9 @@ Basic Features
 
 - REST out of the box.
 
-- Simple sqlalchemy orm customized for postgresql with multiple dabatases.
+- Simple SQLAlchemy ORM, customized for PostgreSQL with multiple dabatases.
+
+- Unit testing tools
 
 - Simple Redis integration.
 
@@ -38,15 +40,15 @@ Installation
 
 ::
 
-    pip install Flask-Philo
+    $ pip install Flask-Philo
 
 
 Alternatively, you can create a virtual environment first:
 
 ::
 
-    mkvirtualenv -p /usr/bin/python3 philo
-    pip install Flask-Philo
+    $ mkvirtualenv -p /usr/bin/python3 philo
+    $ pip install Flask-Philo
 
 
 Creating a new project
@@ -58,22 +60,16 @@ To quickly generate a new Flask-Philo project, navigate to the directory in whic
 
 ::
 
-    flask-philo-admin startproject <project_name>
+    $ flask-philo-admin startproject <project_name>
 
 
-This will create a folder called <project_name> which will contain the basic structure of a Flask-Philo application.
-
-Example:
-
-::
-
-    flask-philo-admin startproject flask-philo-example
+This will create a folder called <project_name> which will contain the basic structure of a Flask-Philo application, basic unit tests and configuration.
 
 
 Folder structure
 ################
 
-Here follows the folder structure for the recent created project:
+The following folder structure is created for the new project:
 
 * README.md
 * documentation
@@ -98,20 +94,15 @@ Here follows the folder structure for the recent created project:
         * base.txt
         * dev.txt
 
-Running the server for the new project_name
+Running the server for your new project
 ###########################################
 
-In order to run the server for the new project, you should go the ``src`` folder:
+To run the listening server for your new Flask-Philo project, navigate to the project's ``src/`` directory and issue the ``runserver`` command :
 
 ::
 
-    flask-philo-example > cd src
-
-And run the following command:
-
-::
-
-    python3 manage.py runserver
+    $ cd <your-project-dir>/src
+    $ python3 manage.py runserver
 
 The response from this command will be something like this:
 
@@ -122,23 +113,22 @@ The response from this command will be something like this:
     * Debugger is active!
     * Debugger PIN: 147-416-135
 
-To access the server, you will have to take a look in two concepts: URLs and view files.
+Access to the server's URL routes is controlled in two places: URL and View files.
 
-URLs
+URL Routes
 ####
 
-The urls file contains all the routes of the service. You can refer to the example created automatically by Flask-Philo by accessing the file ``urls.py`` located in the ``src/app``. It will look like this:
+The URLs file ``urls.py`` defines all available routes for your Flask-Philo application. You can refer to the example created automatically by Flask-Philo by accessing the file ``urls.py`` located in the ``src/app`` directory. It will look like this:
 
 ::
 
     from app.views.example_views import ExampleView
 
-
     URLS = (
         ('/example', ExampleView, 'example_route'),
     )
 
-The defined route ``/example`` is referring to the ``ExampleView`` class of the ``example_views.py`` file. This file can be accessed by going to the ``src/app/views``. Below you can find the content of the file:
+The defined route ``/example`` is mapped to the View class **ExampleView**, which is defined in ``src/app/views/example_views.py``. All View classes should be defined in the ``src/app/views/`` directory. Below you can find the content of the example View file:
 
 ::
 
@@ -151,37 +141,44 @@ The defined route ``/example`` is referring to the ``ExampleView`` class of the 
                 status=200, data={'some_data': 'yes'})
 
 
-Open the new Flask-Philo app in the browser
+Accessing the new Flask-Philo app
 ###########################################
 
-If you don't have the server running in the browser, run the following command again:
+If you haven't already done so, run the following terminal command to create your Flask-Philo application:
 
 ::
 
-    python3 manage.py runserver
+    $ python3 manage.py runserver
 
 
-Now, with the application running and with a route defined, if you open your favorite browser and type the following address you'll see the JSON code returned:
+Now, with the application running and with a route defined, the following URL address will be accessible in the browser of your choice, and will return a JSON response:
 
-[http://localhost:8080/example]
+http://localhost:8080/example
 
-The port 8080 should be the same displayed when you run the server:
+Note that the port number (in this case ``8080``) should match the port number displayed when you start the application:
 
 ::
 
     # Port 8080 in this case
     * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
-    * Restarting with stat
-    * Debugger is active!
-    * Debugger PIN: 147-416-135
+    ...
 
-The browser will show you, the response defined on the view file:
+Your browser will display a JSON response, as defined in the **ExampleView** class :
 
 ::
 
     {"some_data": "yes"}
 
-You will also be able to check the status code of the http request (in the same window you started the server):
+
+Alternatively, you can test this example URL route with a direct HTTP request using the CURL command-line tool:
+
+::
+
+  $ curl http://localhost:8080/example
+  {"some_data": "yes"}
+
+
+All incoming request to your Flask-Philo application and their corresponding HTTP status codes may be viewed in the same console session you used to start the application:
 
 ::
 
@@ -192,14 +189,16 @@ You will also be able to check the status code of the http request (in the same 
     127.0.0.1 - - [05/Dec/2017 00:06:01] "GET /example HTTP/1.1" 200 -
 
 
-Running tests
+Running Unit Tests
 #############
 
-In order to run the test for the new app. You should run the following console command:
+Flask-Philo simplifies Unit Test coverage by providing a single console command for running and managing all test. All test code should be written in the dedicated directory location : ``src/app/tests``. Within this directory, all Python source files begining with ``test_`` will be executed as part of a suite of Unit Tests.
+
+To run all Unit Tests for your new Flask-Philo app, use the following console command:
 
 ::
 
-    python3 manage.py test
+    $ python3 manage.py test
 
 
 The return of the tests will be something like the print below:
@@ -216,7 +215,8 @@ The return of the tests will be something like the print below:
     =================================== 1 passed in 0.02 seconds ===================================
 
 
-The ``test_views.py`` file can be found in the ``src/tests`` folder.
+In this example, the automatically-generated example Unit Test class **TestExampleEndpoints** is executed, as defined in ``src/tests/test_views.py``
+
 
 
 Extending Flask-Philo projects
@@ -228,7 +228,7 @@ Flask-Philo projects are fully customizable and fully extensible. There are a lo
 - ORM Integration using Postgresql: [http://flask-philo.readthedocs.io/en/latest/db/postgresql-orm.html]
 - AWS Integration [http://flask-philo.readthedocs.io/en/latest/cloud/aws/introduction.html]
 
-In order to deploy a Flask-Philo application, we can use any tool we have in the market, here follows an example:
+In order to deploy a Flask-Philo application, we can use any deployment tool on the market. For example :
 
 - NGINX and uWSGI for Flask-Philo app deployment: [http://flask-philo.readthedocs.io/en/latest/etc/flask_app_deploy.html]
 

@@ -2,3 +2,4 @@
 pytest
 pyhamcrest
 mock
+ipdb==0.10.2

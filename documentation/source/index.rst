@@ -3,11 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Flask-Philo's documentation!
-==========================================
 
-.. image:: _static/img/philo.png
- :width: 25%
+.. image:: _static/img/banner_1.png
 
 
 .. toctree::
@@ -26,11 +23,16 @@ Welcome to Flask-Philo's documentation!
 
    etc/unit_test
 
+   etc/console_commands
+
    etc/flask_app_deploy
 
    cloud/aws/introduction
 
    cloud/aws/sqs
+
+   etc/jinja
+
 
 Indices and tables
 ==================

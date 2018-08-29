@@ -1,6 +1,7 @@
 from flask_philo import app
 from flask_philo.test import FlaskTestCase
 from jinja2.loaders import FileSystemLoader
+from flask_philo.jinja2 import init_filesystem_loader
 
 
 class TestJinja2FileSystemLoader(FlaskTestCase):
@@ -44,6 +45,13 @@ class TestJinja2FileSystemLoader(FlaskTestCase):
     def test_custom_tag(self):
         manager = self.get_manager()
         env = manager.environments['DEFAULT']
+        template = env.get_template('home.html')
+        txt = template.render()
+        assert 'random_msg hello world!!!' == txt
+
+    def test_init_filesystem_loader(self):
+        config = app.config['JINJA2_TEMPLATES']['DEFAULT']
+        env = init_filesystem_loader(**config)
         template = env.get_template('home.html')
         txt = template.render()
         assert 'random_msg hello world!!!' == txt
