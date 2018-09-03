@@ -13,7 +13,8 @@ def main():
 
     args, extra_params = parser.parse_known_args()
 
-    test_cmd = 'python3 /philo/test/manage.py test --q /philo/test/{}'.format(args.test)
+    test_cmd = 'python3 /philo/test/manage.py test --q /philo/test/{}'.format(
+        args.test)
 
     cmd = [
         'docker',
