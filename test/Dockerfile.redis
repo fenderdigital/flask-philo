@@ -1,0 +1,9 @@
+FROM alpine:latest
+MAINTAINER Manuel Ignacio Franco <maigfrga@gmail.com>
+USER root
+ADD ./tools/provision /provision
+
+RUN apk add --no-cache openjdk8 redis
+RUN cat /etc/redis.conf
+RUN echo 'protected-mode no' >> /etc/redis.conf
+CMD ["/provision/init_redis.sh"]

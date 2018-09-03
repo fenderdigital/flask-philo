@@ -1,0 +1,16 @@
+FROM alpine:latest
+MAINTAINER Manuel Ignacio Franco <maigfrga@gmail.com>
+USER root
+ADD ./tools/provision /provision
+RUN apk add py3-psycopg2 postgresql postgresql-dev postgresql
+RUN mkdir -p /postgresql/data
+RUN chown -R postgres:postgres /postgresql/*
+RUN mkdir -p /run/postgresql
+RUN chown -R postgres:postgres /run/postgresql/
+USER postgres
+ENV LANG en_US.utf8
+ENV PGDATA /postgresql/data
+
+RUN /provision/configure_postgresql.sh
+
+CMD ["/provision/init_postgresql.sh"]

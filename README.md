@@ -1,22 +1,27 @@
 # Flask-Philo
 
-Flask-Philo is a small and very opinionated framework to build Flask-based microservices.
+![Flask-Philo Logo](https://raw.githubusercontent.com/Riffstation/flask-philo/dev/documentation/source/_static/img/banner_1.png)
 
-You can check the official documentation [here](http://flask-philo.readthedocs.io/en/latest/)
+A small and very opinionated framework to build flask based microservices.
 
-
-## What is this project?
-
-Flask is an awesome web microframework that works great out of the box. Nevertheless,
-additional configuration and integration with complementary libraries are required
-in order to build complex applications. Here in [riffstation.com](https://play.riffstation.com) we have several
-HTTP REST based microservices, anytime that we want to create a new microservice we need to bootstrap
-very similar common code.
-
-This framework collect all the logic related with HTTP, REST and data access in one common place.
-Feel free to use it and extend it. We are willing to hear about your suggestions and improvements.
+You can check the official documentation
+[here](http://flask-philo.readthedocs.io/en/latest/)
 
 
+## What is this project about?
+
+Flask is an awesome web microframework that works great out of the box.
+Nevertheless, additional configuration and integration with complementary
+libraries are required in order to build complex applications.
+
+There are multiple ways of building web application using Flask. For example,
+you can use simple functions for views or use Class Based Views. Flask provides
+multiple ways to bootstrap applications and is up to the user structure a
+web application properly.
+
+This framework implmenents one and only one way to boostrap a web app, a unique
+way to structure a web application and so on. Feel free to use it and extend it.
+We are willing to hear about your suggestions and improvements.
 
 ## Basic Features
 
@@ -24,20 +29,59 @@ Feel free to use it and extend it. We are willing to hear about your suggestions
 
 * Simple sqlalchemy orm customized for postgresql with multiple dabatases.
 
-* Unit testing tools
-
 * Simple Redis integration.
 
 * Simple Elastic Search integration.
 
 * Basic AWS integration.
 
-
-
 ## Installation
 
+Flask-Philo installation is pretty straightforward:
+
 ```
-$ pip3 install Flask-Philo
+pip3 install Flask-Philo
+```
+
+
+## Executing Unit Tests
+
+We use docker and docker compose to run the tests as we need an environment
+with dependencies such as Redis, Postgres and Elastic Search:
+
+* [Docker installation instructions](https://docs.docker.com/install/)
+
+* [Docker compose installation instructionsx](https://docs.docker.com/compose/install/#install-compose)
+
+
+The following command creates the docker images required for running the tests:
+
+```
+cd test
+docker-compose up --build
+```
+
+If you get an error related with ``__pycache__``  directories or ``pyc`` files,
+you need to remove generated python bytecode  by running the following command:
+
+```
+find . | grep -E "(__pycache__|\.pyc|\.pyo$)" | xargs sudo rm -rf
+```
+
+
+After building and running the docker images you will need to get the
+container id for the maching labelled as ``test_python`` by running the following
+command:
+
+```
+docker ps
+```
+
+Having the container id you can run the unit tests using the following command:
+
+
+```
+python3 run_tests.py --container_id container-id   test --test tests/
 ```
 
 
@@ -49,11 +93,12 @@ To quickly generate a new Flask-Philo project, navigate to the directory in whic
 the project and run:
 
 ```
-$ flask-philo-admin startproject <project_name>
+flask-philo-admin startproject <project_name>
 ```
 
 This will create a folder called project_name which will contain the basic structure of a Flask-Philo application,
 basic unit tests and configuration.
+
 
 
 
@@ -182,11 +227,6 @@ In this example, the automatically-generated example Unit Test class **TestExamp
 
 
 
-
-
-
-
-
 ## External Resources
 
 * [Flask Website](http://flask.pocoo.org/)
@@ -200,3 +240,5 @@ In this example, the automatically-generated example Unit Test class **TestExamp
 * [Python Elastic Search](https://www.elastic.co/guide/en/elasticsearch/client/python-api/current/index.html)
 
 * [AWS Boto](https://pypi.python.org/pypi/boto3)
+
+* [Docker](https://docs.docker.com/install/)

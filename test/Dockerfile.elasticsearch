@@ -1,0 +1,22 @@
+FROM docker.elastic.co/elasticsearch/elasticsearch:6.4.0
+#FROM debian:latest
+#
+#RUN DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" dist-upgrade
+#RUN apt-cache search sysctl
+#RUN apt-get update && apt-get upgrade -y
+#RUN apt-get install apt-utils build-essential g++ gcc libssl-dev libffi-dev sysctl -y 
+#
+#RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
+#RUN echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" >> /etc/apt/sources.list.d/webupd8team-java.list
+#RUN echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" >> /etc/apt/sources.list.d/webupd8team-java.list
+#RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886
+#RUN apt-get update
+#RUN apt-get install oracle-java8-installer -y
+#RUN wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.4.0.deb
+#RUN dpkg -i elasticsearch-6.4.0.deb
+#RUN whereis elasticsearch
+##RUN which sysctl
+#RUN  echo vm.max_map_count=262144 > /etc/sysctl.conf
+USER elasticsearch
+ADD ./tools/provision /provision
+CMD ["/provision/init_elasticsearch.sh"]

@@ -35,13 +35,13 @@ JINJA2_TEMPLATES = {
 
 DATABASES = {
     'POSTGRESQL': {
-        'DEFAULT': 'postgresql://ds:dsps@localhost:5432/ds_test',
-        'DB2': 'postgresql://ds:dsps@localhost:5432/ds2_test'
+        'DEFAULT': 'postgresql://ds:dsps@pgdb:5432/ds_test',
+        'DB2': 'postgresql://ds:dsps@pgdb:5432/ds2_test'
     },
 
     'REDIS': {
         'DEFAULT': {
-            'HOST': 'localhost',
+            'HOST': 'redisdb',
             'PORT': 6379,
             'DB': 0
         }
@@ -50,7 +50,7 @@ DATABASES = {
     'ELASTICSEARCH': {
         'DEFAULT': {
             'HOSTS': [
-                {'host': 'localhost', 'port': '9200'}
+                {'host': 'elasticsearchdb', 'port': '9200'}
             ]
         }
     }

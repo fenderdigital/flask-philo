@@ -1,0 +1,17 @@
+FROM alpine:latest
+MAINTAINER Manuel Ignacio Franco <maigfrga@gmail.com>
+USER root
+RUN apk add --update bash && rm -rf /var/cache/apk/*
+RUN apk add --update alpine-sdk
+RUN apk add --no-cache gcc git db-dev make autoconf automake libffi libffi-dev
+RUN apk add --no-cache boost boost-dev libtool libevent libevent-dev musl-dev 
+RUN apk add --no-cache python3 python3-dev py3-virtualenv 
+RUN apk add --no-cache openssh-client py3-psycopg2
+
+ADD ./tools/provision /provision
+RUN pip3 install -r /provision/requirements.txt
+
+
+ENV PYTHONPATH /philo
+
+CMD ["tail", "-f", "/dev/null"]
