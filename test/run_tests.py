@@ -29,8 +29,9 @@ def main():
     try:
         subprocess.call(cmd)
 
-    except:
+    except Exception:
         subprocess.run(cmd)
+
 
 if __name__ == '__main__':
     main()
