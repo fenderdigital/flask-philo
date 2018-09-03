@@ -28,7 +28,7 @@ jobs:
           command: |
             git clone https://github.com/awslabs/git-secrets.git && cd git-secrets && sudo make install
             git secrets --register-aws ; git secrets --add '\-{5}BEGIN\ RSA\ PRIVATE\ KEY-{5}' ; git secrets --scan --scan-history -r .
-            sudo pip3 install -r ~/circleci-flaskphilo/test/requirements/dev.txt
+            sudo pip3 install -r ~/circleci-flaskphilo/test/tools/provision/requirements.txt
             sudo pip3 install flake8
             cd ~/circleci-flaskphilo
       - run:
