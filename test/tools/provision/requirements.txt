@@ -1,11 +1,12 @@
-bcrypt
 psycopg2
-markdown
-flask
 jsonschema
+pytest
+flask
 flask_oauthlib
+bcrypt
 SQLAlchemy
 redis
 elasticsearch
 boto3
 PrettyTable
+jinja2==2.10
