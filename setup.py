@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='Flask-Philo',
-    version='3.6.7',
+    version='3.7.0',
     description='Simple web framework based on Flask',
     long_description='Flask based framework to build RESTful microservices',
     packages=[
