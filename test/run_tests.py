@@ -28,7 +28,6 @@ def main():
         test_cmd
 
     ]
-    
     try:
         subprocess.call(cmd)
 
