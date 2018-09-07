@@ -79,3 +79,8 @@ class UserResourceView(BaseResourceView):
             app.logger.error(e)
             self.postgresql_pool.rollback()
             return self.json_response(status=500)
+
+
+class CorsResourceView(BaseResourceView):
+    def get(self):
+        return self.json_response(status=200, data={'cors': 'ok'})

@@ -112,3 +112,9 @@ class TestApiRequest(FlaskTestCase):
         )
         assert 200 == result.status_code
         assert 0 == User.objects.count()
+
+    def test_cors(self):
+        result = self.client.get('/cors-api/test-cors')
+        assert 'Access-Control-Allow-Origin' in result.headers
+        cors_val = result.headers['Access-Control-Allow-Origin']
+        assert 'FLASK_PHILO_TEST_CORS' == cors_val

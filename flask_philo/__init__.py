@@ -1,5 +1,6 @@
 from flask import Flask, g
 from flask_oauthlib.provider import OAuth2Provider
+from flask_cors import CORS
 from . import default_settings
 from .commands_flask_philo import *  # noqa
 from .jinja2 import init_jinja2
@@ -64,8 +65,10 @@ def init_app(module, BASE_DIR, **kwargs):
             """
             initialize logger for the app
             """
+
             hndlr = logging.StreamHandler()
-            formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s') # noqa
+            formatter = logging.Formatter(
+                '%(asctime)s - %(name)s - %(levelname)s - %(message)s')
             hndlr.setFormatter(formatter)
             app.logger.addHandler(hndlr)
             log_level = app.config['LOG_LEVEL']
@@ -76,12 +79,21 @@ def init_app(module, BASE_DIR, **kwargs):
             http://flask-oauthlib.readthedocs.io/en/latest/oauth2.html
             """
             oauth.init_app(app)
+
+        def init_cors(app):
+            """
+            Initializes cors protection if config
+            """
+
+            if 'CORS' in app.config:
+                CORS(app, resources=app.config['CORS'])
+
         init_db(g, app)
         init_logging()
         init_urls()
         init_flask_oauthlib()
         init_jinja2(g, app)
-
+        init_cors(app)
     app = Flask(module)
     init_config()
     return app

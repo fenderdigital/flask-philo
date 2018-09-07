@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='Flask-Philo',
-    version='3.6.2',
+    version='3.7.0',
     description='Simple web framework based on Flask',
     long_description='Flask based framework to build RESTful microservices',
     packages=[
@@ -31,7 +31,8 @@ setup(
         'elasticsearch',
         'boto3',
         'PrettyTable',
-        'jinja2==2.10'
+        'jinja2==2.10',
+        'flask-cors'
     ],
     python_requires='>=3',
     classifiers=[
