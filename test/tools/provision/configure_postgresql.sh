@@ -1,6 +1,5 @@
 #!/bin/sh
 /usr/bin/initdb 
-ls /postgresql/data
 /usr/bin/pg_ctl start
 sleep 2
 /usr/bin/psql -c "CREATE ROLE ds WITH ENCRYPTED PASSWORD 'dsps'";

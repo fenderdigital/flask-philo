@@ -10,3 +10,5 @@ elasticsearch
 boto3
 PrettyTable
 jinja2==2.10
+flask-cors
+ipdb

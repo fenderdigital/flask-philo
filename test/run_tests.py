@@ -16,6 +16,8 @@ def main():
     test_cmd = 'python3 /philo/test/manage.py test --q /philo/test/{}'.format(
         args.test)
 
+    # test_cmd = 'pip3 install ipdb'
+
     cmd = [
         'docker',
         'exec',
@@ -26,6 +28,7 @@ def main():
         test_cmd
 
     ]
+    
     try:
         subprocess.call(cmd)
 
