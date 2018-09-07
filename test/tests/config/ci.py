@@ -51,3 +51,5 @@ DATABASES = {
         }
     }
 }
+
+CORS = {r"/cors-api/*": {"origins": "FLASK_PHILO_TEST_CORS"}}
