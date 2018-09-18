@@ -442,7 +442,10 @@ Here's an example of a typical configuration file:
 
     # Add a Genre object to our session
     blues_obj = Genre(name='Blues', description='Still got the blues')
-    blues_obj.add()
+    blues_obj.add(connection_name='MUSIC_CATALOG')
 
     # Commit changes to the MUSIC_CATALOG database
     pool.commit(connection_name='MUSIC_CATALOG'))
+
+
+The ``connection_name==DB_NAME`` parameter may be specified for all other common ORM methods in Flask-Philo
