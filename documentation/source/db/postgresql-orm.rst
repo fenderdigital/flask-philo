@@ -446,3 +446,6 @@ Here's an example of a typical configuration file:
 
     # Commit changes to the MUSIC_CATALOG database
     pool.commit(connection_name='MUSIC_CATALOG'))
+
+
+The ``connection_name==DB_NAME`` parameter may be specified for all other common ORM methods in Flask-Philo
