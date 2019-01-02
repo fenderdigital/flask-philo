@@ -1,10 +1,6 @@
 from datetime import date, datetime
 from decimal import Decimal
-
-
-
 from jsonschema import validate, FormatChecker
-
 from flask_philo import utils
 from .exceptions import SerializerError
 import uuid
