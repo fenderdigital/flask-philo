@@ -27,7 +27,7 @@ setup(
         'flask_oauthlib',
         'bcrypt',
         'SQLAlchemy',
-        'redis==2.10.16',
+        'redis==2.10.6',
         'elasticsearch',
         'boto3',
         'PrettyTable',
