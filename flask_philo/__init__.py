@@ -86,7 +86,18 @@ def init_app(module, BASE_DIR, **kwargs):
             """
 
             if 'CORS' in app.config:
-                CORS(app, resources=app.config['CORS'])
+                CORS(
+                    app,
+                    resources=app.config['CORS'],
+                    supports_credentials=app.config.get(
+                        "CORS_SUPPORT_CREDENTIALS",
+                        False
+                    ),
+                    allow_headers=app.config.get(
+                        "CORS_ALLOW_HEADERS",
+                        "Content-Type,Authorization,accept-language,accept"
+                    )
+                )
 
         init_db(g, app)
         init_logging()
