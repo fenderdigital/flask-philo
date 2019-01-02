@@ -1,5 +1,8 @@
 from datetime import date, datetime
 from decimal import Decimal
+
+
+
 from jsonschema import validate, FormatChecker
 
 from flask_philo import utils
@@ -12,10 +15,9 @@ uuid_schema = {
     "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"  # noqa
 }
 
-
-decimal_schema = {
+decimal_schema = { # noqa
     "type": "string",
-    "pattern": "\d+\.\d+"
+    "pattern": "\d+\.\d+" # noqa
 }
 
 
