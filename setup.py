@@ -31,7 +31,7 @@ setup(
         'elasticsearch',
         'boto3',
         'PrettyTable',
-        'jinja2==2.10',
+        'jinja2==2.11.3',
         'flask-cors'
     ],
     python_requires='>=3',
